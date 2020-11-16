@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { appRoutes, routes } from 'src/app/app-routing.module';
+import { appRoutes, sideBarRoutes } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit {
   routesArray;
   
   constructor() {
-    this.routesArray = routes;
+    this.routesArray = sideBarRoutes;
   }
 
   ngOnInit(): void {

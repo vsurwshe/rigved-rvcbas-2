@@ -1,98 +1,32 @@
 <nav id="sidebar1" class="">
     <div class="sidebar-header">
         <a href="/bookride">
-            <img class="brand-logo" src="assets/img/RV_cabs_logo.png" alt="logo" width="100%" /></a>
-            <button type="button" id="sidebarCollapse2" class="btn btn-info" style="float: right;display: none;">
-                <i class="fas fa-arrow-left"></i>
-            </button>
+            <img class="brand-logo" src="assets/img/RV_cabs_logo.png" alt="logo" width="80%" />
+        </a>
+        <button type="button" id="sidebarCollapse2" class="btn btn-info" style="float: right;display: none;">
+            <i class="fas fa-arrow-left"></i>
+        </button>
     </div>
-    <ul class="list-unstyled components">
+    <ul class="list-unstyled components" >
         <p class="text-white font-weight-bold" style="margin-top: -40px;">Call: +91 88808 55551</p>
-        <span *ngFor="let item of routesArray">
-            <li>
+        <span *ngFor="let item of routesArray" >
+            <li> 
                 <a href="{{item.path}}" style="text-decoration: none;">
-                    <img class="imgIco" src="{{item.image}}" /> <span style="margin-top: -10px;">{{item.text}}</span></a>
+                    <img class="imgIco" src="{{item.image}}" /> {{item.text}}
+                </a>
             </li>
         </span>
-        <!-- <li class={{rideList}}>
-            <a href="#profile"><img class="imgIco" src="assets/img/car-list.png" /> Profile</a>
-        </li> -->
-        <!-- <li class="{{manageTrip}}">
-            <a href="#managetrip"><img class="imgIco" src="assets/img/customer-list.png">Manage Trip</a>
-        </li> -->
-        <!-- <li class={{bookcab}}>
-            <a href="#bookride"><img class="imgIco" src="assets/img/home.png" /> Book Now</a>
-        </li> -->
-        <!-- <li class={{rideList}}>
-            <a href="#rideList"><img class="imgIco" src="assets/img/car-list.png" /> Ride List</a>
-        </li> -->
-        <!-- <li class={{customerList}}>
-            <a href="#customerList"><img class="imgIco" src="assets/img/customer-list.png" /> Traveller List</a>
-        </li>
-        <li class={{approveMember}}>
-            <a href="#approveMember"><img class="imgIco" src="assets/img/approveList.png" /> Driver Management</a>
-        </li> -->
-        <!-- <li class="{{travelerReg}}">
-            <a href="#travelerReg"><img class="imgIco" src="assets/img/approveList.png">Traveller Registration</a>
-        </li> -->
-        <!-- <li class="{{manageVendor}}">
-            <a href="#manageVendor"><img class="imgIco" src="assets/img/approveList.png">Manage Vendor</a>
-        </li>
-        <li class="{{manageClient}}">
-            <a href="#manageClient"><img class="imgIco" src="assets/img/approveList.png">Manage Client</a>
-        </li> -->
-
-        <!-- <li class={{myMember}} >
-            <a href="#myMember"><img class="imgIco" src="assets/img/approve.png" /> My Member</a>
-        </li> -->
-        <!-- <li class={{ratecard}} >
-            <a href="#ratecard"><img class="imgIco" src="assets/img/rupee-indian.png" /> Rate Card</a>
-        </li> -->
-        <!-- <li class={{farechart}}>
-            <a href="#travelBilling"><img class="imgIco" src="assets/img/rupee-indian.png" /> Travel Billing</a>
-        </li>
-        <li class={{maintenanceReport}}>
-            <a href="#maintenanceReport"><img class="imgIco" src="assets/img/customer-list.png" /> Maintenance
-                Report</a>
-        </li> -->
-
-        <!-- <li class="{{help}}">
-            <a href="#help"><img class="imgIco" src="assets/img/mobile-phone.png" /> Help</a>
-        </li>
-        <li class="{{support}}">
-            <a href="#support"><img class="imgIco" src="assets/img/support.png" />support</a>
-        </li>
-
-        <li class="{{terms}}">
-            <a href="#terms"><img class="imgIco" src="assets/img/clipboard-and-notebook.png" /> Terms & Conditions</a>
-
-        </li>
-        <li class="{{privacy}}}">
-            <a href="#privacy"><img class="imgIco" src="assets/img/approveList.png" />Privacy Policy</a>
-        </li> -->
-
-        <!-- <li class={{bookyourrides}} >
-            <a href="#maps"><img src="assets/img/taxi.png" style="margin-right: 12px;">Book Your Ride</a>
-        </li>
-        <li class={{yourrides}} >
-            <a href="#ride-history"><img src="assets/img/clock.png" style="margin-right: 12px;">Your Rides</a>
-        </li> -->
-        <!-- <li class="{{profile}}">
-            <a href="#profile"><img src="assets/img/man.png" style="margin-right: 12px;">Profile Settings</a>
-        </li> -->
-        <!-- <li class="logout" style="cursor: pointer">
+        <li class="logout" style="cursor: pointer">
             <a ng-click="logout()"><img class="imgIco" src="assets/img/logout.png" /> Logout</a>
-        </li> -->
-    </ul>
-    <ul class="list-unstyled CTAs" style="list-style-type: none;" >
+        </li>
         <li>
             <a href="https://www.apple.com/in/iphone/" target="_blank" class="article">
-                <img src="assets/img/appstore.png" width="100%">
+                <img src="assets/img/appstore.png" width="100%" height="50%">
             </a>
         </li>
         <li>
             <a href="https://play.google.com/store/apps?hl=en" target="_blank" class="article" >
-                <img src="assets/img/googleplay.png" width="100%">
+                <img src="assets/img/googleplay.png" width="100%" height="50%">
             </a>
         </li>
     </ul>
