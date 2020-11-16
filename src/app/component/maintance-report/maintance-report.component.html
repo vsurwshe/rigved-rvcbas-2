@@ -1,1 +1,16 @@
-<p>maintance-report works!</p>
+<div class="col-md-12 table-responsive header-board">
+    <div class="tab">
+        <button id="defaultOpen" class="tablinks" (click)="openTab($event, 'ApprovedBills')">Approved Bills</button>
+        <button class="tablinks" (click)="openTab($event, 'PendingBills')">Pending Bills</button>
+    </div>
+    <div id="ApprovedBills" class="tabcontent">
+        <div class="col-sm-12">
+            <h1>Approved Bills</h1>
+        </div>
+    </div>
+    <div id="PendingBills" class="tabcontent">
+        <div class="col-sm-12">
+            <h1>Pending Bills</h1>
+        </div>
+    </div>
+</div>
