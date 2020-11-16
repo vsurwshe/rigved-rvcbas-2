@@ -1,0 +1,109 @@
+<nav class="navbar navbar-expand-lg bg-white">
+    <div class="container-fluid">
+        <button type="button" id="sidebarCollapse1" class="btn btn-info" style="display: none;">
+            <img src="assets/img/menu.png">
+        </button>
+        <!-- <h3 class="text-md-right myFont">{{Route}}</h3> -->
+        <button *ng-show="travelBilling" class="btn btn-default" style="position: fixed;right: 100px;" ng-click="travelFilters()">Filters</button>
+        <button *ng-show="maintenanceReport" class="btn btn-default" style="position: fixed;right: 100px;" ng-click="maintenanceReportFilters()">Filters</button>
+        <div *ng-if="travelBillingFilter" style="position: relative; left: 600px;">
+            <button class="btn btn-default" style="margin-left: 32px;" ng-click="filtersApply()">Apply Filters</button>
+            <button class="btn btn-default" style="margin-left: 32px;" ng-click="travelFilters()">Clear</button>
+            <!--  <button ng-show = "travellerList" class="btn btn-default" style="margin-left: 32px;" ><a href="#travelerReg"> Traveller Registration</a></button>-->
+        </div>
+        <div *ng-if="maintanceReportFilter" style="position: relative; left: 350px;">
+            <button class="btn btn-default" ng-click="reportFiltersApply()">Apply Report Filters</button>
+            <button class="btn btn-default" ng-click="maintenanceReportFilters()">Clear</button>
+        </div>
+        <button 
+            class="btn btn-dark d-inline-block d-lg-none ml-auto" id="hideButton" type="button"
+            data-toggle="collapse" data-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-justify"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul style="position: absolute; right: 50%;" ng-if="acctdetail == '1' || acctdetail == '2' ">
+                <!-- <li>
+                    <label class="switch">
+                        <input type="checkbox" checked ng-model="online" ng-click="ToggleOnline(online)">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+                <li class="online-status myfont" ng-show="online">
+                    <div class="green-dot"></div>Online
+                </li>
+                <li class="offline-status myfont" ng-show="!online">
+                    <div class="red-dot"></div>Offline
+                </li> -->
+            </ul>
+            <!-- <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item">
+                </li>
+                <li class="nav-item nav-profile">
+                    <h5 style="display: inline;">{{profileData.firstName}} {{profileData.lastName}}</h5>
+                    <img class="profile" src="{{profileData.profileUrl || 'assets/img/user-demo.png'}}" alt="user_img">
+                    <div class="dropdown-content center">
+                        <div class="desc" ng-click="gotoProfile()" >Profile</div>
+                        <div class="desc" ng-click="logout();">Logout</div>
+                    </div>
+                    <!-- <div class="dropdown-content center">
+                        <div class="desc" ng-click="gotoProfile()">Profile</div>
+                        <div class="desc" ng-click="logout();">Logout</div>
+                    </div> --
+                </li>
+
+            </ul> -->
+        </div>
+    </div>
+</nav>
+<!---------------------------------Conf Model-------------------------------- -->
+<div id="ConfOk" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-body custom-body" style="text-align: center;">
+                <!-- <div class="Conficon">
+                    <img src="assets/img/checked.png" width="100%;">
+                </div>
+                <h1>Success!</h1> -->
+                <!-- <p>{{ConfOkMsg}}</p> -->
+                <!-- <button type="button" class="btn btn-outline-success okbtn" data-dismiss="modal"
+                    ng-click="routeRefresh()">Ok</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------------------------------------------------------------------- -->
+<div id="ConfError" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+            <div class="modal-body custom-body" style="text-align: center;">
+                <!-- <div class="Conficon">
+                    <img src="assets/img/cancel.png" width="100%;">
+                </div>
+                <h1>OOPS!</h1>
+                <p>Something went wrong.<br>Try again.</p>
+                <button type="button" class="btn btn-outline-danger okbtn" data-dismiss="modal">Ok</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    $("#sidebar1").mCustomScrollbar({ theme: "minimal" });
+    $('.overlay').removeClass('active');
+    $('#sidebarCollapse1, #sidebarCollapse2, .overlay').on('click', function () {
+        $('#sidebar1, #content').toggleClass('active');
+        $('.overlay').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    });
+    // To apply active class on link
+    /*$('.nav li a').click(function(e) {
+        $('.nav li.active').removeClass('active');
+        var $parent = $(this).parent();
+        $parent.addClass('active');
+        e.preventDefault();
+    });*/
+});
+</script>
