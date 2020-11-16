@@ -17,8 +17,6 @@
 
 #sidebar1 .sidebar-header {
     padding: 20px;
-    /* background: #343a40;
-     */
     background: #d9d9d9;
     border-bottom: 1px solid #ff0000;
 }
@@ -34,7 +32,7 @@
 }
 
 #sidebar1 ul li a {
-    padding: 10px;
+    padding: 5px;
     font-size: 1.1em;
     display: block;
     color: #ffff !important;
@@ -42,8 +40,10 @@
 
 #sidebar1 ul li a:hover {
     color: #fefeff;
-    /* background: #4e4c4c; */
     background: #a6a6a6;
+}
+.li-class{
+    text-decoration: none;
 }
 
 #sidebar1 ul li.active>a,
@@ -143,15 +143,6 @@ a.article:hover {
         margin-left: 0;
     }
 
-    #content {
-        width: 100%;
-        padding: 15px !important;
-    }
-
-    #content.active {
-        width: 100%;
-    }
-
     #sidebarCollapse1 span {
         display: none;
     }
@@ -162,10 +153,6 @@ a.article:hover {
 
     #hideButton {
         display: none !important;
-    }
-
-    .brand-logo {
-        width: 50%;
     }
 
     #sidebarCollapse2 {

@@ -1,13 +1,19 @@
-<nav id="sidebar1" class="" ng-controller="sidebarCtrl">
+<nav id="sidebar1" class="">
     <div class="sidebar-header">
-        <a href="#bookride">
+        <a href="/bookride">
             <img class="brand-logo" src="assets/img/RV_cabs_logo.png" alt="logo" width="100%" /></a>
-            <button type="button" id="sidebarCollapse2" class="btn btn-info" style="float: right; display: none;">
+            <button type="button" id="sidebarCollapse2" class="btn btn-info" style="float: right;display: none;">
                 <i class="fas fa-arrow-left"></i>
             </button>
     </div>
     <ul class="list-unstyled components">
-        <!-- <p class="text-white font-weight-bold">Call: +91 88808 55551</p> -->
+        <p class="text-white font-weight-bold" style="margin-top: -40px;">Call: +91 88808 55551</p>
+        <span *ngFor="let item of routesArray">
+            <li>
+                <a href="{{item.path}}" style="text-decoration: none;">
+                    <img class="imgIco" src="{{item.image}}" /> <span style="margin-top: -10px;">{{item.text}}</span></a>
+            </li>
+        </span>
         <!-- <li class={{rideList}}>
             <a href="#profile"><img class="imgIco" src="assets/img/car-list.png" /> Profile</a>
         </li> -->
@@ -78,16 +84,16 @@
             <a ng-click="logout()"><img class="imgIco" src="assets/img/logout.png" /> Logout</a>
         </li> -->
     </ul>
-    <ul class="list-unstyled CTAs">
-        <!-- <li>
+    <ul class="list-unstyled CTAs" style="list-style-type: none;" >
+        <li>
             <a href="https://www.apple.com/in/iphone/" target="_blank" class="article">
                 <img src="assets/img/appstore.png" width="100%">
             </a>
         </li>
         <li>
-            <a href="https://play.google.com/store/apps?hl=en" target="_blank" class="article">
+            <a href="https://play.google.com/store/apps?hl=en" target="_blank" class="article" >
                 <img src="assets/img/googleplay.png" width="100%">
             </a>
-        </li> -->
+        </li>
     </ul>
 </nav>

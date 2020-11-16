@@ -1,0 +1,46 @@
+/* -------------Content Css-------------- */
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+#content {
+    width: calc(100% - 230px);
+    min-height: 100vh;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url('/../assets/img/background.jpg') !important;
+}
+#content.active {
+    width: calc(100% - 10px);
+}
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(95, 71, 71, 0.7);
+    z-index: 998;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+.overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    #content {
+        width: calc(100% - 40px);
+        padding: 10px !important;
+    }
+
+    #content.active {
+        width: 100%;
+    }
+    
+   .brand-logo {
+        width: 50%;
+    }
+}
