@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./support.component.scss']
 })
 export class SupportComponent implements OnInit {
+  // varaible delcartions
+  loading;
 
-  constructor() { }
+  constructor() { 
+    this.loading=false;
+  }
 
   ngOnInit(): void {
+  }
+
+  submitSupport(data){
+    console.warn("Data ",data);
   }
 
 }

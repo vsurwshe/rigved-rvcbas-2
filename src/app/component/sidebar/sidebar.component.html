@@ -8,7 +8,7 @@
         </button>
     </div>
     <ul class="list-unstyled components" >
-        <p class="text-white font-weight-bold" style="margin-top: -40px;">Call: +91 88808 55551</p>
+        <p class="text-white font-weight-bold" style="margin-top: 20px;">Call: +91 88808 55551</p>
         <span *ngFor="let item of routesArray" >
             <li> 
                 <a href="{{item.path}}" style="text-decoration: none;">
@@ -16,8 +16,8 @@
                 </a>
             </li>
         </span>
-        <li class="logout" style="cursor: pointer">
-            <a ng-click="logout()"><img class="imgIco" src="assets/img/logout.png" /> Logout</a>
+        <li class="logout" style="cursor: pointer" >
+            <a (click)="userLogout()"><img class="imgIco" src="assets/img/logout.png" /> Logout</a>
         </li>
         <li>
             <a href="https://www.apple.com/in/iphone/" target="_blank" class="article">

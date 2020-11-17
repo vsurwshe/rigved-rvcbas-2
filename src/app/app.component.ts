@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import '@fortawesome/fontawesome-free/js/all.js';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,11 @@ import '@fortawesome/fontawesome-free/js/all.js';
 export class AppComponent {
   title = 'RV Cabs Rental';
   loading= false;
+  token;
+  constructor(private loginService:LoginService){}
 
-  token= false;
+  public ngOnInit(): void {
+    this.token= (this.loginService.getToken() !== null && this.loginService.getToken() !=="") ? true: false;
+  }
 
 }

@@ -4,16 +4,16 @@
     width: 100%;
 }
 #content {
-    width: calc(100% - 230px);
+    width: calc(100% - 210px);
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
     top: 0;
     right: 0;
-    // background-image: url('/../assets/img/background.jpg') !important;
+    background-image: url('/../assets/img/background.jpg') !important;
 }
 #content.active {
-    width: calc(100% - 10px);
+    width: 100%;
 }
 .overlay {
     display: none;
@@ -32,7 +32,7 @@
 
 @media (max-width: 768px) {
     #content {
-        width: calc(100% - 40px);
+        width: 100%;
         padding: 10px !important;
     }
 

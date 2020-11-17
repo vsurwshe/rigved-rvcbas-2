@@ -26,6 +26,7 @@ import { AuthService } from './service/auth.service';
 import { LoginComponent } from './component/login/login.component';
 import { LoginNavbarComponent } from './component/login-navbar/login-navbar.component';
 import { LoginFooterComponent } from './component/login-footer/login-footer.component'
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LoginFooterComponent } from './component/login-footer/login-footer.comp
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     LoginService,
