@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
@@ -21,6 +21,11 @@ import { HelpComponent } from './component/help/help.component';
 import { SupportComponent } from './component/support/support.component';
 import { TermsAndConditionsComponent } from './component/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
+import { LoginService } from './service/login.service'
+import { AuthService } from './service/auth.service';
+import { LoginComponent } from './component/login/login.component';
+import { LoginNavbarComponent } from './component/login-navbar/login-navbar.component';
+import { LoginFooterComponent } from './component/login-footer/login-footer.component'
 
 @NgModule({
   declarations: [
@@ -40,15 +45,22 @@ import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-polic
     HelpComponent,
     SupportComponent,
     TermsAndConditionsComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    LoginComponent,
+    LoginNavbarComponent,
+    LoginFooterComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,12 +6,15 @@
 <div *ng-view>
   <app-errorview></app-errorview>
 </div>
-<div class="wrapper">
-  <app-sidebar></app-sidebar>
-  <div id="content">
-    <app-headerbar></app-headerbar>
-    <!-- <div class="col-md-12 table-responsive header-board"> -->
-      <router-outlet></router-outlet>
-    <!-- </div> -->
+<ng-container *ngIf="token; else elseTemplate">
+  <div class="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content">
+        <app-headerbar></app-headerbar>
+        <router-outlet></router-outlet>
+    </div>
   </div>
-</div>
+</ng-container>
+<ng-template #elseTemplate>
+  <app-login class="login"></app-login>
+</ng-template>

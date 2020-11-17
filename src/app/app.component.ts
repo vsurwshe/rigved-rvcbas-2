@@ -10,4 +10,7 @@ import '@fortawesome/fontawesome-free/js/all.js';
 export class AppComponent {
   title = 'RV Cabs Rental';
   loading= false;
+
+  token= false;
+
 }
