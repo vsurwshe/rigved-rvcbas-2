@@ -28,14 +28,16 @@
               "src/assets"
             ],
             "styles": [
-             "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-             "src/styles.scss",
-             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-             "src/assets/css/iao-alert.min.css"
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/iao-alert.min.css",
+              "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/assets/js/iao-alert.jquery.min.js"
             ]
           },
@@ -134,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "rvcabs"
+  "defaultProject": "rvcabs",
+  "cli": {
+    "analytics": false
+  }
 }

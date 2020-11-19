@@ -26,7 +26,9 @@ import { AuthService } from './service/auth.service';
 import { LoginComponent } from './component/login/login.component';
 import { LoginNavbarComponent } from './component/login-navbar/login-navbar.component';
 import { LoginFooterComponent } from './component/login-footer/login-footer.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ManageTripService } from './service/manage-trip.service'
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,7 @@ import { FormsModule } from '@angular/forms';
     PrivacyPolicyComponent,
     LoginComponent,
     LoginNavbarComponent,
-    LoginFooterComponent
+    LoginFooterComponent 
   ],
   imports: [
     CommonModule,
@@ -57,11 +59,13 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule  
   ],
   providers: [
     LoginService,
-    AuthService
+    AuthService,
+    ManageTripService,
   ],
   bootstrap: [AppComponent]
 })

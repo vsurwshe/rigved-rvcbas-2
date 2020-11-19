@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { LoginService } from 'src/app/service/login.service';
@@ -12,9 +13,11 @@ export class LoginComponent implements OnInit {
 
   loading;
 
-  constructor(private loginService:LoginService, private appComponent: AppComponent) { 
-    this.loading=false;
-  }
+  constructor(
+    private loginService:LoginService, 
+    private appComponent: AppComponent,
+    private location: Location
+  ){  this.loading=false; }
 
   ngOnInit(): void {
     $(document).ready(function () {
@@ -30,7 +33,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async loginUser(data){
+  // this method will used for the calling onclick of login button
+  loginUser(data){
     this.loading=true;
     this.loginService.loginUser({...data, "deviceToken": ""}).subscribe(
       response=>{
@@ -40,14 +44,13 @@ export class LoginComponent implements OnInit {
         this.loginService.successFullMessage("Successfully Login....!");
         setTimeout(()=>{
           this.appComponent.ngOnInit();  
+          this.location.go("/managetrip")
         },500)
       },
       error=>{ 
         this.loading=false;
         this.loginService.errorMessage("Invalid or Something went wrong");
-      }
-    );
-    
+      });
   }
 
 }
