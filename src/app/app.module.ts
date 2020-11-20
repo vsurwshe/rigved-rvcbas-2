@@ -27,8 +27,11 @@ import { LoginComponent } from './component/login/login.component';
 import { LoginNavbarComponent } from './component/login-navbar/login-navbar.component';
 import { LoginFooterComponent } from './component/login-footer/login-footer.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ManageTripService } from './service/manage-trip.service'
+import { ManageTripService } from './service/manage-trip.service';
+import { MasterDataService } from './service/master-data.service';
+import { BookingService } from './service/booking.service'
 import { DataTablesModule } from 'angular-datatables';
+import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import { DataTablesModule } from 'angular-datatables';
     PrivacyPolicyComponent,
     LoginComponent,
     LoginNavbarComponent,
-    LoginFooterComponent 
+    LoginFooterComponent,
+    AddTripComponent 
   ],
   imports: [
     CommonModule,
@@ -66,6 +70,8 @@ import { DataTablesModule } from 'angular-datatables';
     LoginService,
     AuthService,
     ManageTripService,
+    MasterDataService,
+    BookingService
   ],
   bootstrap: [AppComponent]
 })

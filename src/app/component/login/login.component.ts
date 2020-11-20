@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { LoginService } from 'src/app/service/login.service';
 declare var $: any;
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService:LoginService, 
     private appComponent: AppComponent,
-    private location: Location
+    private router:Router
   ){  this.loading=false; }
 
   ngOnInit(): void {
@@ -43,8 +44,8 @@ export class LoginComponent implements OnInit {
         this.loginService.saveToken(token);
         this.loginService.successFullMessage("Successfully Login....!");
         setTimeout(()=>{
+          this.router.navigateByUrl("/managetrip");
           this.appComponent.ngOnInit();  
-          this.location.go("/managetrip")
         },500)
       },
       error=>{ 

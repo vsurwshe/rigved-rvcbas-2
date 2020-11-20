@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
+        <h3 class="text-md-right myFont">{{routeText}}</h3>
         <button [hidden]="!travelBilling" class="btn btn-default" style="position: fixed;right: 100px;" ng-click="travelFilters()">Filters</button>
         <button [hidden]="!maintenanceReport" class="btn btn-default" style="position: fixed;right: 100px;" ng-click="maintenanceReportFilters()">Filters</button>
         <div *ngIf="travelBillingFilter" style="position: relative; left: 600px;">

@@ -26,4 +26,6 @@ export class ManageTripService {
     return this.authService.process("GET","booking/finishedTripByDriverFrAdmin/"+firstIndex+"/"+lastIndex,{headers: this.setHeaders()})
   }
 
+ 
+
 }

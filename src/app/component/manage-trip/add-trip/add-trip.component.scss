@@ -1,0 +1,221 @@
+.mapContainer {
+  padding: 81px 0px 0px 55px;
+}
+
+form {
+  margin: 0px;
+}
+
+.input-field {
+  position: relative;
+  width: 100%;
+  height: 70px;
+  line-height: 44px;
+}
+
+input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  border-bottom: 2px solid white;
+  background-color: transparent;
+  color: white;
+}
+
+input:focus,
+input:valid {
+  /*border-color: #00dd22;*/
+}
+
+.form-div {
+  background-color: #171616;
+  opacity: 0.8;
+  padding: 25px;
+}
+
+.form-control {
+  border-radius: 0rem !important;
+}
+
+.route-list {
+  top: 130px;
+  background-color: #fff;
+  max-height: 410px;
+  overflow: hidden;
+}
+
+.header-right {
+  background-color: transparent !important;
+  border: none !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 480px) {
+  .header-right {
+    margin: 1px !important;
+  }
+  .header-board {
+    padding: 2px;
+  }
+}
+
+/* -----------------button------------------------- */
+.button {
+  padding: 5px 50px;
+  border: 2px solid #494a49;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #494a49;
+  background-color: #fff;
+}
+
+.button:hover {
+  color: #494a49;
+  background-color: #f1f50b;
+  cursor: pointer;
+}
+
+#map {
+  display: none !important;
+}
+
+.mendatory {
+  color: red;
+}
+
+/* -----------typeahead  custom template css--------- */
+.UserDemography.dropuser-list {
+  padding: 0px !important;
+}
+
+.UserDemography.dropuser-list li {
+  padding: 10px 30px;
+  background: #f3f3f3;
+  border-radius: 10px;
+}
+
+.UserDemography.dropuser-list:before {
+  content: '';
+  position: absolute;
+  border-width: 8px 8px 8px 0;
+  border-style: solid solid solid none;
+  border-color: transparent #49baeb transparent;
+  top: 30px;
+  left: 0px;
+}
+
+[uib-typeahead-popup].dropdown-menu {
+  display: block;
+  width: 94%;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 292px;
+}
+
+.font {
+  font-size: 16px;
+  font-weight: 600;
+  color: red;
+}
+
+.uib-typeahead-match {
+  cursor: pointer;
+}
+
+.button {
+  padding: 5px 20px;
+  border: 2px solid #494a49;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #494a49;
+  background-color: #fff;
+}
+
+.button:hover {
+  color: #494a49;
+  background-color: #f1f50b;
+  cursor: pointer;
+}
+
+.button-small {
+  padding: 3px 15px;
+  border: 2px solid #494a49;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #494a49;
+  background-color: #fff;
+}
+
+.button-small:hover {
+  color: #494a49;
+  background-color: #f1f50b;
+  cursor: pointer;
+}
+
+.btn-link {
+  font-weight: 400;
+  color: #203b70;
+  background-color: transparent;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.typeahead-demo .custom-popup-wrapper {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  background-color: #f9f9f9;
+}
+
+.typeahead-demo .custom-popup-wrapper>.message {
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
+  color: #868686;
+}
+
+.form-horizontal {
+  width: 500px;
+}
+
+.datetime-picker-dropdown {}
+
+.datetime-picker-dropdown>li.date-picker-menu div>table .btn-default {
+  border: 0;
+}
+
+.datetime-picker-dropdown>li.time-picker-menu div>table {}
+
+.typeahead-demo .custom-popup-wrapper>.dropdown-menu {
+  position: static;
+  float: none;
+  display: block;
+  min-width: 160px;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}

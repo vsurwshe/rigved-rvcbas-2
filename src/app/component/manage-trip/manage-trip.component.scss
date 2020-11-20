@@ -17,6 +17,21 @@
   transition: 0.3s;
   font-size: 14px;
 }
+.tab .button-add{
+  color: black;
+  background-color: blanchedalmond;
+  border-radius: 15px;
+  float: right;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+/* Change background color of buttons on hover */
+.tab .button-add:hover {
+  color: yellow;
+  background-color: red;
+}
+
 
 /* Change background color of buttons on hover */
 .tab button:hover {
@@ -35,4 +50,16 @@
   padding: 6px 12px;
   border: 1px solid #ccc;
   /* border-top: none; */
+}
+
+.img {
+  width: 100px;
+  position: relative;
+  right: 15px;
+}
+
+.element {
+  position: absolute;
+  left: 112px;
+  top: 14px;
 }

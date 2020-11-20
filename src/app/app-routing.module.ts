@@ -6,6 +6,7 @@ import { CustomerListComponent } from './component/customer-list/customer-list.c
 import { DriverManagementComponent } from './component/driver-management/driver-management.component';
 import { HelpComponent } from './component/help/help.component';
 import { MaintanceReportComponent } from './component/maintance-report/maintance-report.component';
+import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { ManageTripComponent } from './component/manage-trip/manage-trip.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
 import { ProfileComponent } from './component/profile/profile.component';
@@ -16,7 +17,9 @@ import { VendorManagementComponent } from './component/vendor-management/vendor-
 
 export const appRoutes: Routes = [
   {path:"profile", component: ProfileComponent},
+  {path:"bookride", component: BookRideComponent},
   {path:"managetrip", component: ManageTripComponent},
+  {path:"addtrip", component: AddTripComponent},
   {path:"customerList", component: CustomerListComponent},
   {path:"approveMember", component: DriverManagementComponent},
   {path:"manageVendor", component: VendorManagementComponent},

@@ -1,4 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
+import { BookingService } from 'src/app/service/booking.service';
 import { ManageTripService } from 'src/app/service/manage-trip.service';
 declare var $;
 
@@ -11,6 +14,12 @@ export class ManageTripComponent implements OnInit {
   loading;
   upcomeingRidesList;
   pastRides;
+  ridesDetails;
+  view;
+  feedback;
+  accept;
+  online;
+
   upComeingTabelColumns=[
     {title:'Traveller Name',data:'travellerName'},
     {title:'Mobile Number',data:'travellerMobile'},
@@ -19,38 +28,38 @@ export class ManageTripComponent implements OnInit {
     {title:'Status',data:'changedStatus'},
     {title:'',data:'',orderable: false},
     {title:'',data:'',orderable: false},
-    {title:'',data:'',orderable: false},
+    {title:'',data:'changedStatus',orderable: false},
   ]
   upComeingTabelColumnsDef= [
     {
       "targets": -1, // specifies the position of button(last but one) in the row
       "data": null,
-      "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => {
-             console.log("Row Data",rowData)
-          })
+      "render": function ( data, type, row ) {
+        if(row.status !== 0 && row.status !== 1 && row.status !== 3) {
+          return "<button class='btn btn-primary btn-round' disabled>Reassign</button>"
+        }else{
+          return "<button class=' btn btn-primary btn-round' data-toggle='modal' data-target='#exampleModal1'>Reassign</button>"
+        }
       },
-      "defaultContent": "<button class=' btn btn-primary btn-round' ng-disabled='item.status !='0' && item.status !='1' && item.status !='3' ng-click='getDetails(item,2)' data-toggle='modal' data-target='#exampleModal1'>Reassign</button>"
+      "createdCell": (td, cellData, rowData, row, col) => {
+        $(td).click(e => { this.getBookingDetailsById(rowData,2); })
+      }
     },
     {
       "targets": -2, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => {
-             console.log("Row Data",rowData)
-          })
+          $(td).click(e => { this.getBookingDetailsById(rowData,2); })
       },
-      "defaultContent": "<button class='btn btn-success btn-round' ng-click='getDetails(item,2)' data-toggle='modal' data-target='#exampleModal'>Accept</button>"
+      "defaultContent": "<button class='btn btn-success btn-round' data-toggle='modal' data-target='#exampleModal'>Accept</button>"
     },
     {
       "targets": -3, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => {
-             console.log("Row Data",rowData)
-          })
+          $(td).click(e => { this.getBookingDetailsById(rowData,2); })
       },
-      "defaultContent": "<button class='btn btn-default btn-round' ng-click='getDetails(item,2)' data-toggle='modal' data-target='#exampleModal'>View</button>"
+      "defaultContent": "<button class='btn btn-default btn-round' data-toggle='modal' data-target='#exampleModal'>View</button>"
     }
   ]
 
@@ -68,16 +77,23 @@ export class ManageTripComponent implements OnInit {
       "targets": -1, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => {
-             console.log("Row Data",rowData)
-          })
+        $(td).click(e => { this.getBookingDetailsById(rowData,1); })
       },
       "defaultContent": "<button class='btn btn-default btn-round' ng-click='getDetails(item,2)' data-toggle='modal' data-target='#exampleModal'>View</button>"
     }
   ]
 
-  constructor(private mangeTripService:ManageTripService) {
+  constructor(
+    private mangeTripService:ManageTripService,
+    private router:Router,
+    private bookingService:BookingService
+  ) 
+  { 
     this.loading=false;
+    this.view=false;
+    this.feedback=false;
+    this.accept=false;
+    this.online=false;
   }
 
   ngOnInit(): void {
@@ -203,6 +219,78 @@ export class ManageTripComponent implements OnInit {
     }
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
+  }
+
+  goToAddTrip(){
+      this.router.navigateByUrl("/addtrip");
+  }
+
+  getBookingDetailsById(data,boolean){
+    if (boolean == 1) {
+      this.view = true;
+      this.feedback = true;
+      this.accept = false;
+    } else if (boolean == 2) {
+        this.accept = true;
+        this.view = false;
+        this.feedback = false;
+    }
+    this.loading=true;
+    this.bookingService.getBookingDetailsById(data.id).subscribe(
+      response=> { 
+        let tempData;
+        switch (response.tripStatus) {
+          case 0:
+            tempData= {...response, changedStatus:"Driver Not Available"}
+            break;
+          case 1:
+            tempData= {...response, changedStatus:"Ride Expired"}
+            break;
+          case 2:
+            tempData= {...response, changedStatus:"Ride Assigned"}
+            break;
+          case 3:
+            tempData= {...response, changedStatus:"Ride Accepted"}
+            break;
+          case 4:
+            tempData= {...response, changedStatus:"Ride Started"}
+            break;
+          case 5:
+            tempData= {...response, changedStatus:"Ride Completed"}
+            break;
+          case 6:
+            tempData= {...response, changedStatus:"Declined"}
+            break;
+          case 7:
+            tempData= {...response, changedStatus:"Expired"}
+            break;
+          case 8:
+            tempData= {...response, changedStatus:"Ride Billed"}
+            break;
+          default:
+            tempData= {...response, changedStatus:""}
+        }
+        this.ridesDetails=tempData;
+        this.loading=false;
+      },
+      error=>{ this.loading=false; console.log("Error ",error)}
+    )
+  }
+
+  viewTripDetails(rideData){
+    console.log("Ride ",rideData)
+  }
+
+  viewFeedback(rideData){
+    console.log("DATA ",rideData)
+  }
+
+  reAssignRide(data){
+    console.log("Reassign Data", data)
+  }
+
+  ToggleOnline(data){
+    console.log("Data ",data);
   }
 
 }
