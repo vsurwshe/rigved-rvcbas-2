@@ -63,3 +63,19 @@
   left: 112px;
   top: 14px;
 }
+
+.center {
+  // display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+// Star css
+/*
+ignore this. it's just used to put the two example panels next to each other.
+*/
+.part {
+  float:left;
+  margin:0 5px;
+}
+

@@ -26,6 +26,8 @@ export class ManageTripService {
     return this.authService.process("GET","booking/finishedTripByDriverFrAdmin/"+firstIndex+"/"+lastIndex,{headers: this.setHeaders()})
   }
 
- 
+  getFeedbackOfTrip(tripId):Observable<any>{
+    return this.authService.process("GET","trip/getFeedback/"+tripId,{headers: this.setHeaders()})
+  }
 
 }

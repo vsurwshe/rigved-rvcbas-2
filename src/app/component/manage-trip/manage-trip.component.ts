@@ -19,6 +19,9 @@ export class ManageTripComponent implements OnInit {
   feedback;
   accept;
   online;
+  feedbackModel;
+  feedbackMessage;
+  starReatings: number;
 
   upComeingTabelColumns=[
     {title:'Traveller Name',data:'travellerName'},
@@ -94,6 +97,7 @@ export class ManageTripComponent implements OnInit {
     this.feedback=false;
     this.accept=false;
     this.online=false;
+    this.feedbackModel=false;
   }
 
   ngOnInit(): void {
@@ -282,7 +286,27 @@ export class ManageTripComponent implements OnInit {
   }
 
   viewFeedback(rideData){
-    console.log("DATA ",rideData)
+    const { tripId } = rideData
+    if (tripId) {
+      this.feedbackModel=true;
+      this.loading=true;
+      this.mangeTripService.getFeedbackOfTrip(tripId)
+        .subscribe(
+          response=>{ 
+            console.log("Data ",response)
+            const { feedBack, rating } = (response && response.data) ? response.data : "";
+            this.feedbackMessage="There is no feedback for this trip";
+            this.starReatings=Math.round(rating);
+            this.loading=false;
+          },
+          error=>{ this.loading=false; console.error("Error ",error);
+          }
+        )
+    } else {
+        this.starReatings=0;
+        this.feedbackMessage="There is no feedback for this trip";
+    }
+   
   }
 
   reAssignRide(data){

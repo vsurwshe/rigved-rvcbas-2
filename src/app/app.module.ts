@@ -31,6 +31,7 @@ import { ManageTripService } from './service/manage-trip.service';
 import { MasterDataService } from './service/master-data.service';
 import { BookingService } from './service/booking.service'
 import { DataTablesModule } from 'angular-datatables';
+import {RatingModule} from 'primeng/rating';
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 
 @NgModule({
@@ -64,7 +65,8 @@ import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.comp
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    DataTablesModule  
+    DataTablesModule,
+    RatingModule  
   ],
   providers: [
     LoginService,
