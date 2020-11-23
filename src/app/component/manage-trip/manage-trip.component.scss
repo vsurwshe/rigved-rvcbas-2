@@ -78,4 +78,29 @@ ignore this. it's just used to put the two example panels next to each other.
   float:left;
   margin:0 5px;
 }
+.subtext{
+  color: #737373;
+}
 
+.text{
+  font-weight: bolder;
+}
+
+.tab .button-small {
+  padding: 3px 15px;
+  border: 2px solid #494a49;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 700;
+  float: right;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #494a49;
+  background-color: #fff;
+}
+
+.tab .button-small:hover {
+  color: #494a49;
+  background-color: #f1f50b;
+  cursor: pointer;
+}

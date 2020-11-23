@@ -15,12 +15,13 @@ form {
 
 input {
   width: 100%;
-  border: 0;
+  // border: 0;
   outline: 0;
   padding: 0;
-  border-bottom: 2px solid white;
+  // border-bottom: 2px solid white;
   background-color: transparent;
-  color: white;
+  color: black;
+  // text-align: center;
 }
 
 input:focus,
@@ -108,22 +109,10 @@ input:valid {
   left: 0px;
 }
 
-[uib-typeahead-popup].dropdown-menu {
-  display: block;
-  width: 94%;
-  overflow: hidden;
-  overflow-y: scroll;
-  max-height: 292px;
-}
-
 .font {
   font-size: 16px;
   font-weight: 600;
   color: red;
-}
-
-.uib-typeahead-match {
-  cursor: pointer;
 }
 
 .button {
@@ -218,4 +207,46 @@ input:checked+.slider:before {
   border: none;
   border-radius: 0;
   box-shadow: none;
+}
+
+// Center
+.center {
+  // display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 45px;
+  height: 20px;
+  margin: 20px;
+}
+
+.switch input {display:none; background-color: #ccc;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+   background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 0px;
+   right: 0px;
+  bottom: -3px;
+  background-color: #2196F3;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
