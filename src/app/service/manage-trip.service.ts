@@ -30,4 +30,8 @@ export class ManageTripService {
     return this.authService.process("GET","trip/getFeedback/"+tripId,{headers: this.setHeaders()})
   }
 
+  saveTrip(tripData):Observable<any>{
+    return this.authService.process("POST","booking/bookTrip/",{headers: this.setHeaders(), body:tripData})
+  }
+
 }

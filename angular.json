@@ -43,7 +43,8 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "src/assets/js/iao-alert.jquery.min.js",
-              "src/assets/js/mdtimepicker.js"
+              "src/assets/js/mdtimepicker.js",
+              "src/assets/js/moment.js"
             ]
           },
           "configurations": {

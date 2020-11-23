@@ -5,83 +5,78 @@
 </div>
 <div id="map" style="width: 100%; height: 100vh; display: none"></div>
 <div class="col-sm-12 header-board">
-  <div class="col-md-12  col-sm-12 mb-2" style="text-align: right">
+    <div class="col-md-12  col-sm-12 mb-2" style="text-align: right">
     <a href="/managetrip"> <button type="button" class="button-small" style="cursor: pointer"
         ng-show="!upcomingList"><span class="myfont">Manage Trip</span></button> </a>
-  </div>
-  <div class="row">
+    </div>
+    <form [formGroup]="tirpForm" (ngSubmit)="tripBooking()">
+    <div class="row">
     <div class="col-md-12 col-sm-12">
       <div class="col-md-12 col-sm-12 row header-right nopadding">
         <div id="accordion" class="col-md-12">
-          <div class="card">
-            <div class="card-header" id="headingOne">
+            <div class="card">
+                <div class="card-header" id="headingOne">
               <h5 class="mb-0">
-                <button class="btn btn-link font-weight-bold" data-toggle="collapse" data-target="#collapseOne"
+                <button type="button" class="btn btn-link font-weight-bold" data-toggle="collapse" data-target="#collapseOne"
                   aria-expanded="true" aria-controls="collapseOne"> Company Details </button>
               </h5>
-            </div>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body row">
                 <div class="from-group  col-sm-4">
                   <label for="">Cost Center&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field " placeholder="Enter Cost Center" name="costCenter">
-                  <i [hidden]="!loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                  <div [hidden]="!noResults"> <i class="glyphicon glyphicon-remove"></i> No Results Found</div>
+                  <input class="form-control txt-field " placeholder="Enter Cost Center" formControlName="costCenter">
                 </div>
-                <div class="from-group  col-sm-4" id="remote">
+                <div formGroupName="companyDetailDto" class="from-group  col-sm-4" id="remote">
                   <label for="">Company name&nbsp;<span class="mendatory">*</span></label>
-                  <input id="company" type="text" class="form-control" name="company" placeholder="Select Company Name"
+                  <input id="company" type="text" class="form-control" formControlName="companyName" placeholder="Select Company Name"
                     [ngbTypeahead]="companySearch" (focus)="companyfocus$.next($any($event).target.value)"
                     (click)="companyclick$.next($any($event).target.value)" #companyinstance="ngbTypeahead" required />
                 </div>
-                <div class="from-group  col-sm-4">
+                <div formGroupName="companyDetailDto" class="from-group  col-sm-4">
                   <label for="">GST Number&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" name="gstNum" type="text" placeholder="GST Number">
+                  <input class="form-control txt-field" formControlName="gstnumber" type="text" placeholder="GST Number">
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Travel Id&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field " placeholder="Enter Company Name" name="travel_Id">
-                  <i [hidden]="!loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                  <div [hidden]="!noResults"> <i class="glyphicon glyphicon-remove"></i> No Results Found</div>
+                  <input class="form-control txt-field " placeholder="Enter Travel Id" formControlName="travelId">
                 </div>
-                <div class="from-group  col-sm-4">
+                <div formGroupName="companyDetailDto" class="from-group  col-sm-4">
                   <label for="">Requested By&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" name="Book_req" type="text" name="Book_req"
-                    placeholder="Customer Name" maxlength="20">
+                  <input class="form-control txt-field" formControlName="traveldeskname" type="text" placeholder="Enter Customer Name" maxlength="20">
                 </div>
-                <div class="from-group  col-sm-4">
+                <div formGroupName="companyDetailDto" class="from-group  col-sm-4">
                   <label for="">Email-Id&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" name="Book_email" type="text" name="Book_email"
-                    placeholder="Email Id">
+                  <input class="form-control txt-field" formControlName="emailId" type="email" placeholder="Enter Email Id">
                 </div>
               </div>
+                </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingTwo">
+            <div class="card">
+                <div class="card-header" id="headingTwo">
               <h5 class="mb-0">
-                <button class="btn btn-link font-weight-bold collapsed" data-toggle="collapse"
+                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse"
                   data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> Travel Details </button>
               </h5>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body row">
                 <div class="from-group  col-sm-4" id="remote">
                   <label for="">Car Segment Type&nbsp;<span class="mendatory">*</span></label>
-                  <input id="carSegment" type="text" class="form-control" name="carSegment" placeholder="Select a Type"
+                  <input id="carSegment" type="text" class="form-control" formControlName="sysBookingRequestTypeDto" placeholder="Select a Type"
                     [ngbTypeahead]="carSegmentSearch" (focus)="focus$.next($any($event).target.value)"
                     (click)="click$.next($any($event).target.value)" #carsegmentinstance="ngbTypeahead" />
                 </div>
                 <div class="from-group  col-sm-4" id="remote">
                   <label for="">Car Brand&nbsp;<span class="mendatory">*</span></label>
-                  <input id="carName" type="text" class="form-control" name="carName" placeholder="Select Car Name"
+                  <input id="carName" type="text" class="form-control" formControlName="sysCarCategoryDto" placeholder="Select Car Name"
                     [ngbTypeahead]="carBrandSearch" (focus)="carnamefocus$.next($any($event).target.value)"
                     (click)="carnameclick$.next($any($event).target.value)" #carnameinstance="ngbTypeahead" />
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">From Date Of Travel&nbsp;<span class="mendatory">*</span></label>
                   <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" ngModel="model"
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" formControlName="pickUpDate"
                       [minDate]="minDate" ngbDatepicker #d1="ngbDatepicker">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"></button>
@@ -91,7 +86,7 @@
                 <div class="from-group  col-sm-4">
                   <label for="">To Date Of Travel&nbsp;<span class="mendatory">*</span></label>
                   <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" ngModel="model"
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" formControlName="dropDate"
                       [minDate]="minDate" ngbDatepicker #d2="ngbDatepicker">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
@@ -100,122 +95,125 @@
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Pick-Up Time &nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" type="text" ng-model="picktime" id="timepicker" />
+                  <ngb-timepicker  formControlName="pickUpTime"></ngb-timepicker>
+                  <!-- <input class="form-control txt-field" type="text" [(ngModel)]="pickUpTime" formControlName="pickUpTime" id="timepicker" /> -->
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Pick-Up City&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="fromCity" type="text" placeholder="Pick Up From City">
+                  <input class="form-control txt-field" formControlName="pickUpCity" type="text" placeholder="Pick Up From City">
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Pick-Up Location&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="pickUpLocation" type="text"
+                  <input class="form-control txt-field" formControlName="pickUpLocation" type="text"
                     placeholder="Pick Up Location">
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Pick-Up Address&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="repAdd" type="text" placeholder="Reporting Address">
+                  <input class="form-control txt-field" formControlName="pickUpAddress" type="text" placeholder="Reporting Address">
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Release Time&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" type="text" ng-model="releasetime" id="timepicker1" />
+                  <ngb-timepicker  formControlName="dropTime"></ngb-timepicker>
+                  <!-- <input class="form-control txt-field" type="text" formControlName="dropTime" id="timepicker1" /> -->
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Release Location&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="dropLocation" type="text" placeholder="Drop Location">
+                  <input class="form-control txt-field" formControlName="releaseLocation" type="text" placeholder="Drop Location">
                 </div>
                 <div class="from-group  col-sm-4">
                   <label for="">Release Address&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="relAdd" type="text" placeholder="Release Address">
+                  <input class="form-control txt-field" formControlName="releaseAddress" type="text" placeholder="Release Address">
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="exampleFormControlSelect1">Car Hire&nbsp;<span class="mendatory">*</span></label>
-                  <select class="form-control txt-field" id="exampleFormControlSelect1" ng-model=carHire>
+                  <select class="form-control txt-field" id="exampleFormControlSelect1" formControlName=carHire>
                     <option>One Way</option>
                     <option>Return</option>
                   </select>
                 </div>
                 <div class="form-group  col-sm-4">
                   <label for="">For Use<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field " placeholder="Enter For Use" ng-model="forUse"
+                  <input class="form-control txt-field " placeholder="Enter For Use" formControlName="carUse"
                     uib-typeahead="company as company.name for company in getForUse($viewValue)"
                     typeahead-loading="loadingLocations" typeahead-show-hint="false" typeahead-min-length="0"
                     typeahead-no-results="noResults" class="form-control">
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="">Specific Instruction</label>
-                  <textarea class="form-control txt-field" ng-model="specificIns" cols="30" rows="2"></textarea>
+                  <textarea class="form-control txt-field" formControlName="instruction" cols="30" rows="2"></textarea>
                 </div>
               </div>
+                </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingThree">
+            <div class="card">
+                <div class="card-header" id="headingThree">
               <h5 class="mb-0">
-                <button class="btn btn-link font-weight-bold collapsed" data-toggle="collapse"
+                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse"
                   data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Traveler Details
                 </button>
               </h5>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div class="card-body row">
-                <div class="from-group  col-sm-6">
+                <div class="from-group  col-sm-6" formGroupName="travelerDetailDto">
                   <label for="">Traveler's Mobile Number&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="travelerMobNum" type="text"
-                    placeholder="Traveler's Mobile Number" maxlength="10">
+                  <input class="form-control txt-field" formControlName="mobileNumber" type="text" placeholder="Traveler's Mobile Number" maxlength="10">
                 </div>
-                <div class="from-group  col-sm-6">
+                <div class="from-group  col-sm-6" formGroupName="travelerDetailDto">
                   <label for="">Employee Id&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="empId" type="text" placeholder="Employee Id">
+                  <input class="form-control txt-field" formControlName="employeeId" type="text" placeholder="Employee Id">
                 </div>
-                <div class="from-group  col-sm-6">
+                <div class="from-group  col-sm-6" formGroupName="travelerDetailDto">
                   <label for="">Traveler First Name&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="fname" type="text" placeholder="Traveler First Name">
+                  <input class="form-control txt-field" formControlName="firstName" type="text" placeholder="Traveler First Name">
                 </div>
-                <div class="from-group  col-sm-6">
+                <div class="from-group  col-sm-6" formGroupName="travelerDetailDto">
                   <label for="">Traveler Last Name&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" ng-model="lname" type="text" placeholder="Traveler Last Name">
+                  <input class="form-control txt-field" formControlName="lastName" type="text" placeholder="Traveler Last Name">
                 </div>
               </div>
+                </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingFour">
+            <div class="card">
+               <div class="card-header" id="headingFour">
               <h5 class="mb-0">
-                <button class="btn btn-link font-weight-bold collapsed" data-toggle="collapse"
+                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse"
                   data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"> Driver Details
                 </button>
               </h5>
+               </div>
+               <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                    <div class="card-body row">
+                        <div class="col-md-12 text-right">
+                          <h4 class="mt-2 mb-2">Assign Ride</h4>
+                          <div>
+                            <label>Auto</label>
+                            <label class="switch">
+                              <input type="checkbox" [ngModelOptions]="{standalone: true}"
+                              [(ngModel)]="assignDriver" (click)="toggle()">
+                              <span class="slider round"></span>
+                            </label>
+                            <label>Manual</label>
+                          </div>
+                        </div>
+                        <div class="from-group  col-sm-6" [hidden]="!showDriverList" style="position: absolute;">
+                            <label for="">Select a Driver&nbsp;<span class="mendatory">*</span></label>
+                            <input id="driverName" type="text" class="form-control" formControlName="driverAccountId" 
+                            placeholder="Select a Driver" [ngbTypeahead]="driverSearch" 
+                            (focus)="drivernamefocus$.next($any($event).target.value)" (click)="drivernameclick$.next($any($event).target.value)" 
+                            #driverinstance="ngbTypeahead" />
+                        </div>
+                    </div>
+               </div>
             </div>
-            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-              <div class="card-body row">
-                <div class="col-md-12 text-right">
-                  <h4 class="mt-2 mb-2">Assign Ride</h4>
-                  <div>
-                    <label>Auto</label>
-                    <label class="switch">
-                      <input type="checkbox" [(ngModel)]="assignDriver" (click)="toggle()">
-                      <span class="slider round"></span>
-                    </label>
-                    <label>Manual</label>
-                  </div>
-                </div>
-                <div class="from-group  col-sm-6" [hidden]="!showDriverList" style="position: absolute;">
-                    <label for="">Select a Driver&nbsp;<span class="mendatory">*</span></label>
-                    <input id="driverName" type="text" class="form-control" name="driverName" 
-                    placeholder="Select a Driver" [ngbTypeahead]="driverSearch" 
-                    (focus)="drivernamefocus$.next($any($event).target.value)" (click)="drivernameclick$.next($any($event).target.value)" 
-                    #driverinstance="ngbTypeahead" />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="col-sm-12" style="margin-top: 10px;">
           <span class="center">
-            <button type="button" class="button btn-block" (click)="tripBooking()">Assign Ride</button>
+            <button type="submit" class="button btn-block">Assign Ride</button>
           </span>
         </div>
       </div>
     </div>
-  </div>
+        </div>
+    </form>
 </div>

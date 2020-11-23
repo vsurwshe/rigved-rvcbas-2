@@ -66,6 +66,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     DataTablesModule,
     RatingModule,
     NgbModule  
