@@ -39,7 +39,10 @@ import { DriverService } from './service/driver.service'
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
+<<<<<<< HEAD
 import { TravellBillingFilterComponent } from './component/travell-billing/travell-billing-filter/travell-billing-filter.component';
+=======
+>>>>>>> 0.2.2: start the implement add driver form
 import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
 
 @NgModule({
@@ -66,7 +69,10 @@ import { AddDriverComponent } from './component/driver-management/add-driver/add
     LoginFooterComponent,
     AddTripComponent,
     AddCustomerComponent,
+<<<<<<< HEAD
     TravellBillingFilterComponent,
+=======
+>>>>>>> 0.2.2: start the implement add driver form
     AddDriverComponent 
   ],
   imports: [

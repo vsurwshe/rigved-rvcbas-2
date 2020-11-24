@@ -19,6 +19,7 @@ import { TravellBillingComponent } from './component/travell-billing/travell-bil
 import { VendorManagementComponent } from './component/vendor-management/vendor-management.component';
 
 export const appRoutes: Routes = [
+<<<<<<< HEAD
   {path:"profile", component: ProfileComponent},
   {path:"bookride", component: BookRideComponent},
   {path:"managetrip", component: ManageTripComponent},
@@ -35,6 +36,24 @@ export const appRoutes: Routes = [
   {path:"support", component: SupportComponent},
   {path:"terms", component: TermsAndConditionsComponent},
   {path:"privacy", component: PrivacyPolicyComponent},
+=======
+  { path:"profile", component: ProfileComponent},
+  { path:"bookride", component: BookRideComponent},
+  { path:"managetrip", component: ManageTripComponent},
+  { path:"addtrip", component: AddTripComponent},
+  { path:"customerList", component: CustomerListComponent},
+  { path:"travelerReg", component: AddCustomerComponent},
+  { path:"approveMember", component: DriverManagementComponent},
+  { path:"driverReg", component: AddDriverComponent},
+  { path:"manageVendor", component: VendorManagementComponent},
+  { path:"manageClient", component: ClientManagementComponent},
+  { path:"travelBilling", component: TravellBillingComponent},
+  { path:"maintenanceReport", component: MaintanceReportComponent},
+  { path:"help", component: HelpComponent},
+  { path:"support", component: SupportComponent},
+  { path:"terms", component: TermsAndConditionsComponent},
+  { path:"privacy", component: PrivacyPolicyComponent},
+>>>>>>> 0.2.2: start the implement add driver form
 ];
 
 export const sideBarRoutes = [
