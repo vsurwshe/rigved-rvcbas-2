@@ -23,7 +23,7 @@
                 </div>
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body row">
-                <div class="from-group  col-sm-4">
+                <div  formGroupName="companyDetailDto" class="from-group  col-sm-4">
                   <label for="">Cost Center&nbsp;<span class="mendatory">*</span></label>
                   <input class="form-control txt-field " placeholder="Enter Cost Center" formControlName="costCenter">
                 </div>
@@ -41,13 +41,13 @@
                   <label for="">Travel Id&nbsp;<span class="mendatory">*</span></label>
                   <input class="form-control txt-field " placeholder="Enter Travel Id" formControlName="travelId">
                 </div>
-                <div formGroupName="companyDetailDto" class="from-group  col-sm-4">
+                <div class="from-group  col-sm-4">
                   <label for="">Requested By&nbsp;<span class="mendatory">*</span></label>
                   <input class="form-control txt-field" formControlName="traveldeskname" type="text" placeholder="Enter Customer Name" maxlength="20">
                 </div>
-                <div formGroupName="companyDetailDto" class="from-group  col-sm-4">
+                <div class="from-group  col-sm-4">
                   <label for="">Email-Id&nbsp;<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field" formControlName="emailId" type="email" placeholder="Enter Email Id">
+                  <input class="form-control txt-field" formControlName="traveldeskEmailId" type="email" placeholder="Enter Email Id">
                 </div>
               </div>
                 </div>
@@ -133,10 +133,13 @@
                 </div>
                 <div class="form-group  col-sm-4">
                   <label for="">For Use<span class="mendatory">*</span></label>
-                  <input class="form-control txt-field " placeholder="Enter For Use" formControlName="carUse"
+                  <!-- <input class="form-control txt-field " placeholder="Enter For Use" formControlName="carUse"
                     uib-typeahead="company as company.name for company in getForUse($viewValue)"
                     typeahead-loading="loadingLocations" typeahead-show-hint="false" typeahead-min-length="0"
-                    typeahead-no-results="noResults" class="form-control">
+                    typeahead-no-results="noResults" class="form-control"> -->
+                  <input id="forUse" type="text" class="form-control" formControlName="carUse" placeholder="Select For Use"
+                    [ngbTypeahead]="forUseSearch" (focus)="forusefocus$.next($any($event).target.value)"
+                    (click)="foruseclick$.next($any($event).target.value)" #foruseinstance="ngbTypeahead" required />
                 </div>
                 <div class="form-group col-sm-4">
                   <label for="">Specific Instruction</label>

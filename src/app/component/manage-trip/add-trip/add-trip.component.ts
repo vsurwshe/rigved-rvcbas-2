@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbCalendar, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import {Observable, Subject, merge, forkJoin} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
-import { MasterDataService } from 'src/app/service/master-data.service';
 declare var $;
+import { MasterDataService } from 'src/app/service/master-data.service';
 import * as moment from 'moment'
 import { ManageTripService } from 'src/app/service/manage-trip.service';
 import { LoginService } from 'src/app/service/login.service';
@@ -28,6 +28,9 @@ export class AddTripComponent implements OnInit {
   @ViewChild('driverinstance', {static: true}) driverinstance: NgbTypeahead;
   drivernamefocus$ = new Subject<string>();
   drivernameclick$ = new Subject<string>();
+  @ViewChild('foruseinstance', {static: true}) foruseinstance: NgbTypeahead;
+  forusefocus$ = new Subject<string>();
+  foruseclick$ = new Subject<string>();
 
   // declare the from group
   tirpForm: FormGroup;
@@ -38,12 +41,16 @@ export class AddTripComponent implements OnInit {
   noResults;
   minDate;
   companyNameArray;
+  companyList;
+  companyId;
   carTypeArray;
   carTypeList;
   carBrandArray;
   carBrandList;
   driverList;
   driverArray;
+  bookingArray;
+  bookingList;
   assignDriver;
   showDriverList;
   pickUpTime;
@@ -69,6 +76,7 @@ export class AddTripComponent implements OnInit {
     let carBrandSerach= this.masterData.getCarBrandSerach('');
     let companySerach = this.masterData.getCompanyDetails('');
     let driverSerach= this.masterData.getDriverSerach('');
+    let bookingSerach= this.masterData.getBookingSerach('');
     this.loading=true;
     $(document).ready(function(){
       $('#timepicker').mdtimepicker({format: 'hh:mm'}); //Initializes the time picker and uses the specified format (i.e. 23:30)
@@ -78,22 +86,24 @@ export class AddTripComponent implements OnInit {
       companySerach,
       carSegmentType,
       carBrandSerach,
-      driverSerach
+      driverSerach,
+      bookingSerach
     ]).subscribe(
       response=>{
         this.companyNameArray= response[0].length>0 ? response[0].map(item=> item.companyName) :[] ;
+        this.companyList=response[0];
         this.carTypeArray=response[1].length>0 ? response[1].map(item=> item.name) :[] ;
         this.carTypeList=response[1];
         this.carBrandArray=response[2].length>0 ? response[2].map(item=> item.name) :[] ;
         this.carBrandList=response[2];
         this.driverArray=response[3].length>0 ? response[3].map(item=> item.firstName) :[] ;
         this.driverList=response[3];
+        this.bookingArray=response[4].length>0 ? response[4].map(item=> item.name) :[] ;
+        this.bookingList=response[4];
         this.loading=false;
       }
     )
     this.tirpForm= this.formBuilder.group({
-      'costCenter': new FormControl(),
-      'travelId': new FormControl(),
       'carHire': new FormControl(),
       'carUse': new FormControl(),
       'driverAccountId': new FormControl(),
@@ -107,22 +117,29 @@ export class AddTripComponent implements OnInit {
       'pickUpTime': new FormControl(),
       'releaseAddress': new FormControl(),
       'releaseLocation': new FormControl(),
+      'sysCarCategoryDto': new FormControl(),
+      'sysBookingRequestTypeDto': new FormControl(),
       'companyDetailDto': this.formBuilder.group({
         'companyName': new FormControl(),
         'gstnumber': new FormControl(),
-        'traveldeskname': new FormControl(),
-        'emailId':new FormControl()
+        'costCenter': new FormControl(),
       }),
+      'travelId': new FormControl(),
+      "traveldeskEmailId":new FormControl(),
+      'traveldeskname': new FormControl(),
       'travelerDetailDto': this.formBuilder.group({
         'employeeId': new FormControl(),
         'firstName': new FormControl(),
         'lastName': new FormControl(),
         'mobileNumber': new FormControl()
       }),
-      'sysCarCategoryDto': new FormControl(),
-      'sysBookingRequestTypeDto': new FormControl()
+     
     })
-  
+    this.tirpForm.get("companyDetailDto.companyName").valueChanges.subscribe(data=>{
+      let companyData= this.companyList.length >0 && this.companyList.filter(item=> item.companyName=== data);
+      this.tirpForm.get("companyDetailDto.gstnumber").setValue(companyData.length >0 ? companyData[0].gstnumber :"");
+      this.companyId=companyData.length >0 ? companyData[0].id :"";
+    })
   }
 
   companySearch = (text$: Observable<string>) => {
@@ -164,6 +181,16 @@ export class AddTripComponent implements OnInit {
         : this.driverArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
+
+  forUseSearch = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+    const clicksWithClosedPopup$ = this.foruseclick$.pipe(filter(() => !this.foruseinstance.isPopupOpen()));
+    const inputFocus$ = this.forusefocus$;
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term => (term === '' ? this.bookingArray
+        : this.bookingArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+    );
+  }
   
   toggle(){
     if(this.assignDriver){
@@ -176,39 +203,38 @@ export class AddTripComponent implements OnInit {
   async tripBooking(){
     let carSegmentDto = this.carTypeList.length >0 ? this.carTypeList.filter(item=> item.name === this.tirpForm.value.sysBookingRequestTypeDto): []
     let carBrandDto = this.carBrandList.length >0 ? this.carBrandList.filter(item=> item.name === this.tirpForm.value.sysCarCategoryDto): []
+    let requestTypeDto= this.bookingList.length >0 ? this.bookingList.filter(item=> item.name === this.tirpForm.value.carUse) :[]
     let driverData= this.driverList.length >0 ? this.driverList.filter(item=> item.firstName === this.tirpForm.value.driverAccountId): []
-    let modifyPickUpDate=this.tirpForm.value.pickUpDate && moment(this.tirpForm.value.pickUpDate).format('x');
-    let modifyDropDate=this.tirpForm.value.dropDate && moment(this.tirpForm.value.dropDate).format('x')
-    let modifyPickupTime= this.tirpForm.value.pickUpTime && moment(this.tirpForm.value.pickUpTime).format('x');
-    let modifyDropTime= this.tirpForm.value.dropTime && moment(this.tirpForm.value.dropTime).format('x');
+    let modifyPickUpDate=this.tirpForm.value.pickUpDate && Number(moment(this.tirpForm.value.pickUpDate).format('x'));
+    let modifyDropDate=this.tirpForm.value.dropDate && Number(moment(this.tirpForm.value.dropDate).format('x'));
+    let modifyPickupTime= this.tirpForm.value.pickUpTime && Number(moment(this.tirpForm.value.pickUpTime).format('x'));
+    let modifyDropTime= this.tirpForm.value.dropTime && Number(moment(this.tirpForm.value.dropTime).format('x'));
     var formData= {
       ...this.tirpForm.value, 
+      "companyDetailDto": { "id": this.companyId },
       "dropTime":modifyDropTime,
       "pickUpTime":modifyPickupTime,
       "dropDate": modifyDropDate,
       "pickUpDate":modifyPickUpDate,
       "driverAccountId":driverData.length>0 && driverData[0].accountId,
-      "sysBookingRequestTypeDto": carSegmentDto,
-      "sysCarCategoryDto":carBrandDto,
-      "tripStatus": 0
+      "sysCarCategoryDto": carSegmentDto.length > 0 && { "id": carSegmentDto[0].id},
+      "sysCarMasterDto":carBrandDto.length>0 && { "id": carBrandDto[0].id},
+      "sysBookingRequestTypeDto": requestTypeDto.length > 0 && { "id": requestTypeDto[0].id},
+      "tripStatus": "0"
     };
-    console.log("From Data", formData)
     this.loading=true;
     this.tripService.saveTrip(formData)
     .subscribe(
       response=>{ 
-        console.log("Data ", response)
-        this.loginService.successFullMessage("Your Trip Registerd Successfully...!");
+        this.loginService.successFullMessage("Trip Booked Successfully ..!");
         setTimeout(()=>{
           this.router.navigateByUrl("/managetrip");
           this.loading=false;
         },500)
       },
       error=> { 
-        console.error("Error ",error)
         this.loginService.errorMessage("Something went worng..., Please try again....!");
         this.loading=false;
-      });
+    });
   }
-
 }
