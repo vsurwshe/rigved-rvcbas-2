@@ -4,6 +4,7 @@ import { BookRideComponent } from './component/book-ride/book-ride.component';
 import { ClientManagementComponent } from './component/client-management/client-management.component';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
 import { CustomerListComponent } from './component/customer-list/customer-list.component';
+import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
 import { DriverManagementComponent } from './component/driver-management/driver-management.component';
 import { HelpComponent } from './component/help/help.component';
 import { MaintanceReportComponent } from './component/maintance-report/maintance-report.component';

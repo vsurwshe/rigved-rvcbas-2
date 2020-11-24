@@ -38,6 +38,7 @@ import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.comp
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
 import { TravellBillingFilterComponent } from './component/travell-billing/travell-billing-filter/travell-billing-filter.component';
+import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { TravellBillingFilterComponent } from './component/travell-billing/trave
     LoginFooterComponent,
     AddTripComponent,
     AddCustomerComponent,
-    TravellBillingFilterComponent 
+    TravellBillingFilterComponent,
+    AddDriverComponent 
   ],
   imports: [
     CommonModule,
