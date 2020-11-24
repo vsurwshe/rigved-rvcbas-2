@@ -13,7 +13,7 @@ export class MasterDataService {
   lastIndex;
   constructor(private authService:AuthService, private loginService:LoginService) {
     this.firstIndex=0;
-    this.lastIndex=20;
+    this.lastIndex=100;
   }
 
   setHeaders(){

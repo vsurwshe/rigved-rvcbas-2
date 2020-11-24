@@ -37,18 +37,18 @@ export const appRoutes: Routes = [
 ];
 
 export const sideBarRoutes = [
-  {path:"/profile", text:"User Profile", image:"assets/img/car-list.png"},
-  {path:"/managetrip", text:"Manage Trip", image:"assets/img/customer-list.png"},
-  {path:"/customerList", text:"Traveller List", image:"assets/img/customer-list.png"},
-  {path:"/approveMember", text:"Driver Management", image:"assets/img/approveList.png"},
-  {path:"/manageVendor", text:"Manage Vendor", image:"assets/img/approveList.png"},
-  {path:"/manageClient", text:"Manage Client", image:"assets/img/approveList.png"},
-  {path:"/travelBilling", text:"Travel Billing", image:"assets/img/rupee-indian.png"},
-  {path:"/maintenanceReport", text:"Maintenance Report", image:"assets/img/customer-list.png"},
-  {path:"/help", text:"Help", image:"assets/img/mobile-phone.png"},
-  {path:"/support", text:"Support", image:"assets/img/support.png"},
-  {path:"/terms", text:"Terms & Conditions", image:"assets/img/clipboard-and-notebook.png"},
-  {path:"/privacy", text:"Privacy Policy", image:"assets/img/approveList.png"}
+  { path:"/profile", text:"User Profile", image:"assets/img/car-list.png"},
+  { path:"/managetrip", text:"Manage Trip", image:"assets/img/customer-list.png"},
+  { path:"/customerList", text:"Traveller List", image:"assets/img/customer-list.png"},
+  { path:"/approveMember", text:"Driver Management", image:"assets/img/approveList.png"},
+  { path:"/manageVendor", text:"Manage Vendor", image:"assets/img/approveList.png"},
+  { path:"/manageClient", text:"Manage Client", image:"assets/img/approveList.png"},
+  { path:"/travelBilling", text:"Travel Billing", image:"assets/img/rupee-indian.png"},
+  { path:"/maintenanceReport", text:"Maintenance Report", image:"assets/img/customer-list.png"},
+  { path:"/help", text:"Help", image:"assets/img/mobile-phone.png"},
+  { path:"/support", text:"Support", image:"assets/img/support.png"},
+  { path:"/terms", text:"Terms & Conditions", image:"assets/img/clipboard-and-notebook.png"},
+  { path:"/privacy", text:"Privacy Policy", image:"assets/img/approveList.png"}
 ];
 
 @NgModule({
