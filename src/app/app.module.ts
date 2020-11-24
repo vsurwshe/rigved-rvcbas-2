@@ -30,10 +30,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageTripService } from './service/manage-trip.service';
 import { MasterDataService } from './service/master-data.service';
 import { BookingService } from './service/booking.service'
+import { DataTableService } from './service/data-table.service'
+import { CustomerService } from './service/customer.service'
 import { DataTablesModule } from 'angular-datatables';
-import {RatingModule} from 'primeng/rating';
+import { RatingModule} from 'primeng/rating';
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     LoginNavbarComponent,
     LoginFooterComponent,
-    AddTripComponent 
+    AddTripComponent,
+    AddCustomerComponent 
   ],
   imports: [
     CommonModule,
@@ -76,7 +80,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthService,
     ManageTripService,
     MasterDataService,
-    BookingService
+    BookingService,
+    DataTableService,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })

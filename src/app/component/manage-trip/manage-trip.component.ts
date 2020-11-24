@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/app/service/booking.service';
+import { DataTableService } from 'src/app/service/data-table.service';
 import { ManageTripService } from 'src/app/service/manage-trip.service';
 declare var $;
 
@@ -89,7 +90,8 @@ export class ManageTripComponent implements OnInit {
   constructor(
     private mangeTripService:ManageTripService,
     private router:Router,
-    private bookingService:BookingService
+    private bookingService:BookingService,
+    private dataTabelService: DataTableService
   ) 
   { 
     this.loading=false;
@@ -107,8 +109,8 @@ export class ManageTripComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.loadTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef); 
-    this.loadTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
+    this.dataTabelService.dataTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
+    this.dataTabelService.dataTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
   }
 
   getManageTrip(){
@@ -140,7 +142,7 @@ export class ManageTripComponent implements OnInit {
         })
         this.upcomeingRidesList=tempData;
         this.loading=false;
-        this.loadTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
+        this.dataTabelService.dataTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
       },
       error=>{ this.loading=false; console.log("error ",error)}
     )
@@ -177,7 +179,7 @@ export class ManageTripComponent implements OnInit {
         })
         this.pastRides=tempData;
         this.loading=false;
-        this.loadTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
+        this.dataTabelService.dataTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
       },
       error=>{ this.loading=false; console.log("error ",error)}
     )

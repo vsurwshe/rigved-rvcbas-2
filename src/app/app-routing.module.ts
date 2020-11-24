@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BookRideComponent } from './component/book-ride/book-ride.component';
 import { ClientManagementComponent } from './component/client-management/client-management.component';
+import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
 import { CustomerListComponent } from './component/customer-list/customer-list.component';
 import { DriverManagementComponent } from './component/driver-management/driver-management.component';
 import { HelpComponent } from './component/help/help.component';
@@ -21,6 +22,7 @@ export const appRoutes: Routes = [
   {path:"managetrip", component: ManageTripComponent},
   {path:"addtrip", component: AddTripComponent},
   {path:"customerList", component: CustomerListComponent},
+  {path:"travelerReg", component: AddCustomerComponent},
   {path:"approveMember", component: DriverManagementComponent},
   {path:"manageVendor", component: VendorManagementComponent},
   {path:"manageClient", component: ClientManagementComponent},
