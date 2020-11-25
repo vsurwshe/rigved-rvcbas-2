@@ -1,21 +1,23 @@
 <nav class="navbar navbar-expand-lg bg-white">
     <div class="container-fluid">
         <h3 class="text-md-right myFont">{{routeText}}</h3>
-        <button [hidden]="!travelBilling" class="btn btn-default" style="position: fixed;right: 100px;" ng-click="travelFilters()">Filters</button>
-        <button [hidden]="!maintenanceReport" class="btn btn-default" style="position: fixed;right: 100px;" ng-click="maintenanceReportFilters()">Filters</button>
-        <div *ngIf="travelBillingFilter" style="position: relative; left: 600px;">
-            <button class="btn btn-default" style="margin-left: 32px;" ng-click="filtersApply()">Apply Filters</button>
-            <button class="btn btn-default" style="margin-left: 32px;" ng-click="travelFilters()">Clear</button>
+        <a href="/travelBillingFilters" [hidden]="!travelBilling" style="position: fixed;right: 100px;">
+            <button  class="button-small" >Filters</button>
+        </a>
+        <a href="/travelBillingFilters" [hidden]="!maintenanceReport" style="position: fixed;right: 100px;">
+            <button class="button-small">Filters</button>
+        </a>
+        <div [hidden]="!travelBillingFilter" style="position: fixed; right: 100px;">
+            <button class="button-small" style="margin-left: 32px; float: left;" (click)="filtersApply()">Apply Filters</button>
+            <a href="/travelBilling"><button class="button-small" style="margin-left: 32px;">Clear</button></a>
             <!--  <button ng-show = "travellerList" class="btn btn-default" style="margin-left: 32px;" ><a href="#travelerReg"> Traveller Registration</a></button>-->
         </div>
-        <div *ngIf="maintanceReportFilter" style="position: relative; left: 350px;">
+        <div [hidden]="!maintanceReportFilter" style="position: fixed; right: 100px;">
             <button class="btn btn-default" ng-click="reportFiltersApply()">Apply Report Filters</button>
             <button class="btn btn-default" ng-click="maintenanceReportFilters()">Clear</button>
         </div>
-        <button 
-            class="btn btn-dark d-inline-block d-lg-none ml-auto" id="hideButton" type="button"
-            data-toggle="collapse" data-target="#navbarSupportedContent" 
-            aria-controls="navbarSupportedContent"
+        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" id="hideButton" type="button"
+            data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
             aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-align-justify"></i>
         </button>

@@ -13,6 +13,7 @@ import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-polic
 import { ProfileComponent } from './component/profile/profile.component';
 import { SupportComponent } from './component/support/support.component';
 import { TermsAndConditionsComponent } from './component/terms-and-conditions/terms-and-conditions.component';
+import { TravellBillingFilterComponent } from './component/travell-billing/travell-billing-filter/travell-billing-filter.component';
 import { TravellBillingComponent } from './component/travell-billing/travell-billing.component';
 import { VendorManagementComponent } from './component/vendor-management/vendor-management.component';
 
@@ -27,6 +28,7 @@ export const appRoutes: Routes = [
   {path:"manageVendor", component: VendorManagementComponent},
   {path:"manageClient", component: ClientManagementComponent},
   {path:"travelBilling", component: TravellBillingComponent},
+  {path:"travelBillingFilters", component: TravellBillingFilterComponent},
   {path:"maintenanceReport", component: MaintanceReportComponent},
   {path:"help", component: HelpComponent},
   {path:"support", component: SupportComponent},
