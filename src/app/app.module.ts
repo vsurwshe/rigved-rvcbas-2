@@ -33,7 +33,6 @@ import { BookingService } from './service/booking.service'
 import { DataTableService } from './service/data-table.service'
 import { CustomerService } from './service/customer.service'
 import { DataTablesModule } from 'angular-datatables';
-import { RatingModule} from 'primeng/rating';
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
@@ -72,7 +71,6 @@ import { AddCustomerComponent } from './component/customer-list/add-customer/add
     FormsModule,
     ReactiveFormsModule,
     DataTablesModule,
-    RatingModule,
     NgbModule  
   ],
   providers: [

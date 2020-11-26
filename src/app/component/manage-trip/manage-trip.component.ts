@@ -295,7 +295,6 @@ export class ManageTripComponent implements OnInit {
       this.mangeTripService.getFeedbackOfTrip(tripId)
         .subscribe(
           response=>{ 
-            console.log("Data ",response)
             const { feedBack, rating } = (response && response.data) ? response.data : "";
             this.feedbackMessage="There is no feedback for this trip";
             this.starReatings=Math.round(rating);
@@ -305,7 +304,7 @@ export class ManageTripComponent implements OnInit {
           }
         )
     } else {
-        this.starReatings=0;
+        this.starReatings=0.0;
         this.feedbackMessage="There is no feedback for this trip";
     }
    

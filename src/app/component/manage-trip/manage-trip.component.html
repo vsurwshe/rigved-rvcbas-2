@@ -238,7 +238,7 @@
             </div>
             <div class="modal-body">
                 <div class="center">
-                    <p-rating [ngModel]="starReatings" readonly="true" stars="5" [cancel]="false"></p-rating>
+                    <ngb-rating [(rate)]="starReatings" [max]="5" [readonly]="true" style="font-size: 30px; color: #F7CC1A;"></ngb-rating>
                     <div class="from-group  col-sm-12">
                         <label>Message</label><br/>
                          <label>{{feedbackMessage}}</label> 
