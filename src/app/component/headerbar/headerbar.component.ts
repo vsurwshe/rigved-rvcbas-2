@@ -40,6 +40,9 @@ export class HeaderbarComponent implements OnInit {
               this.routeText="Customer List";
               this.travellerList = true;
               break;
+            case "/travelerReg":
+              this.routeText="Register Traveller"
+              break;
             case "/approveMember":
               this.routeText="Approve Member"
               break;

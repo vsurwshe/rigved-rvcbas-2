@@ -133,10 +133,6 @@
                 </div>
                 <div class="form-group  col-sm-4">
                   <label for="">For Use<span class="mendatory">*</span></label>
-                  <!-- <input class="form-control txt-field " placeholder="Enter For Use" formControlName="carUse"
-                    uib-typeahead="company as company.name for company in getForUse($viewValue)"
-                    typeahead-loading="loadingLocations" typeahead-show-hint="false" typeahead-min-length="0"
-                    typeahead-no-results="noResults" class="form-control"> -->
                   <input id="forUse" type="text" class="form-control" formControlName="carUse" placeholder="Select For Use"
                     [ngbTypeahead]="forUseSearch" (focus)="forusefocus$.next($any($event).target.value)"
                     (click)="foruseclick$.next($any($event).target.value)" #foruseinstance="ngbTypeahead" required />

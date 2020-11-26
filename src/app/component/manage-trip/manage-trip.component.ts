@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/app/service/booking.service';
+import { DataTableService } from 'src/app/service/data-table.service';
 import { ManageTripService } from 'src/app/service/manage-trip.service';
 declare var $;
 
@@ -89,7 +90,8 @@ export class ManageTripComponent implements OnInit {
   constructor(
     private mangeTripService:ManageTripService,
     private router:Router,
-    private bookingService:BookingService
+    private bookingService:BookingService,
+    private dataTabelService: DataTableService
   ) 
   { 
     this.loading=false;
@@ -107,13 +109,13 @@ export class ManageTripComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    this.loadTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef); 
-    this.loadTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
+    this.dataTabelService.dataTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
+    this.dataTabelService.dataTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
   }
 
   getManageTrip(){
     this.loading=true;
-    this.mangeTripService.loadTrips(0,10)
+    this.mangeTripService.loadTrips(0,100)
     .subscribe(
       response=>{ 
         var tempData= (response.length >0 ) && response.map((item)=>{ 
@@ -140,7 +142,7 @@ export class ManageTripComponent implements OnInit {
         })
         this.upcomeingRidesList=tempData;
         this.loading=false;
-        this.loadTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
+        this.dataTabelService.dataTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
       },
       error=>{ this.loading=false; console.log("error ",error)}
     )
@@ -148,7 +150,7 @@ export class ManageTripComponent implements OnInit {
 
   getFinishedTrips(){
     this.loading=true;
-    this.mangeTripService.getFinishedTrip(0,10)
+    this.mangeTripService.getFinishedTrip(0,100)
     .subscribe(
       response=>{ 
         var tempData= (response.length >0 ) && response.map((item)=>{ 
@@ -177,7 +179,7 @@ export class ManageTripComponent implements OnInit {
         })
         this.pastRides=tempData;
         this.loading=false;
-        this.loadTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
+        this.dataTabelService.dataTable("#pastRidesDataTable", this.pastRidesTabelColumns, this.pastRides, this.pastRidesTabelColumnsDef);
       },
       error=>{ this.loading=false; console.log("error ",error)}
     )
@@ -195,8 +197,8 @@ export class ManageTripComponent implements OnInit {
       "deferRender": true,
       /* 2nd sub-array defines the values to be displayed in select(entries) to the user
       1st sub-array defines the no.of records to show as per user selection based on 2nd sub-array values */
-      "lengthMenu": [[3, 5, 10, 50, -1], [3, 5, 10, 50, "All"]],
-      "pageLength": 3, // This is the no of default rows/entries shown in datatable
+      "lengthMenu": [[10, 50, -1], [10, 50, "All"]],
+      "pageLength": 10, // This is the no of default rows/entries shown in datatable
       "pagingType": "full_numbers", // This shows pagination list
       // These are pagination style settings of datatable
       "oLanguage": {
@@ -293,7 +295,6 @@ export class ManageTripComponent implements OnInit {
       this.mangeTripService.getFeedbackOfTrip(tripId)
         .subscribe(
           response=>{ 
-            console.log("Data ",response)
             const { feedBack, rating } = (response && response.data) ? response.data : "";
             this.feedbackMessage="There is no feedback for this trip";
             this.starReatings=Math.round(rating);
@@ -303,7 +304,7 @@ export class ManageTripComponent implements OnInit {
           }
         )
     } else {
-        this.starReatings=0;
+        this.starReatings=0.0;
         this.feedbackMessage="There is no feedback for this trip";
     }
    

@@ -4,8 +4,8 @@ import { NgbCalendar, NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import {Observable, Subject, merge, forkJoin} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 declare var $;
+import * as moment from 'moment';
 import { MasterDataService } from 'src/app/service/master-data.service';
-import * as moment from 'moment'
 import { ManageTripService } from 'src/app/service/manage-trip.service';
 import { LoginService } from 'src/app/service/login.service';
 import { Router } from '@angular/router';
@@ -201,12 +201,14 @@ export class AddTripComponent implements OnInit {
   }
   // Trip Booking
   async tripBooking(){
+    let tripPickUpDate=this.tirpForm.value.pickUpDate && this.tirpForm.value.pickUpDate.month+"/"+this.tirpForm.value.pickUpDate.day+"/"+this.tirpForm.value.pickUpDate.year;
+    let tripDropDate=this.tirpForm.value.dropDate && this.tirpForm.value.dropDate.month+"/"+this.tirpForm.value.dropDate.day+"/"+this.tirpForm.value.dropDate.year
     let carSegmentDto = this.carTypeList.length >0 ? this.carTypeList.filter(item=> item.name === this.tirpForm.value.sysBookingRequestTypeDto): []
     let carBrandDto = this.carBrandList.length >0 ? this.carBrandList.filter(item=> item.name === this.tirpForm.value.sysCarCategoryDto): []
     let requestTypeDto= this.bookingList.length >0 ? this.bookingList.filter(item=> item.name === this.tirpForm.value.carUse) :[]
     let driverData= this.driverList.length >0 ? this.driverList.filter(item=> item.firstName === this.tirpForm.value.driverAccountId): []
-    let modifyPickUpDate=this.tirpForm.value.pickUpDate && Number(moment(this.tirpForm.value.pickUpDate).format('x'));
-    let modifyDropDate=this.tirpForm.value.dropDate && Number(moment(this.tirpForm.value.dropDate).format('x'));
+    let modifyPickUpDate=Number(moment(tripPickUpDate).format('x'));
+    let modifyDropDate= Number(moment(tripDropDate).format('x'));
     let modifyPickupTime= this.tirpForm.value.pickUpTime && Number(moment(this.tirpForm.value.pickUpTime).format('x'));
     let modifyDropTime= this.tirpForm.value.dropTime && Number(moment(this.tirpForm.value.dropTime).format('x'));
     var formData= {

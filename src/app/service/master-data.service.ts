@@ -71,4 +71,8 @@ export class MasterDataService {
     return this.authService.process("POST","masterdata/addCompany/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
   }
 
+  getCustomerList(serachTerm):Observable<any>{
+    return this.authService.process("GET","masterdata/costomerSearch/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
+  }
+
 }
