@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BillService } from 'src/app/service/bill.service';
 import { DataTableService } from 'src/app/service/data-table.service';
 import { LoginService } from 'src/app/service/login.service';
@@ -10,11 +13,14 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class TravellBillingComponent implements OnInit {
 
+  state$: Observable<object>;
+
   // required variables
   loading;
   travellingBillList;
 
   travellBillingTabelColumns=[
+    {title:'',data:'', orderable: false},
     {title:'Company Name',data:'nameOfCompany'},
     {title:'GST',data:'gstNo'},
     {title:'Cost center',data:'costCentre'},
@@ -58,24 +64,33 @@ export class TravellBillingComponent implements OnInit {
     }
   ]
 
-
-
   constructor(
     private loginService:LoginService,
     private billService: BillService,
-    private dataTabelService: DataTableService
+    private dataTabelService: DataTableService,
+    private activatedRoute:ActivatedRoute
   ) { this.loading=false;}
 
   ngOnInit(): void {
     this.loading=true;
-    this.billService.getBillList(0,100,{})
-    .subscribe(
-      response=>{
-        this.travellingBillList=response;
-        this.dataTabelService.dataTable("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef);
+    this.state$ = this.activatedRoute.paramMap.pipe(map(()=> window.history.state));
+    this.state$.subscribe((data:any)=>{
+      const { billList }= data ? data : ""
+      if(billList != ""){
         this.loading=false;
-      },error=>{ this.loading=false; console.error("Error ",error);}
-    )
+        this.travellingBillList=billList
+      }else{
+        this.billService.getBillList(0,100,{})
+        .subscribe(
+          response=>{
+            this.travellingBillList=response;
+            this.dataTabelService.dataTable("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef);
+            this.loading=false;
+          },error=>{ this.loading=false; console.error("Error ",error);}
+        )
+      }
+    })
+    
   }
 
   ngAfterViewInit(): void {

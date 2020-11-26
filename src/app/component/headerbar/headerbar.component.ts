@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { TravellBillingFilterComponent } from '../travell-billing/travell-billing-filter/travell-billing-filter.component';
 declare var $: any;
 @Component({
   selector: 'app-headerbar',
@@ -57,6 +59,7 @@ export class HeaderbarComponent implements OnInit {
               break;
             case "/travelBilling":
               this.travelBilling=true;
+              this.travelBillingFilter=false;
               this.maintenanceReport=false;
               this.routeText="Travel Billing"
               break;
@@ -100,6 +103,6 @@ export class HeaderbarComponent implements OnInit {
   }
 
   filtersApply(){
-    console.log("Calling form Header");
+    // new TravellBillingFilterComponent().filtersApply();
   }
 }
