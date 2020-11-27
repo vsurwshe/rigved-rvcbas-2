@@ -61,8 +61,12 @@ export class DataTableService {
           }
       },
       columnDefs:colunmDefs,
+      select: {
+        style: 'multi',
+        selector: 'td:first-child'
+      },
       dom: 'lBfrtip',
-      buttons:{buttons}
+      buttons:{buttons},
     })
   }
   

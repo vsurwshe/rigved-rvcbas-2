@@ -25,4 +25,8 @@ export class BillService {
   getAdjustBill(url):Observable<any>{
     return this.authService.process("GET",url,{headers: this.setHeaders()})
   }
+
+  genratetBillInvoice(bodyData):Observable<any>{
+    return this.authService.process("POST","bill/generateInvoice/",{headers: this.setHeaders(),body:bodyData})
+  }
 }

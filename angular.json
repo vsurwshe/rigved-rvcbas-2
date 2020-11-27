@@ -32,6 +32,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/jquery.dataTables.css",
               "src/assets/css/buttons.dataTables.min.css",
+              "src/assets/css/select.dataTables.min.css",
               "src/assets/css/iao-alert.min.css",
               "src/assets/css/mdtimepicker.css",
               "src/styles.scss"
@@ -50,6 +51,7 @@
               "src/assets/js/vfs_fonts.js",
               "src/assets/js/buttons.html5.min.js",
               "src/assets/js/buttons.print.min.js",
+              "src/assets/js/dataTables.select.min.js"
             ]
           },
           "configurations": {

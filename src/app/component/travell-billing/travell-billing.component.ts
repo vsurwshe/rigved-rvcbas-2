@@ -6,6 +6,8 @@ import { BillService } from 'src/app/service/bill.service';
 import { DataTableService } from 'src/app/service/data-table.service';
 import { LoginService } from 'src/app/service/login.service';
 
+declare var $;
+
 @Component({
   selector: 'app-travell-billing',
   templateUrl: './travell-billing.component.html',
@@ -24,6 +26,9 @@ export class TravellBillingComponent implements OnInit {
   totalKm;
   adjustSign;
   invoiceId;
+  tabel:any;
+  selectedIds:Array<any>;
+  invoiceViewData;
 
   travellBillingTabelColumns=[
     {title:'',data:'', orderable: false},
@@ -53,13 +58,11 @@ export class TravellBillingComponent implements OnInit {
 
   travellBillingTabelColumnsDef= [
     {
-      'targets': 0,
-      'searchable': false,
-      'orderable': false,
-      'className': 'dt-body-center',
-      'render': function (data, type, full, meta){
-          return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
-      }
+      "targets":   0,
+      "className": 'select-checkbox',
+      "orderable": false,
+      "data":null,
+      "defaultContent": ''
     },
     {
       "targets": 1,
@@ -104,6 +107,10 @@ export class TravellBillingComponent implements OnInit {
       exportOptions: {
         columns: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
       }
+    },
+    {
+      text: 'Generate Invoice',
+      className: 'genInv'
     }
   ]
 
@@ -112,7 +119,10 @@ export class TravellBillingComponent implements OnInit {
     private billService: BillService,
     private dataTabelService: DataTableService,
     private activatedRoute:ActivatedRoute
-  ) { this.loading=false;}
+  ) { 
+    this.loading=false;
+    this.selectedIds=[];
+  }
 
   ngOnInit(): void {
     this.loading=true;
@@ -131,23 +141,45 @@ export class TravellBillingComponent implements OnInit {
     .subscribe(
       response=>{
         this.travellingBillList=response;
-        var tabel = this.dataTabelService.dataTableWithButtons("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef,this.travellBillingTabelButtons,true);
+        this.tabel = this.dataTabelService.dataTableWithButtons("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef,this.travellBillingTabelButtons,true);
         this.loading=false;
-        this.listenClickEventListenerOnTabel("#travellBillingTabel",tabel);
+        this.listenClickEventListenerOnTabel("#travellBillingTabel",this.tabel);
+        this.listenSelectEvent(this.tabel,this.selectedIds);
       },error=>{ this.loading=false; console.error("Error ",error);}
     )
   }
 
   ngAfterViewInit(): void {
-    var tabel= this.dataTabelService.dataTableWithButtons("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef,this.travellBillingTabelButtons,true);
-    this.listenClickEventListenerOnTabel("#travellBillingTabel",tabel);
+    this.tabel= this.dataTabelService.dataTableWithButtons("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef,this.travellBillingTabelButtons,true);
+    // showing details pan
+    this.listenClickEventListenerOnTabel("#travellBillingTabel",this.tabel);
+    // cathing select event
+    this.listenSelectEvent(this.tabel,this.selectedIds);
+  }
+
+  listenSelectEvent(table,selectedIds){
+    var localThis=this;
+    $(document).ready(function() {
+      $('.genInv').click( function () {
+        var rowData = table.rows('.selected').data().toArray().map(item=>item.id);
+        localThis.billService.genratetBillInvoice(rowData)
+        .subscribe(
+          response=>{
+            localThis.invoiceViewData=response;
+            localThis.loginService.successFullMessage("Your selected data Invoice Created Successfully!")
+          },error=>{
+            localThis.loading=false; 
+            console.error("Error ",error);
+            localThis.loginService.errorMessage("Something went wrong...Please try again...!");
+          })
+      });
+    })
   }
 
   listenClickEventListenerOnTabel(tabelId,table){
     var localThis=this;
     $(document).ready(function() {
       $(tabelId).on('click', 'td.details-control', function () {
-        console.log("tabel",table)
           var tr = $(this).closest('tr');
           var row = table.row(tr);
           if ( row.child.isShown() ) {
@@ -222,7 +254,7 @@ export class TravellBillingComponent implements OnInit {
       var totalHourConverted= this.adjustTime.hour >0 && this.adjustTime.hour *60;
       var totalTime= totalHourConverted+ this.adjustTime.minute;
       var withSignTime= this.adjustSign == "-" ? this.adjustSign+totalTime : totalTime;
-      let url= "bill/adjustInvoice/"+this.invoiceId+"/"+withSignTime+"/"+this.totalKm;
+      let url= "bill/adjustInvoice/"+this.invoiceId+"/"+this.totalKm+"/"+withSignTime;
       this.loading=true;
       this.billService.getAdjustBill(url)
       .subscribe(
