@@ -29,24 +29,24 @@ export class TravellBillingComponent implements OnInit {
     {title:'',data:'', orderable: false},
     {title:'',data:'', orderable: false},
     {title:'Company Name',data:'nameOfCompany'},
-    // {title:'GST',data:'gstNo'},
-    // {title:'Cost center',data:'costCentre'},
-    // {title:'Emp.No',data:'empNo'},
-    // {title:'Emp.Name',data:'empName'},
+    {title:'GST',data:'gstNo',visible:false},
+    {title:'Cost center',data:'costCentre',visible:false},
+    {title:'Emp.No',data:'empNo',visible:false},
+    {title:'Emp.Name',data:'empName',visible:false},
     {title:'Travel Id',data:'travelId'},
     {title:'From Date',data:'fromDate'},
     {title:'To Date',data:'toDate'},
-    // {title:'Type of Duty',data:'typeOfDuty'},
-    // {title:'Vehicle Segment',data:'vehicleSeg'},
-    // {title:'Vehicle Model',data:'vehicleType'},
-    // {title:'Vehicle Number',data:'carNo'},
-    // {title:'Per Kms Rate',data:'perKmRate'},
+    {title:'Type of Duty',data:'typeOfDuty',visible:false},
+    {title:'Vehicle Segment',data:'vehicleSeg',visible:false},
+    {title:'Vehicle Model',data:'vehicleType',visible:false},
+    {title:'Vehicle Number',data:'carNo',visible:false},
+    {title:'Per Kms Rate',data:'perKmRate',visible:false},
     {title:'Total Kms',data:'totalKm'},
-    // {title:'Per hrs Rate',data:'perHrRate'},
+    {title:'Per hrs Rate',data:'perHrRate',visible:false},
     {title:'Total Hrs',data:'totalHr'},
     {title:'Total Amount',data:'totalHrAmt'},
-    // {title:'Toll-park',data:'tolllPark'},
-    // {title:'D.A+Night allowences',data:'naDa'},
+    {title:'Toll-park',data:'tolllPark',visible:false},
+    {title:'D.A+Night allowences',data:'naDa',visible:false},
     {title:'Grand Total',data:'totalTripBill'},
     {title:'Actions',data:'',orderable: false},
   ]
@@ -87,6 +87,26 @@ export class TravellBillingComponent implements OnInit {
     }
   ]
 
+  travellBillingTabelButtons=[
+    {
+      extend: 'excelHtml5',
+      className: 'excleExport',
+      text: "Export Excel",
+      exportOptions: {
+        columns: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+      }
+    },
+    {
+      extend: 'pdfHtml5',
+      orientation: 'landscape',
+      pageSize: 'LEGAL',
+      text:'Export PDF',
+      exportOptions: {
+        columns: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+      }
+    }
+  ]
+
   constructor(
     private loginService:LoginService,
     private billService: BillService,
@@ -111,7 +131,7 @@ export class TravellBillingComponent implements OnInit {
     .subscribe(
       response=>{
         this.travellingBillList=response;
-        var tabel = this.dataTabelService.dataTable("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef);
+        var tabel = this.dataTabelService.dataTableWithButtons("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef,this.travellBillingTabelButtons,true);
         this.loading=false;
         this.listenClickEventListenerOnTabel("#travellBillingTabel",tabel);
       },error=>{ this.loading=false; console.error("Error ",error);}
@@ -119,7 +139,7 @@ export class TravellBillingComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    var tabel= this.dataTabelService.dataTable("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef);
+    var tabel= this.dataTabelService.dataTableWithButtons("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef,this.travellBillingTabelButtons,true);
     this.listenClickEventListenerOnTabel("#travellBillingTabel",tabel);
   }
 
