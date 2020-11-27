@@ -13,7 +13,7 @@ export class DataTableService {
       //This line clears the previous datatable for every show entries and pagination changes
      $(tableId).DataTable().clear().destroy();
     }
-    $(tableId).DataTable({
+    return $(tableId).DataTable({
       retrieve: true,
       data: data, // This is the billData provided to show in data Table
       columns:colunm , // This is list of column names provided to display in data Table
