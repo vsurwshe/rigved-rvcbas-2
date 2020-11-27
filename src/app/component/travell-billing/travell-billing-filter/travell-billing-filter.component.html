@@ -15,6 +15,27 @@
                         <li class="nav-item">
                             <a class="nav-link tablinks" (click)="openProfile($event, 'companyData')"><i class="fa fa-car"></i> Company Name</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks " (click)="openProfile($event, 'gst')"><i class="fa fa-file"></i> GST Number</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'cost')"><i class="fa fa-key"></i> Cost Number</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'employee')"><i class="fa fa-key"></i> Employee Number</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'travel')"><i class="fa fa-key"></i> Travel ID</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'typeOfduty')"><i class="fa fa-key"></i> Type of Duty</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'vehSegment')"><i class="fa fa-key"></i> Vehicle Segment</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'vhModel')"><i class="fa fa-key"></i> Vehicle Model</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -46,9 +67,61 @@
                     </div>
                 </div>
                 <div class="tabcontent" id="companyData">
-                    <h3 class="mt-3">Company Details</h3><hr>
+                    <h4 class="mt-2">Company Details</h4><hr>
+                    <div class="from-group  col-sm-5">
+                        <label for="">Company Name</label>
+                        <input id="company" type="text" class="form-control" formControlName="companyNames" placeholder="Select Company Name" [ngbTypeahead]="companySearch" (focus)="companyfocus$.next($any($event).target.value)" (click)="companyclick$.next($any($event).target.value)" #companyinstance="ngbTypeahead"/>
+                    </div>
+                </div>
+                <div class="tabcontent" id="gst">
+                    <h4 class="mt-2">GST Number</h4><hr>
+                    <div class="from-group  col-sm-5">
+                        <label for="">GST Number</label>
+                        <input id="gst" type="text" class="form-control" formControlName="gstNumber" placeholder="Select GST Nubmer" [ngbTypeahead]="gstNumberSearch" (focus)="gstfocus$.next($any($event).target.value)" (click)="gstclick$.next($any($event).target.value)" #gstinstance="ngbTypeahead" />
+                    </div>
+                </div>
+                <div class="tabcontent" id="cost">
+                    <h4 class="mt-2">Cost Center Number </h4><hr>
                     <div class="from-group  col-sm-6">
-                        <!-- <typeahead ng-model="selectedCompany" items="contacts" displaytag="companyName" displayitem="companyName"> </typeahead> -->
+                        <label for="">Cost Center Number</label>
+                        <input id="costCenter" type="text" class="form-control" formControlName="costCenter" placeholder="Select Cost Center" [ngbTypeahead]="costCenterSearch" (focus)="costcenterfocus$.next($any($event).target.value)" (click)="costcenterclick$.next($any($event).target.value)" #costcenterinstance="ngbTypeahead" />
+                    </div>
+                </div>
+                <div class="tabcontent" id="employee">
+                    <h4 class="mt-2">Employee Id</h4><hr>
+                    <div class="from-group  col-sm-6">
+                        <label for="">Employees Id's</label>
+                        <input id="employeeId" type="text" class="form-control" formControlName="employeeId" placeholder="Select Employee Ids" [ngbTypeahead]="employeeIdSearch" (focus)="employeeidfocus$.next($any($event).target.value)" (click)="employeeidclick$.next($any($event).target.value)" #employeeidinstance="ngbTypeahead" />
+                    </div>
+                </div>
+                <div class="tabcontent" id="travel">
+                    <h4 class="mt-2">Travel ID</h4><hr>
+                    <div class="from-group  col-sm-9">
+                        <label for="">Travel ID</label>
+                        <input id="travelId" type="text" class="form-control" formControlName="tarvelId" placeholder="Select Travel Ids" [ngbTypeahead]="travelIdSearch" (focus)="travelidfocus$.next($any($event).target.value)" (click)="travelidclick$.next($any($event).target.value)" #travelidinstance="ngbTypeahead" />
+                    </div>
+                </div>
+                <div class="tabcontent" id="typeOfduty">
+                    <h4 class="mt-2">Type of duty</h4><hr>
+                    <div class="from-group  col-sm-9">
+                        <label for="">Type of duty</label>
+                        <input id="typeOfDuty" type="text" class="form-control" formControlName="typeOfDuty" placeholder="Select Type of Duty" [ngbTypeahead]="typeOfDutySearch" (focus)="typeofdutyfocus$.next($any($event).target.value)" (click)="typeofdutyclick$.next($any($event).target.value)" #typeofdutyinstance="ngbTypeahead" />
+                    </div>
+                </div>
+                <div class="tabcontent" id="vehSegment">
+                    <h4 class="mt-2">Vehicle Segment</h4><hr>
+                    <div class="from-group  col-sm-9">
+                        <label for="">Vehicle Segment</label>
+                        <!-- <typeahead ng-model="selectedsSeg" items="categery" displaytag="name" displayitem="name"></typeahead> -->
+                        <input id="vahicalSegment" type="text" class="form-control" formControlName="vahicalSegment" placeholder="Select Vahical Model" [ngbTypeahead]="vahicalSegmentSearch" (focus)="vahicalsegmentfocus$.next($any($event).target.value)" (click)="vahicalsegmentclick$.next($any($event).target.value)" #vahicalsegmentinstance="ngbTypeahead" />
+                    </div>
+                </div>
+                <div class="tabcontent" id="vhModel">
+                    <h4 class="mt-2">Vehicle Model</h4><hr>
+                    <div class="from-group  col-sm-9">
+                        <label for="">Vehicle Model</label>
+                        <!-- <typeahead ng-model="selectedsModel" items="carModals" displaytag="name" displayitem="name"></typeahead> -->
+                        <input id="vahicalModel" type="text" class="form-control" formControlName="vahicalModel" placeholder="Select Vahical Model" [ngbTypeahead]="vahicalModelSearch" (focus)="vahicalmodelfocus$.next($any($event).target.value)" (click)="vahicalmodelclick$.next($any($event).target.value)" #vahicalmodelinstance="ngbTypeahead" />
                     </div>
                 </div>
             </form>

@@ -22,4 +22,7 @@ export class BillService {
     return this.authService.process("POST","bill/retriveData/"+firstIndex+"/"+lastIndex,{headers: this.setHeaders(),body:serachTerm})
   }
 
+  getAdjustBill(url):Observable<any>{
+    return this.authService.process("GET",url,{headers: this.setHeaders()})
+  }
 }

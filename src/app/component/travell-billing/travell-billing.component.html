@@ -6,3 +6,42 @@
 <div class="col-md-12 table-responsive header-board">
     <table id="travellBillingTabel" class="display" style="width: 100%;"></table>
 </div>
+<!-- This model showing customer feedback model -->
+<div class="modal" tabindex="-1" role="dialog" id="adjustmentModel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Adjustment Model</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-sm-12">
+                        <label for="exampleFormControlSelect1">Adjust by<span class="mendatory">*</span></label>
+                        <select class="form-control txt-field" [(ngModel)]="adjustSign" required>
+                            <option>Select Option</option>
+                            <option value="+">Increment</option>
+                            <option value="-">Decrement</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="from-group  col-sm-6">
+                        <lable for="">Total KM</lable>
+                        <input class="form-control txt-field" [(ngModel)]="totalKm" type="text" placeholder="Enter total KM">
+                    </div>
+                    <div class="from-group  col-sm-6">
+                        <lable for="">Total Time</lable>
+                        <ngb-timepicker [(ngModel)]="adjustTime"></ngb-timepicker>
+                    </div>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="submitAdjustment()">Save Adjustment</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" #savebuttonmodel>Close</button>
+            </div>
+        </div>
+    </div>
+</div>

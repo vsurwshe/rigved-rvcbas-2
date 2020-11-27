@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,17 +13,23 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class TravellBillingComponent implements OnInit {
 
+  @ViewChild('savebuttonmodel') savebuttonmodel: ElementRef;
+
   state$: Observable<object>;
 
   // required variables
   loading;
   travellingBillList;
+  adjustTime:{ hour: number, minute: number};;
+  totalKm;
+  adjustSign;
+  invoiceId;
 
   travellBillingTabelColumns=[
     {title:'',data:'', orderable: false},
     {title:'',data:'', orderable: false},
     {title:'Company Name',data:'nameOfCompany'},
-    {title:'GST',data:'gstNo'},
+    // {title:'GST',data:'gstNo'},
     // {title:'Cost center',data:'costCentre'},
     // {title:'Emp.No',data:'empNo'},
     // {title:'Emp.Name',data:'empName'},
@@ -66,9 +72,18 @@ export class TravellBillingComponent implements OnInit {
       "targets": -1, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => { console.log("Data ",rowData)})
+        $(td).on('click',event=>{
+          const { totalHr, totalKm, id}=rowData
+          let filterTime= totalHr.split(":");
+          this.adjustTime = {
+            hour: Number(filterTime[0]),
+            minute: Number(filterTime[1]) 
+          };
+          this.totalKm=totalKm;
+          this.invoiceId=id;
+        })
       },
-      "defaultContent": "<button class='btn btn-default btn-round' data-toggle='modal' data-target='#exampleModal'>Adjument</button>"
+      "defaultContent": "<button class='btn btn-success btn-round' data-toggle='modal' data-target='#adjustmentModel'>ADJUSTMENT</button>"
     }
   ]
 
@@ -87,22 +102,20 @@ export class TravellBillingComponent implements OnInit {
       if(billList != ""){
         this.loading=false;
         this.travellingBillList=billList
-      }else{
-        this.billService.getBillList(0,100,{})
-        .subscribe(
-          response=>{
-            this.travellingBillList=response;
-            var tabel = this.dataTabelService.dataTable("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef);
-            this.loading=false;
-            this.listenClickEventListenerOnTabel("#travellBillingTabel",tabel);
-          },error=>{ this.loading=false; console.error("Error ",error);}
-        )
-      }
+      }else{ this.getBillList() }
     })
-    // Add event listener for opening and closing details
-    
+  }
 
-      
+  getBillList(){
+    this.billService.getBillList(0,100,{})
+    .subscribe(
+      response=>{
+        this.travellingBillList=response;
+        var tabel = this.dataTabelService.dataTable("#travellBillingTabel", this.travellBillingTabelColumns, this.travellingBillList, this.travellBillingTabelColumnsDef);
+        this.loading=false;
+        this.listenClickEventListenerOnTabel("#travellBillingTabel",tabel);
+      },error=>{ this.loading=false; console.error("Error ",error);}
+    )
   }
 
   ngAfterViewInit(): void {
@@ -136,48 +149,71 @@ export class TravellBillingComponent implements OnInit {
     // `rowData` is the original data object for the row
     return '<div class="card">'+
         '<div class="card-body row">'+
-           '<div class="col-sm-3">'+
-           '<label>Cost Center: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.costCentre+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Empolyee Number: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.empNo+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Empolyee Name: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.empName+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Type of Duty: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.typeOfDuty+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Vehicle Segment: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.vehicleSeg+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Vehicle Model: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.vehicleType+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Vehicle Number: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.carNo+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Per KMS Rate: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.perKmRate+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>Toll Park: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.tolllPark+'</label>'+
-           '</div>'+
-           '<div class="col-sm-3">'+
-           '<label>D.A+Night allowences: &nbsp;</label>'+
-           '<label style="font-weight: bold;">'+rowData.naDa+'</label>'+
-           '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Company GST Number: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.gstNo+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Empolyee Number: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.empNo+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Empolyee Name: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.empName+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Type of Duty: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.typeOfDuty+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Cost Center: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.costCentre+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Vehicle Segment: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.vehicleSeg+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Vehicle Model: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.vehicleType+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Vehicle Number: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.carNo+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Per KMS Rate: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.perKmRate+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>Toll Park: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.tolllPark+'</label>'+
+            '</div>'+
+            '<div class="col-sm-3">'+
+            '<label>D.A+Night allowences: &nbsp;</label>'+
+            '<label style="font-weight: bold;">'+rowData.naDa+'</label>'+
+            '</div>'+
         '</div>'+
     '</div>';
   }
 
+  submitAdjustment(){
+    if(this.adjustSign != undefined && this.adjustSign !=""){ 
+      var totalHourConverted= this.adjustTime.hour >0 && this.adjustTime.hour *60;
+      var totalTime= totalHourConverted+ this.adjustTime.minute;
+      var withSignTime= this.adjustSign == "-" ? this.adjustSign+totalTime : totalTime;
+      let url= "bill/adjustInvoice/"+this.invoiceId+"/"+withSignTime+"/"+this.totalKm;
+      this.loading=true;
+      this.billService.getAdjustBill(url)
+      .subscribe(
+        response=>{
+          this.savebuttonmodel.nativeElement.click();
+          this.loginService.successFullMessage("Successfully updated the adjustment...!");
+          this.getBillList();
+        },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng..., Please try again...!")}
+      )
+    }else{
+      this.loginService.errorMessage("Please check the values");
+    }
+  }
 }
