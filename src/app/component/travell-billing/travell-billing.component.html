@@ -5,6 +5,7 @@
 </div>
 <div class="col-md-12 table-responsive header-board">
     <table id="travellBillingTabel" class="display" style="width: 100%;"></table>
+    <button style="display: none;" data-toggle='modal' data-target='#invoiceModel' #invoicemodel ></button>
 </div>
 <!-- This model showing customer feedback model -->
 <div class="modal" tabindex="-1" role="dialog" id="adjustmentModel">
@@ -43,5 +44,121 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" #savebuttonmodel>Close</button>
             </div>
         </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="invoiceModel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invoice</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered" id="invoiceViewData" >
+                    <tr> <td colspan="10" class="text-center"><h3>RIGVED Technologies Private Ltd</h3></td></tr>
+                    <tr> <td  colspan="10" class="text-center"><h6>408, Rupa Solitaire Park, Millennium Business Park, Sector 1, Mahape, Navi Mumbai, Maharashtra- 400710</h6></td> </tr>
+                    <tr> <td colspan="10" class="text-center"> <h4>TAX INVOICE</h4> </td> </tr>
+                    <tr> <td colspan="10" style="float: right;" >Invoice No : <b>{{invoiceViewData?.invoiceNo}}</b></td> </tr>
+                    <tr> <td colspan="10" style="float: right;">Invoice Date : <b>{{invoiceViewData?.invoiceDate}}</b></td></tr>
+                    <tr>          
+                        <table>
+                            <tr>
+                                <td><h6>To</h6></td>
+                                <td>Vendor Name : <b>{{invoiceViewData?.fromCompanyName}}</b></td>
+                            </tr>
+                            <tr>
+                                <td><b>{{invoiceViewData?.toCompanyAddress}}</b></td>
+                                <td>GST Number :<b>{{invoiceViewData?.fromGstNo}}</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>PAN :<b>{{invoiceViewData?.fromPANNo}}</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>SAC CODE :<b>{{invoiceViewData?.fromSACCode}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>GST NO <b>{{invoiceViewData?.toGstNo}}</b></td>
+                                <td>STATE CODE :<b>{{invoiceViewData?.fromStateCode}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>State Name : <b>{{invoiceViewData?.toCompanyState}}</b></td>
+                                <td>Place of supply :<b>{{invoiceViewData?.fromcompanyAddress}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>State Code :<b>{{invoiceViewData?.toStateCode}}</b></td>
+                                <td>Description of Service :<b>{{invoiceViewData?.desOfService}}</b></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td> Vendor Code : <b>{{invoiceViewData?.fromVendorCode}}</b></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table>
+                            <tr> <td class="text-center"><h6>PARTICULAR</h6></td> </tr>
+                            <tr> <td class="text-center">Renting of motor vehicle service for the period from </td> </tr>
+                            <tr> <td><h6>Scheduled of Rates</h6></td> </tr>
+                            <tr> <td class="text-center">Service Description : Rental Services Of Road Vehicles Including Buses, Coaches, Cars, Trucks And Other Motor Vehicles, With Or Without Operator</td></tr>
+                        </table>
+                    </tr>
+                    <tr>
+                        <table>
+                            <tr>
+                                <td>Suplied cars  </td>
+                                <td>As per the BDC attached</td>
+                                <td rowspan = "2"><h6>Total Amount</h6></td>
+                            </tr>
+                            <tr>
+                                <td>Hire Charges</td>
+                                <td>As Per Annexure</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td > GST Description Under RCM  </td>
+                                <td>{{invoiceViewData?.billWitoutGST}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td >SGST/UTGS :<b>{{invoiceViewData?.sgstutgs}}</b></td>
+                                <td>{{invoiceViewData?.sgstutgsamt}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td >CGST : <b>{{invoiceViewData?.cgst}}</b></td>
+                                <td>{{invoiceViewData?.cgstamt}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td >IGST : <b>{{invoiceViewData?.igst}}</b></td>
+                                <td>{{invoiceViewData?.igst ? invoiceViewData?.cgstamt :""}}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Net Total</td>
+                                <td><b>{{invoiceViewData?.billWitGST}}</b></td>
+                            </tr>
+                            <tr>
+                                <td>Value Rupees in words</td>
+                                <td colspan="3"></td>
+                            </tr>
+                        </table>
+                    </tr>
+                    <tr>
+                    </tr>
+                </table>
+                <table>
+                    <tr> <td colspan="0" class="text1" ><h6>For RIGVED Technologies Private Ltd</h6></td></tr>
+                    <tr> <td colspan="0" class="text1" ><h6>Authorised Signatory</h6></td></tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="downloadInvoicePdf()">Download Invoice</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>            
+        </div>        
     </div>
 </div>

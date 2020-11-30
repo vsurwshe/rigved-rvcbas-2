@@ -7,6 +7,8 @@ import { DataTableService } from 'src/app/service/data-table.service';
 import { LoginService } from 'src/app/service/login.service';
 
 declare var $;
+import jspdf from 'jspdf';  
+import html2canvas from 'html2canvas'; 
 
 @Component({
   selector: 'app-travell-billing',
@@ -16,6 +18,7 @@ declare var $;
 export class TravellBillingComponent implements OnInit {
 
   @ViewChild('savebuttonmodel') savebuttonmodel: ElementRef;
+  @ViewChild('invoicemodel') invoicemodel: ElementRef;
 
   state$: Observable<object>;
 
@@ -161,19 +164,43 @@ export class TravellBillingComponent implements OnInit {
     var localThis=this;
     $(document).ready(function() {
       $('.genInv').click( function () {
-        var rowData = table.rows('.selected').data().toArray().map(item=>item.id);
-        localThis.billService.genratetBillInvoice(rowData)
-        .subscribe(
-          response=>{
+        if(table.rows('.selected').data().length >0){
+          var rowData = table.rows('.selected').data().toArray().map(item=>item.id);
+          localThis.loading=true;
+          localThis.billService.genratetBillInvoice(rowData)
+          .subscribe(
+            response=>{
             localThis.invoiceViewData=response;
+            localThis.invoicemodel.nativeElement.click();
+            localThis.loading=false;
             localThis.loginService.successFullMessage("Your selected data Invoice Created Successfully!")
           },error=>{
             localThis.loading=false; 
             console.error("Error ",error);
             localThis.loginService.errorMessage("Something went wrong...Please try again...!");
           })
+        }else{
+          localThis.loginService.errorMessage("Please select at least one row form tabel");
+        }
       });
     })
+   
+  }
+
+  downloadInvoicePdf(){
+    var data = document.getElementById('invoiceViewData');  //Id of the table
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      let imgWidth = 208;   
+      let pageHeight = 295;    
+      let imgHeight = canvas.height * imgWidth / canvas.width;  
+      let heightLeft = imgHeight;  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      let position = 2;  
+      pdf.addImage(contentDataURL, 'PNG', 2, position, imgWidth, imgHeight)  
+      pdf.save('RV-CabsInvoice.pdf'); // Generated PDF   
+    });
   }
 
   listenClickEventListenerOnTabel(tabelId,table){
