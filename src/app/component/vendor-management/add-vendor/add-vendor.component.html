@@ -3,10 +3,73 @@
         <img src="assets/img/giphy.gif" width="100" height="100" style="padding: 0">
     </div>
 </div>
+<form [formGroup]="vendorManagementForm" (ngSubmit)="addVendorDetails()">
 <div class="col-sm-12 header-board">
     <div class="col-md-12  col-sm-12 mb-2" style="text-align: right">
         <a href="/manageVendor">
             <button type="button" class="button-small" style="cursor: pointer" ><span class="myfont">Manage Vendor</span></button>         
         </a>
     </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <div class="col-md-12 col-sm-12 row header-right nopadding">
+                <div id="accordion" class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5  class="mb-0">
+                               <button class="btn btn-link font-weight-bold" type="button">Fill Vendor Details</button> 
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body row">
+                                <div class="from-group  col-sm-6">
+                                    <label for="">Company name&nbsp;<span class="mendatory">*</span></label>
+                                    <input class="form-control txt-field" formControlName="companyName" type="text" placeholder="Enter company name">
+                                </div>
+                                <div class="from-group  col-sm-6">
+                                    <label for="">GST Number</label>
+                                    <input class="form-control txt-field" formControlName="gstnumber" type="text" placeholder="Enter company GST number">
+                                </div>
+                                <div class="from-group  col-sm-4">
+                                    <label for="">City<span class="mendatory"></span></label>
+                                    <input class="form-control txt-field" formControlName="city" type="text" placeholder="Enter company city name"  maxlength="20">
+                                </div>
+                                <div class="from-group  col-sm-4">
+                                    <label for="">State<span class="mendatory"></span></label>
+                                    <input class="form-control txt-field" formControlName="state" type="text" placeholder="Enter company state name">
+                                </div>
+                                <div class="from-group  col-sm-4">
+                                    <label for="">Pincode<span class="mendatory"></span></label>
+                                    <input class="form-control txt-field" formControlName="pincode" type="text" placeholder="Enter company pincode">
+                                </div>
+                                <div class="from-group  col-sm-6" formGroupName="contactPersonDtoList">
+                                    <label for="">Contact Person First Name&nbsp;<span class="mendatory">*</span></label>
+                                    <input class="form-control txt-field" formControlName="firstName" type="text" placeholder="Contact Person First Name">
+                                </div>
+                                <div class="from-group  col-sm-6" formGroupName="contactPersonDtoList">
+                                    <label for="">Contact Person Last Name&nbsp;<span class="mendatory">*</span></label>
+                                    <input class="form-control txt-field" formControlName="lastName" type="text" placeholder="Contact Person Last Name">
+                                </div>
+                                <div class="from-group  col-sm-6" formGroupName="contactPersonDtoList">
+                                    <label for="">Contact Person Email-Id<span class="mendatory"></span></label>
+                                    <input class="form-control txt-field" formControlName="emailId" type="text" placeholder="Contact Person Email-Id"  maxlength="40">
+                                </div>
+                                <div class="from-group  col-sm-6" formGroupName="contactPersonDtoList">
+                                    <label for="">Contact Person Mobile Number<span class="mendatory"></span></label>
+                                    <input class="form-control txt-field" formControlName="mobileNumber" type="text" placeholder="Contact Person Mobile Number" maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12" style="margin-top: 10px;">
+                <div class="center">
+                    <button type="submit" class="button btn-block">Save Vendor Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+</form>

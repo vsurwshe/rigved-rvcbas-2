@@ -67,13 +67,9 @@ import { AddVendorComponent } from './component/vendor-management/add-vendor/add
     LoginFooterComponent,
     AddTripComponent,
     AddCustomerComponent,
-<<<<<<< HEAD
     TravellBillingFilterComponent,
-    AddDriverComponent 
-=======
     AddDriverComponent,
     AddVendorComponent 
->>>>>>> 0.4.1: Implemented vendor table with service
   ],
   imports: [
     CommonModule,

@@ -1,3 +1,21 @@
+.button {
+    padding: 5px 50px;
+    border: 2px solid #494a49;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #494a49;
+    background-color: #fff;
+}
+  
+.button:hover {
+  color: #494a49;
+  background-color: #f1f50b;
+  cursor: pointer;
+}
+
 .button-small {
     padding: 3px 15px;
     border: 2px solid #494a49;
@@ -14,4 +32,8 @@
     color: #494a49;
     background-color: #f1f50b;
     cursor: pointer;
+}
+
+.mendatory {
+    color: red;
 }
