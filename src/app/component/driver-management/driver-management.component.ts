@@ -28,6 +28,16 @@ export class DriverManagementComponent implements OnInit {
           $(td).click(e => { console.log("Data ",rowData) })
       },
       "defaultContent": "<button type='button' class='button-small'  uib-tooltip='appears with delay'><i class='fa fa-search-minus' aria-hidden='true'></i></button>"
+    },
+    {
+      "targets": -2, // specifies the position of button(last but one) in the row
+      "render": function ( data, type, row ) {
+        if(row.carDetailDto && (row.carDetailDto.subType.name !== "" || row.carDetailDto.subType.name !== null || row.carDetailDto.subType.name !== undefined)) {
+          return row.carDetailDto.subType.name;
+        }else{
+          return ""
+        }
+      },
     }
    ]
 

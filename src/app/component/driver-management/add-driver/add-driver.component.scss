@@ -45,3 +45,16 @@
     justify-content: center;
     text-align: center;
 }
+
+.upload-file{
+  border-style: groove;
+  border-width: 1px;
+  padding: 5px;
+}
+.upload-file-label{
+  margin-left: 10px;
+}
+.file-path{
+  color: red;
+  font-weight: bold;
+}
