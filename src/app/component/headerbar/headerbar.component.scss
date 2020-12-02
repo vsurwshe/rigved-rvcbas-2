@@ -110,3 +110,22 @@ label {
     display: inline-block;
     margin-right: 5%;
 }
+
+.button-small {
+    padding: 3px 15px;
+    border: 2px solid #494a49;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    float: right;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #494a49;
+    background-color: #fff;
+  }
+  
+.button-small:hover {
+    color: #494a49;
+    background-color: #f1f50b;
+    cursor: pointer;
+  }

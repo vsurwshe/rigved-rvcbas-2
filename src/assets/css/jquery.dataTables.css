@@ -59,6 +59,13 @@ table.dataTable thead .sorting_asc_disabled {
 table.dataTable thead .sorting_desc_disabled {
   background-image: url("./images/sort_desc_disabled.png");
 }
+td.details-control {
+  background: url('./images/details_open.png') no-repeat center center;
+  cursor: pointer;
+}
+tr.shown td.details-control {
+  background: url('./images/details_close.png') no-repeat center center;
+}
 table.dataTable tbody tr {
   background-color: white;
 }

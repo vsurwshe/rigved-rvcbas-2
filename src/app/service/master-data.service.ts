@@ -52,7 +52,7 @@ export class MasterDataService {
   }
 
   getTravelDataById(serachTerm):Observable<any>{
-    return this.authService.process("GET","masterdata/travelIdSearch"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
+    return this.authService.process("GET","masterdata/travelIdSearch/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
   }
 
   getCostCenterSerach(serachTerm):Observable<any>{

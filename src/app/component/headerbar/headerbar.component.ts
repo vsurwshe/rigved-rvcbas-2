@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
+import { TravellBillingFilterComponent } from '../travell-billing/travell-billing-filter/travell-billing-filter.component';
 declare var $: any;
 @Component({
   selector: 'app-headerbar',
@@ -16,7 +18,10 @@ export class HeaderbarComponent implements OnInit {
   routeText="";
   // this varible for dseclaring the array
   routesArray;
-  constructor(private router:Router) {}
+  constructor(private router:Router) {
+    this.travelBilling=false;
+    this.travelBillingFilter=false;
+  }
 
   ngOnInit(): void {
     this.router.events.subscribe(
@@ -53,9 +58,19 @@ export class HeaderbarComponent implements OnInit {
               this.routeText="Manage Client"
               break;
             case "/travelBilling":
+              this.travelBilling=true;
+              this.travelBillingFilter=false;
+              this.maintenanceReport=false;
               this.routeText="Travel Billing"
               break;
+            case "/travelBillingFilters":
+              this.travelBillingFilter=true;
+              this.maintanceReportFilter=false;
+              this.routeText="Travell Billing Filters"
+              break;
             case "/maintenanceReport":
+              this.maintenanceReport=true;
+              this.travelBilling=false;
               this.routeText="Maintenance Report"
               break;
             case "/help":
@@ -85,5 +100,9 @@ export class HeaderbarComponent implements OnInit {
       });
     });
    
+  }
+
+  filtersApply(){
+    // new TravellBillingFilterComponent().filtersApply();
   }
 }
