@@ -573,6 +573,7 @@ export class AddDriverComponent implements OnInit {
       )
     }
   }
+  
 
   // this method will used for the date conversion
   dateConvert(dateValue){

@@ -764,6 +764,645 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="exampleFormControlSelect1">Registration Number</label>
+                                    <input type="text" class="form-control txt-field"  formControlName="registerNo" placeholder="Enter Vahical Number" vlaue="2018">
+                                </div>
+                                <div class="form-group col-md-6" formGroupName="carDetailDto">
+                                    <label for="exampleFormControlSelect1">Vehicle Colour</label>
+                                        <input id="carColour" type="text" class="form-control" formControlName="carColor" placeholder="Select Car Color"
+                                    [ngbTypeahead]="carColorSearchMethod" (focus)="carcolorfocus$.next($any($event).target.value)"
+                                    (click)="carcolorclick$.next($any($event).target.value)" #carcolorinstance="ngbTypeahead" 
+                                    />
+                                </div>
+                                <div class="form-group col-md-6" formGroupName="carDetailDto">
+                                    <label for="exampleFormControlSelect1">Vehicle Interrior Colour</label>
+                                    <input id="carInterriorColour" type="text" class="form-control" formControlName="carInterrior" placeholder="Select Car Interrior Color"
+                                    [ngbTypeahead]="carInteriorSearchMethod" (focus)="carinterriorfocus$.next($any($event).target.value)"
+                                    (click)="carinterriorclick$.next($any($event).target.value)" #carinterriorinstance="ngbTypeahead" 
+                                    />
+                                </div>
+                                <div class="form-group col-md-6" formGroupName="carDetailDto">
+                                    <label for="exampleFormControlSelect1">Vendor Details</label>
+                                    <input id="vendorDetails" type="text" class="form-control" formControlName="company" placeholder="Select Vendor"
+                                    [ngbTypeahead]="vendorSearchMethod" (focus)="vendorfocus$.next($any($event).target.value)"
+                                    (click)="vendorclick$.next($any($event).target.value)" #vendorinstance="ngbTypeahead" 
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button  type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> Documents </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body row">
+                                <div id="card" class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header" id="dlcard">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#dlaccordian" aria-expanded="false" aria-controls="dlaccordian" ng-click=acc1()> Driver Licence </button>
+                                            </h5>
+                                        </div>
+                                        <div id="dlaccordian" class="collapse" aria-labelledby="dlcard" data-parent="#card">
+                                            <div class="card-body row" formGroupName="Driving Licence">
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">DL No&nbsp;<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" ng-model="dlno" type="text" formControlName="DL Number" placeholder="Driving Licence Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">First Name&nbsp;<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" formControlName="Firt Name" type="text" placeholder="First Name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Last Name&nbsp;<span class="mendatory">*</span> </label>
+                                                    <input class="form-control txt-field" formControlName="Last Name" type="text" name="traveler_mobNum" placeholder="Last Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="exampleFormControlSelect1">Blood Group</label>
+                                                    <select class="form-control txt-field" formControlName="Blood Group" id="exampleFormControlSelect1">
+                                                        <option value="">Select blood group</option>
+                                                        <option>A+</option>
+                                                        <option>B+</option>
+                                                        <option>A-</option>
+                                                        <option>O+</option>
+                                                        <option>O-</option>
+                                                        <option>AB+</option>
+                                                        <option>AB-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">RTO Name<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="RTO Name" type="text" name="" placeholder="RTO Name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Type of Vehicle<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="Type of Vehicle" type="text" placeholder="Enter Type of Vehicle" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Issued Date</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" formControlName="Issued Date" ngbDatepicker #issuedate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="issuedate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Expiry Date</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" formControlName="Date of Expiry" ngbDatepicker #expirydate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="expirydate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>Driving Licence Front Image</label><br/>
+                                                    <ng-container *ngIf="getDriverForntImagePath == null; else elseTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="dlForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="dlForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Driving Licence.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseTemplate>
+                                                        <label class="file-path">{{getDriverForntImagePath}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>Driving Licence Back Image</label><br/>
+                                                    <ng-container *ngIf="getDriverBackImagePath == null; else elseTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="dlBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="dlBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Driving Licence.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseTemplate>
+                                                        <label class="file-path">{{getDriverBackImagePath}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card1" class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header" id="pancard">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#panaccordian" aria-expanded="false" aria-controls="dlaccordian">Pan Card</button>
+                                            </h5>
+                                        </div>
+                                        <div id="panaccordian" class="collapse" aria-labelledby="pancard"  data-parent="#card1">
+                                            <div class="card-body row" formGroupName="Pan Card">
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">PAN Number&nbsp;<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" formControlName="Permanent  Account Number" type="text"  placeholder="PAN Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">First Name</label>
+                                                    <input class="form-control txt-field" formControlName="PAN First Name" type="text" placeholder="First Name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Last Name<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="PAN Last Name" type="text" placeholder="Last Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Father Name<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="Father's Name" type="text" placeholder="Father Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Date of Birth</label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="PAN DOB" ngbDatepicker #pandob="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="pandob.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>PAN Card Front Image</label><br/>
+                                                    <ng-container *ngIf="getPanCardForntImage == null; else elsePanForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="panForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="panForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Pan Card.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePanForntTemplate>
+                                                        <label class="file-path">{{getPanCardForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>PAN Card Back Image</label><br/>
+                                                    <ng-container *ngIf="getPanCardBackImage == null; else elsePanBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="panBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="panBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Pan Card.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePanBackTemplate>
+                                                        <label class="file-path">{{getPanCardBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card2" class="col-md-12">
+                                    <div class="card ">
+                                        <div class="card-header" id="adhar">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#adharaccordian" aria-expanded="false" aria-controls="dlaccordian"> Adhar Card </button>
+                                            </h5>
+                                        </div>
+                                        <div id="adharaccordian" class="collapse" aria-labelledby="adhar" data-parent="#card2">
+                                            <div class="card-body row" formGroupName="Adhar Card" >
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Adhar No&nbsp;<span class="mendatory">*</span> </label>
+                                                    <input class="form-control txt-field" formControlName="Aadhar Number" type="text" placeholder="Adhaar Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">First Name</label>
+                                                    <input class="form-control txt-field" formControlName="Aadhar Name" type="text" placeholder="First Name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Father Name<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="Aadhar Father Name" type="text" placeholder="Fahter Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Last Name<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Aadhar Last Name" type="text" name="traveler_mobNum"placeholder="Last Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Select Date of Birth<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Aaddhar DOB" ngbDatepicker #adhardob="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="adhardob.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>Adhar Card Front Image</label><br/>
+                                                    <ng-container *ngIf="getAdharCardForntImage == null; else elseAdharForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="adharForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="adharForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Adhar Card.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseAdharForntTemplate>
+                                                        <label class="file-path">{{getAdharCardForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>Adhar Card Back Image</label><br/>
+                                                    <ng-container *ngIf="getAdharCardBackImage == null; else elseAdharBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="adharBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="adharBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Adhar Card.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseAdharBackTemplate>
+                                                        <label class="file-path">{{getAdharCardBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card3" class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" id="Police Verification">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#pvaccordian" aria-expanded="false" aria-controls="dlaccordian"> Police Verification </button>
+                                            </h5>
+                                        </div>
+                                        <div id="pvaccordian" class="collapse" aria-labelledby="Police Verification" data-parent="#card3">
+                                            <div class="card-body row" formGroupName="Police Verification">
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Police Station Name&nbsp;<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" formControlName="Police Station Name" type="text" placeholder="Police station name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Athority Name</label>
+                                                    <input class="form-control txt-field" formControlName="Authority Name" type="text" placeholder="First Name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Document Number<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="Document Number" type="text" placeholder="Document number" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>Police Verification Form Fornt Image</label><br/>
+                                                    <ng-container *ngIf="getPoliceVerificationForntImage == null; else elsePoliceVerificationForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="policeForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="policeForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Police Verification.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePoliceVerificationForntTemplate>
+                                                        <label class="file-path">{{getPoliceVerificationForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>Police Verification Form Back Image</label><br/>
+                                                    <ng-container *ngIf="getPoliceVerificationBackImage == null; else elsePoliceVerificationBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="policeBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="policeBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Police Verification.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePoliceVerificationBackTemplate>
+                                                        <label class="file-path">{{getPoliceVerificationBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card4" class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" id="vr">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#vraccordian" aria-expanded="false" aria-controls="dlaccordian"> Vehicle Registration </button>
+                                            </h5>
+                                        </div>
+                                        <div id="vraccordian" class="collapse" aria-labelledby="vr" data-parent="#card4">
+                                            <div class="card-body row" formGroupName="Vehicle Registration">
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Registration Number&nbsp;<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" formControlName="Registration Number" type="text" name="" placeholder="Enter Registration Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Select Date of Registration<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Registration Date" ngbDatepicker #vahicalregdate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="vahicalregdate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Registration Office<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Registration Office" type="text" placeholder="Enter Registration office Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Owner Name<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="Owner Name" type="text" placeholder="Enter Owner Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Select Gender<span class="mendatory"></span></label>
+                                                    <select class="form-control txt-field " formControlName="Gender" id="exampleFormControlSelect1">
+                                                        <option>Female</option>
+                                                        <option>Male</option>
+                                                        <option>Other</option>
+                                                    </select>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Age<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Age" type="text" placeholder="Enter Age" maxlength="3">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Manufacturer<span class="mendatory"></span> </label>
+                                                    <input class="form-control txt-field" formControlName="Manufacturer" type="text" placeholder="Enter Manufacturer Name" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Vehicle Name<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Vehicle Model" type="text" placeholder="Enter Vehicle Name">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Vehicle Color<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Vehicle Color" type="text" placeholder="Enter Vehicle Color" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Vehicle Base<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Vehicle Base" type="text" placeholder="Enter Vehicle Base">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Select Date of Manufacturer<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Manufacturer Date" ngbDatepicker #dateofmanufacturer="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="dateofmanufacturer.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Fuel Type<span class="mendatory"></span></label>
+                                                    <select class="form-control txt-field " formControlName="FuelType" id="exampleFormControlSelect1">
+                                                        <option>Diesel</option>
+                                                        <option>Petrol</option>
+                                                        <option>Other</option>
+                                                    </select>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Registration Upto<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Reg Upto" type="text" placeholder="Enter Registration Upto">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Tax Upto<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Tax Upto" type="text" placeholder="Enter Tax">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label for="">Class<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Class" type="text" placeholder="Enter Class">
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>RC Fornt Image</label><br/>
+                                                    <ng-container *ngIf="getRCForntImage == null; else elseRCForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="rcForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="rcForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Vehicle Registration.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseRCForntTemplate>
+                                                        <label class="file-path">{{getRCForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6" >
+                                                    <label>RC Back Image</label><br/>
+                                                    <ng-container *ngIf="getRCBackImage == null; else elseRCBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="rcBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="rcBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Vehicle Registration.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseRCBackTemplate>
+                                                        <label class="file-path">{{getRCBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card5" class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" id="vi">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#viaccordian" aria-expanded="false" aria-controls="dlaccordian"> Vehicle Insurance </button>
+                                            </h5>
+                                        </div>
+                                        <div id="viaccordian" class="collapse" aria-labelledby="vi" data-parent="#card5">
+                                            <div class="card-body row" formGroupName="Vehicle Insurance">
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Policy Number&nbsp;<span class="mendatory">*</span> </label>
+                                                    <input class="form-control txt-field" formControlName="Policy Number" type="text" placeholder="Enter Policy Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Insurance Provider</label>
+                                                    <input class="form-control txt-field" formControlName="Insurance Provider" type="text" placeholder="Enter Insurance Provider">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Policy Issued Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Issued Date" ngbDatepicker #policyissudate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="policyissudate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Policy Expiry Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Expiry Date" ngbDatepicker #policyexpirydate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="policyexpirydate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Document Number<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Document Number" type="text" placeholder="Enter Docment Number" maxlength="20">
+
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Insurance Type<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Insurance Type" type="text" placeholder="Enter Insurance Type" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Policy Insurance Fornt Image</label><br/>
+                                                    <ng-container *ngIf="getPolicyInsuranceForntImage == null; else elsePolicyInsuranceForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="policyInsuranceForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="policyInsuranceForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Vehicle Insurance.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePolicyInsuranceForntTemplate>
+                                                        <label class="file-path">{{getPolicyInsuranceForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Policy Insurance Back Image</label><br/>
+                                                    <ng-container *ngIf="getPolicyInsuranceBackImage == null; else elsePolicyInsuranceBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="policyInsuranceBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="policyInsuranceBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Vehicle Insurance.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePolicyInsuranceBackTemplate>
+                                                        <label class="file-path">{{getPolicyInsuranceBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card6" class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" id="vper">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#vperaccordian" aria-expanded="false" aria-controls="dlaccordian"> Vehicle Permit </button>
+                                            </h5>
+                                        </div>
+                                        <div id="vperaccordian" class="collapse" aria-labelledby="vper" data-parent="#card6">
+                                            <div class="card-body row" formGroupName="Vehicle Permit">
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Permit Number&nbsp;<span class="mendatory">*</span> </label>
+                                                    <input class="form-control txt-field" formControlName="Permit Number" type="text" placeholder="Enter Permit Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Permit State</label>
+                                                    <input class="form-control txt-field" formControlName="Permit Sate" type="text" placeholder="Enter Permit State">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Permit Issued Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Issued Date" ngbDatepicker #permitissudate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="permitissudate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Permit Expiry Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Expiry Date" ngbDatepicker #permitexpriydate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="permitexpriydate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Permit Type<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Permit Type" type="text" placeholder="Enter Permit Type" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Vehicle Number<span class="mendatory"></span></label>
+                                                    <input class="form-control txt-field" formControlName="Vehicle Number" type="text" placeholder="Enter Vahical Number" maxlength="20">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Permit Fornt Image</label><br/>
+                                                    <ng-container *ngIf="getPermitForntImage == null; else elsePermitForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="permitForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="permitForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Vehicle Permit.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePermitForntTemplate>
+                                                        <label class="file-path">{{getPermitForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Permit Back Image</label><br/>
+                                                    <ng-container *ngIf="getPermitBackImage == null; else elsePermitBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="permitBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="permitBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Vehicle Permit.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elsePermitBackTemplate>
+                                                        <label class="file-path">{{getPermitBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card7" class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" id="tax">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#taxaccordian" aria-expanded="false" aria-controls="dlaccordian"> Road Tax </button>
+                                            </h5>
+                                        </div>
+                                        <div id="taxaccordian" class="collapse" aria-labelledby="tax" data-parent="#card7">
+                                            <div class="card-body row" formGroupName="Road Tax">
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Document Number<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" formControlName="Document Number" type="text" placeholder="Enter Document Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Road Tax Document Issued Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Issued Date" ngbDatepicker #roadtaxissuedate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="roadtaxissuedate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Road Tax Document Expiry Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Expiry Date" ngbDatepicker #roadtaxexpriydate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="roadtaxexpriydate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Road Tax Fornt Image</label><br/>
+                                                    <ng-container *ngIf="getRoadTaxForntImage == null; else elseRoadTaxForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="roadTaxForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="roadTaxForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Road Tax.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseRoadTaxForntTemplate>
+                                                        <label class="file-path">{{getRoadTaxForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Road Tax Back Image</label><br/>
+                                                    <ng-container *ngIf="getRoadTaxBackImage == null; else elseRoadTaxForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="roadTaxBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="roadTaxBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Road Tax.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseRoadTaxForntTemplate>
+                                                        <label class="file-path">{{getRoadTaxBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="card8" class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header" id="fc">
+                                            <h5 class="mb-0">
+                                                <button type="button" class="btn btn-link font-weight-bold collapsed" data-toggle="collapse" data-target="#fcaccordian" aria-expanded="false" aria-controls="dlaccordian"> Fitness Certificate </button>
+                                            </h5>
+                                        </div>
+                                        <div id="fcaccordian" class="collapse" aria-labelledby="fc" data-parent="#card8">
+                                            <div class="card-body row" formGroupName="Fittness Certificate">
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Document Number&nbsp;<span class="mendatory">*</span></label>
+                                                    <input class="form-control txt-field" formControlName="Document Number" type="text" placeholder="Enter Document Number">
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Fitness Certificate Issued Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Issued Date" ngbDatepicker #fitnesscertificateissuedate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="fitnesscertificateissuedate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label for="">Select Fitness Certificate Expiry Date<span class="mendatory"></span></label>
+                                                    <div class="input-group">
+                                                        <input class="form-control" placeholder="yyyy-mm-dd" formControlName="Expiry Date" ngbDatepicker #fitnesscertificateexpirydate="ngbDatepicker">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-outline-secondary calendar" (click)="fitnesscertificateexpirydate.toggle()" type="button"></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Fitness Certificate Fornt Image</label><br/>
+                                                    <ng-container *ngIf="getFitnessForntImage == null; else elseFitnessForntTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="fitnessForntIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="fitnessForntIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Fittness Certificate.Front Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseFitnessForntTemplate>
+                                                        <label class="file-path">{{getFitnessForntImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                                <div class="from-group  col-sm-6">
+                                                    <label>Fitness Certificate Back Image</label><br/>
+                                                    <ng-container *ngIf="getFitnessBackImage == null; else elseFitnessBackTemplate">
+                                                        <span  class="upload-file"><label class="upload-file-label" for="fitnessBackIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                                        <input id="fitnessBackIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'DriverDocument','Fittness Certificate.Back Image')" hidden>
+                                                    </ng-container>
+                                                    <ng-template #elseFitnessBackTemplate>
+                                                        <label class="file-path">{{getFitnessBackImage}}</label>
+                                                    </ng-template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
