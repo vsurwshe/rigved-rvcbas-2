@@ -42,6 +42,7 @@ import { AddCustomerComponent } from './component/customer-list/add-customer/add
 import { TravellBillingFilterComponent } from './component/travell-billing/travell-billing-filter/travell-billing-filter.component';
 import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
 import { AddVendorComponent } from './component/vendor-management/add-vendor/add-vendor.component';
+import { AddClientComponent } from './component/client-management/add-client/add-client.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AddVendorComponent } from './component/vendor-management/add-vendor/add
     AddCustomerComponent,
     TravellBillingFilterComponent,
     AddDriverComponent,
-    AddVendorComponent 
+    AddVendorComponent,
+    AddClientComponent 
   ],
   imports: [
     CommonModule,

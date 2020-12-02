@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BookRideComponent } from './component/book-ride/book-ride.component';
+import { AddClientComponent } from './component/client-management/add-client/add-client.component';
 import { ClientManagementComponent } from './component/client-management/client-management.component';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
 import { CustomerListComponent } from './component/customer-list/customer-list.component';
@@ -31,6 +32,7 @@ export const appRoutes: Routes = [
   { path:"manageVendor", component: VendorManagementComponent},
   { path:"addVendor", component: AddVendorComponent},
   { path:"manageClient", component: ClientManagementComponent},
+  { path:"addClient", component: AddClientComponent},
   { path:"travelBilling", component: TravellBillingComponent},
   { path:"travelBillingFilters", component: TravellBillingFilterComponent},
   { path:"maintenanceReport", component: MaintanceReportComponent},
