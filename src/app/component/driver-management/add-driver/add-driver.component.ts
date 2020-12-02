@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { forkJoin, Observable, Subject,merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { DriverService } from 'src/app/service/driver.service';
 import { FileService } from 'src/app/service/file.service';
 import { LoginService } from 'src/app/service/login.service';
 import { MasterDataService } from 'src/app/service/master-data.service';
@@ -42,28 +44,27 @@ export class AddDriverComponent implements OnInit {
   // required variables
   loading;
   driverManagementForm: FormGroup;
-  carCategoryArray;
   carCategoryList;
-  carBrandArray;
   carBrandList;
-  carModelArray;
   carModelList;
-  carColorArray;
   carColorList;
-  carInteriorArray;
   carInteriorList;
-  vendorArray;
   vendorList;
   DocumentData:Array<any>;
   constructor(
     private formBuilder: FormBuilder,
     private loginService:LoginService,
     private masterData: MasterDataService,
-    private fileService: FileService
+    private fileService: FileService,
+    private driverService: DriverService,
+    private router:Router
   ) {  
     this.loading=false; 
     this.DocumentData=[];
   }
+
+  formatMatchesByName = (value: any) => value.name || '';
+  formatMatchesByCompanyName = (value: any) => value.companyName || '';
 
   ngOnInit(): void {
     let carCategoerySerach= this.masterData.getCarCategorySerach('');
@@ -81,15 +82,10 @@ export class AddDriverComponent implements OnInit {
     ])
     .subscribe(
       response=>{
-        this.carCategoryArray= response[0].length>0 ? response[0].map(item=> item.name) :[] ;
         this.carCategoryList=response[0];
-        this.carBrandArray=response[1].length>0 ? response[1].map(item=> item.name) :[] ;
         this.carBrandList=response[1];
-        this.carColorArray=response[2].length>0 ? response[2].map(item=> item.name) :[] ;
         this.carColorList=response[2];
-        this.carInteriorArray=response[3].length>0 ? response[3].map(item=> item.name) :[] ;
         this.carInteriorList=response[3];
-        this.vendorArray= response[4].length>0 ? response[4].map(item=> item.companyName) :[] ;
         this.vendorList= response[4];
         this.loading=false;
       }
@@ -204,14 +200,12 @@ export class AddDriverComponent implements OnInit {
         'Front Image': new FormControl()
       })
     })
-  this.driverManagementForm.get("carDetailDto.carCategory").valueChanges.subscribe(data=>{
-      let carBrandData= this.carBrandList.length >0 && this.carBrandList.filter(item=> item.name=== data);
-      if(carBrandData.length>0){
+    this.driverManagementForm.get("carDetailDto.carCategory").valueChanges.subscribe(data=>{
+      if(data.id){
         this.loading=true;
-        this.masterData.getCarSubTypeBrandSerach(carBrandData[0].id)
+        this.masterData.getCarSubTypeBrandSerach(data.id)
         .subscribe(
           response=>{
-            this.carModelArray= response.length>0 ? response.map(item=> item.name) :[] ;
             this.carModelList=response;
             this.driverManagementForm.get("carDetailDto.type").enable();
             this.loading=false;
@@ -222,66 +216,73 @@ export class AddDriverComponent implements OnInit {
     })
   }
 
+  // this method will used for handel seraching method car category list
   carCategorySearchMethod = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.carcategoryclick$.pipe(filter(() => !this.carcategoryinstance.isPopupOpen()));
     const inputFocus$ = this.carcategoryfocus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.carCategoryArray
-        : this.carCategoryArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+      map(term => (term === '' ? this.carCategoryList
+        : this.carCategoryList.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
 
+  // this method will used for handel seraching method car brand list
   carBrandSearchMethod = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.carbrandclick$.pipe(filter(() => !this.carbrandinstance.isPopupOpen()));
     const inputFocus$ = this.carbrandfocus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.carBrandArray
-        : this.carBrandArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+      map(term => (term === '' ? this.carBrandList
+        : this.carBrandList.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
 
+  // this method will used for handel seraching method car model list
   carModelSearchMethod = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.carmodelclick$.pipe(filter(() => !this.carmodelinstance.isPopupOpen()));
     const inputFocus$ = this.carmodelfocus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.carModelArray
-        : this.carModelArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+      map(term => (term === '' ? this.carModelList
+        : this.carModelList.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
 
+  // this method will used for handel seraching method car color list
   carColorSearchMethod = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.carcolorclick$.pipe(filter(() => !this.carcolorinstance.isPopupOpen()));
     const inputFocus$ = this.carcolorfocus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.carColorArray
-        : this.carColorArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+      map(term => (term === '' ? this.carColorList
+        : this.carColorList.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
 
+  // this method will used for handel seraching method car interrior list
   carInteriorSearchMethod = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.carinterriorclick$.pipe(filter(() => !this.carinterriorinstance.isPopupOpen()));
     const inputFocus$ = this.carinterriorfocus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.carInteriorArray
-        : this.carInteriorArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+      map(term => (term === '' ? this.carInteriorList
+        : this.carInteriorList.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
 
+  // this method will used for handel seraching method vendor list
   vendorSearchMethod = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.vendorclick$.pipe(filter(() => !this.vendorinstance.isPopupOpen()));
     const inputFocus$ = this.vendorfocus$;
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term => (term === '' ? this.vendorArray
-        : this.vendorArray.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
+      map(term => (term === '' ? this.vendorList
+        : this.vendorList.filter(item => item.companyName.toLowerCase().indexOf(term.toLowerCase()) > -1)).slice(0, 10))
     );
   }
 
+  // this method used for the uploading documents
   async Uploading(event,description, formControlName){
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
@@ -369,10 +370,9 @@ export class AddDriverComponent implements OnInit {
   // this method returning image path fitness back 
   get getFitnessBackImage(){ return this.driverManagementForm.get('Fittness Certificate.Back Image').value;}
 
+  // this method will used for the posting driver details 
   driverRegistration(){
-    
     if(this.driverManagementForm.status== "VALID"){
-      console.log("Data ", this.driverManagementForm)
       if(this.isFieldValid('Driving Licence.DL Number')){
         const { value,  } =this.driverManagementForm.get('Driving Licence')
         let documentField={
@@ -538,10 +538,43 @@ export class AddDriverComponent implements OnInit {
           this.DocumentData.push(fitnessCertificateDocData);
         }
       }
-      console.log("Document Data ", this.DocumentData)
+      const { value }= this.driverManagementForm.get('carDetailDto')
+      let postBodyData={
+        "address": "George Street",
+        "area": "M G Road",
+        "branchId": 0,
+        "city": "Bangalore",
+        "countryCode": "IN",
+        "createdBy": "04da390e-7f95-4b73-a541-4d3c7dd0c891",
+        "customerId": "",
+        "dateOfBirth": "2020-03-13T07:30:45.076Z",
+        "emailId": this.driverManagementForm.get('emailId').value,
+        "extension": "string",
+        "firstName": this.driverManagementForm.get('firstName').value,
+        "gender": "Male",
+        "lastName": this.driverManagementForm.get('lastName').value,
+        "mobileNumber": this.driverManagementForm.get('mobileNumber').value,
+        "password": "Abc@12def",
+        "userType": "Driver",
+        "pincode": 12345,
+        "carDetailDto":{...value},
+        "documentDetailDtos": this.DocumentData,
+        "state": "Bangalore"
+      }
+      this.loading=true;
+      this.driverService.postDriverDteails(postBodyData)
+      .subscribe(
+        response=>{
+          this.loginService.successFullMessage("Driver Registered Successfully ..!");
+          this.loading=false;
+          this.router.navigateByUrl("/approveMember");
+        },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng,....Please try again...!"); console.error("Error ",error);
+        }
+      )
     }
   }
 
+  // this method will used for the date conversion
   dateConvert(dateValue){
     const { year, month,day}= dateValue
     return year+"-"+month+"-"+day;
@@ -551,6 +584,4 @@ export class AddDriverComponent implements OnInit {
   isFieldValid(field: string) {
     return this.driverManagementForm.get(field).value !=null && this.driverManagementForm.get(field).touched;
   }
-  
-
 }

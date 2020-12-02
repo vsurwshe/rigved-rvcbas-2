@@ -35,6 +35,7 @@ import { CustomerService } from './service/customer.service'
 import { BillService } from './service/bill.service'
 import { DataTablesModule } from 'angular-datatables';
 import { FileService } from './service/file.service'
+import { DriverService } from './service/driver.service'
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
@@ -88,7 +89,8 @@ import { AddDriverComponent } from './component/driver-management/add-driver/add
     DataTableService,
     CustomerService,
     BillService,
-    FileService
+    FileService,
+    DriverService
   ],
   bootstrap: [AppComponent]
 })

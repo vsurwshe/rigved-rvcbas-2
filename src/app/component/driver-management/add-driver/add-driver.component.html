@@ -83,22 +83,36 @@
                                 </div>
                                 <div class="form-group col-sm-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Segment/Type</label>
-                                    <input id="carCategory" type="text" class="form-control" formControlName="subType" placeholder="Select Car Type"
-                                        [ngbTypeahead]="carCategorySearchMethod" (focus)="carcategoryfocus$.next($any($event).target.value)"
-                                        (click)="carcategoryclick$.next($any($event).target.value)" #carcategoryinstance="ngbTypeahead" />
+                                    <input id="carCategory" type="text" 
+                                    class="form-control" formControlName="subType" placeholder="Select Car Type"
+                                    [ngbTypeahead]="carCategorySearchMethod" 
+                                    [resultFormatter]="formatMatchesByName"
+                                    [inputFormatter]="formatMatchesByName" 
+                                    (focus)="carcategoryfocus$.next($any($event).target.value)"
+                                    (click)="carcategoryclick$.next($any($event).target.value)" 
+                                    #carcategoryinstance="ngbTypeahead" />
                                 </div>
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Brand</label>
-                                    <input id="carBrand" type="text" class="form-control" formControlName="carCategory" placeholder="Select Car Name"
-                                [ngbTypeahead]="carBrandSearchMethod" (focus)="carbrandfocus$.next($any($event).target.value)"
-                                    (click)="carbrandclick$.next($any($event).target.value)" #carbrandinstance="ngbTypeahead" />
+                                    <input id="carBrand" type="text"  class="form-control" 
+                                    formControlName="carCategory" placeholder="Select Car Name"
+                                    [ngbTypeahead]="carBrandSearchMethod"
+                                    [resultFormatter]="formatMatchesByName"
+                                    [inputFormatter]="formatMatchesByName" 
+                                    (focus)="carbrandfocus$.next($any($event).target.value)"
+                                    (click)="carbrandclick$.next($any($event).target.value)" 
+                                    #carbrandinstance="ngbTypeahead" />
                                 </div>
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Model</label>
-                                    <input id="carModel" type="text" class="form-control" formControlName="type" placeholder="Select Car Model"
-                                    [ngbTypeahead]="carModelSearchMethod" (focus)="carmodelfocus$.next($any($event).target.value)"
-                                    (click)="carmodelclick$.next($any($event).target.value)" #carmodelinstance="ngbTypeahead" 
-                                    />
+                                    <input id="carModel" type="text" class="form-control" 
+                                    formControlName="type" placeholder="Select Car Model"
+                                    [ngbTypeahead]="carModelSearchMethod" 
+                                    [resultFormatter]="formatMatchesByName"
+                                    [inputFormatter]="formatMatchesByName"
+                                    (focus)="carmodelfocus$.next($any($event).target.value)"
+                                    (click)="carmodelclick$.next($any($event).target.value)" 
+                                    #carmodelinstance="ngbTypeahead" />
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <label for="exampleFormControlSelect1">Registration Number</label>
@@ -106,24 +120,36 @@
                                 </div>
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Colour</label>
-                                        <input id="carColour" type="text" class="form-control" formControlName="carColor" placeholder="Select Car Color"
-                                    [ngbTypeahead]="carColorSearchMethod" (focus)="carcolorfocus$.next($any($event).target.value)"
-                                    (click)="carcolorclick$.next($any($event).target.value)" #carcolorinstance="ngbTypeahead" 
-                                    />
+                                    <input id="carColour" type="text" class="form-control" 
+                                    formControlName="carColor" placeholder="Select Car Color"
+                                    [ngbTypeahead]="carColorSearchMethod"
+                                    [resultFormatter]="formatMatchesByName"
+                                    [inputFormatter]="formatMatchesByName" 
+                                    (focus)="carcolorfocus$.next($any($event).target.value)"
+                                    (click)="carcolorclick$.next($any($event).target.value)" 
+                                    #carcolorinstance="ngbTypeahead" />
                                 </div>
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Interrior Colour</label>
-                                    <input id="carInterriorColour" type="text" class="form-control" formControlName="carInterrior" placeholder="Select Car Interrior Color"
-                                    [ngbTypeahead]="carInteriorSearchMethod" (focus)="carinterriorfocus$.next($any($event).target.value)"
-                                    (click)="carinterriorclick$.next($any($event).target.value)" #carinterriorinstance="ngbTypeahead" 
-                                    />
+                                    <input id="carInterriorColour" type="text" class="form-control" 
+                                    formControlName="carInterrior" placeholder="Select Car Interrior Color"
+                                    [ngbTypeahead]="carInteriorSearchMethod"
+                                    [resultFormatter]="formatMatchesByName"
+                                    [inputFormatter]="formatMatchesByName"  
+                                    (focus)="carinterriorfocus$.next($any($event).target.value)"
+                                    (click)="carinterriorclick$.next($any($event).target.value)" 
+                                    #carinterriorinstance="ngbTypeahead" />
                                 </div>
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vendor Details</label>
-                                    <input id="vendorDetails" type="text" class="form-control" formControlName="company" placeholder="Select Vendor"
-                                    [ngbTypeahead]="vendorSearchMethod" (focus)="vendorfocus$.next($any($event).target.value)"
-                                    (click)="vendorclick$.next($any($event).target.value)" #vendorinstance="ngbTypeahead" 
-                                    />
+                                    <input id="vendorDetails" type="text" class="form-control" 
+                                    formControlName="company" placeholder="Select Vendor"
+                                    [ngbTypeahead]="vendorSearchMethod"
+                                    [resultFormatter]="formatMatchesByCompanyName"
+                                    [inputFormatter]="formatMatchesByCompanyName" 
+                                    (focus)="vendorfocus$.next($any($event).target.value)"
+                                    (click)="vendorclick$.next($any($event).target.value)" 
+                                    #vendorinstance="ngbTypeahead" />
                                 </div>
                             </div>
                         </div>
@@ -196,7 +222,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
                                                 <div class="from-group  col-sm-6" >
                                                     <label>Driving Licence Front Image</label><br/>
                                                     <ng-container *ngIf="getDriverForntImagePath == null; else elseTemplate">
