@@ -8,6 +8,8 @@ import { CustomerListComponent } from './component/customer-list/customer-list.c
 import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
 import { DriverManagementComponent } from './component/driver-management/driver-management.component';
 import { HelpComponent } from './component/help/help.component';
+import { MaintanceDetailsComponent } from './component/maintance-report/maintance-details/maintance-details.component';
+import { MaintanceFilterComponent } from './component/maintance-report/maintance-filter/maintance-filter.component';
 import { MaintanceReportComponent } from './component/maintance-report/maintance-report.component';
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { ManageTripComponent } from './component/manage-trip/manage-trip.component';
@@ -36,6 +38,8 @@ export const appRoutes: Routes = [
   { path:"travelBilling", component: TravellBillingComponent},
   { path:"travelBillingFilters", component: TravellBillingFilterComponent},
   { path:"maintenanceReport", component: MaintanceReportComponent},
+  { path:"maintenanceReportFilter", component: MaintanceFilterComponent},
+  { path:"maintenanceDetaills", component: MaintanceDetailsComponent},
   { path:"help", component: HelpComponent},
   { path:"support", component: SupportComponent},
   { path:"terms", component: TermsAndConditionsComponent},

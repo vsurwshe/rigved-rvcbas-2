@@ -82,6 +82,13 @@ export class HeaderbarComponent implements OnInit {
               this.travelBilling=false;
               this.routeText="Maintenance Report"
               break;
+            case "/maintenanceReportFilter":
+              this.maintenanceReport=false;
+              this.travelBilling=false;
+              this.routeText="Maintenance Report Filter"
+              break;
+            case "/maintenanceDetaills;":
+              
             case "/help":
               this.routeText="Help"
               break;
@@ -95,7 +102,15 @@ export class HeaderbarComponent implements OnInit {
               this.routeText="Privacy Policy"
               break;
             default:
-              this.routeText=""
+              let splitedRoute= this.router.url.split(';')
+              if(splitedRoute[0]=="/maintenanceDetaills"){
+                this.maintenanceReport=false;
+                this.travelBilling=false;
+                this.routeText="Maintenance Details by Driver"
+                break;
+              }else{
+                this.routeText=""
+              }
           }
         }
       }
