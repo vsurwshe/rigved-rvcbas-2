@@ -57,6 +57,9 @@ export class HeaderbarComponent implements OnInit {
             case "/manageVendor":
               this.routeText="Manage Vendor"
               break;
+            case "/addVendor":
+              this.routeText="Add Vendor"
+              break;
             case "/manageClient":
               this.routeText="Manage Client"
               break;

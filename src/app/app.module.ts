@@ -41,6 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
 import { TravellBillingFilterComponent } from './component/travell-billing/travell-billing-filter/travell-billing-filter.component';
 import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
+import { AddVendorComponent } from './component/vendor-management/add-vendor/add-vendor.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { AddDriverComponent } from './component/driver-management/add-driver/add
     AddTripComponent,
     AddCustomerComponent,
     TravellBillingFilterComponent,
-    AddDriverComponent 
+    AddDriverComponent,
+    AddVendorComponent 
   ],
   imports: [
     CommonModule,

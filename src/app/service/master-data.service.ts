@@ -67,8 +67,8 @@ export class MasterDataService {
     return this.authService.process("GET","masterdata/bookingSearch/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
   }
 
-  saveCompany(serachTerm):Observable<any>{
-    return this.authService.process("POST","masterdata/addCompany/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
+  saveCompany(companyBodyData):Observable<any>{
+    return this.authService.process("POST","masterdata/addCompany/",{headers: this.setHeaders(),body:companyBodyData})
   }
 
   getCustomerList(serachTerm):Observable<any>{

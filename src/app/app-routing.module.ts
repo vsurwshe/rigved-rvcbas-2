@@ -16,25 +16,28 @@ import { SupportComponent } from './component/support/support.component';
 import { TermsAndConditionsComponent } from './component/terms-and-conditions/terms-and-conditions.component';
 import { TravellBillingFilterComponent } from './component/travell-billing/travell-billing-filter/travell-billing-filter.component';
 import { TravellBillingComponent } from './component/travell-billing/travell-billing.component';
+import { AddVendorComponent } from './component/vendor-management/add-vendor/add-vendor.component';
 import { VendorManagementComponent } from './component/vendor-management/vendor-management.component';
 
 export const appRoutes: Routes = [
-  {path:"profile", component: ProfileComponent},
-  {path:"bookride", component: BookRideComponent},
-  {path:"managetrip", component: ManageTripComponent},
-  {path:"addtrip", component: AddTripComponent},
-  {path:"customerList", component: CustomerListComponent},
-  {path:"travelerReg", component: AddCustomerComponent},
-  {path:"approveMember", component: DriverManagementComponent},
-  {path:"manageVendor", component: VendorManagementComponent},
-  {path:"manageClient", component: ClientManagementComponent},
-  {path:"travelBilling", component: TravellBillingComponent},
-  {path:"travelBillingFilters", component: TravellBillingFilterComponent},
-  {path:"maintenanceReport", component: MaintanceReportComponent},
-  {path:"help", component: HelpComponent},
-  {path:"support", component: SupportComponent},
-  {path:"terms", component: TermsAndConditionsComponent},
-  {path:"privacy", component: PrivacyPolicyComponent},
+  { path:"profile", component: ProfileComponent},
+  { path:"bookride", component: BookRideComponent},
+  { path:"managetrip", component: ManageTripComponent},
+  { path:"addtrip", component: AddTripComponent},
+  { path:"customerList", component: CustomerListComponent},
+  { path:"travelerReg", component: AddCustomerComponent},
+  { path:"approveMember", component: DriverManagementComponent},
+  { path:"driverReg", component: AddDriverComponent},
+  { path:"manageVendor", component: VendorManagementComponent},
+  { path:"addVendor", component: AddVendorComponent},
+  { path:"manageClient", component: ClientManagementComponent},
+  { path:"travelBilling", component: TravellBillingComponent},
+  { path:"travelBillingFilters", component: TravellBillingFilterComponent},
+  { path:"maintenanceReport", component: MaintanceReportComponent},
+  { path:"help", component: HelpComponent},
+  { path:"support", component: SupportComponent},
+  { path:"terms", component: TermsAndConditionsComponent},
+  { path:"privacy", component: PrivacyPolicyComponent},
 ];
 
 export const sideBarRoutes = [
@@ -42,8 +45,8 @@ export const sideBarRoutes = [
   { path:"/managetrip", text:"Manage Trip", image:"assets/img/customer-list.png"},
   { path:"/customerList", text:"Traveller List", image:"assets/img/customer-list.png"},
   { path:"/approveMember", text:"Driver Management", image:"assets/img/approveList.png"},
-  { path:"/manageVendor", text:"Manage Vendor", image:"assets/img/approveList.png"},
   { path:"/manageClient", text:"Manage Client", image:"assets/img/approveList.png"},
+  { path:"/manageVendor", text:"Manage Vendor", image:"assets/img/approveList.png"},
   { path:"/travelBilling", text:"Travel Billing", image:"assets/img/rupee-indian.png"},
   { path:"/maintenanceReport", text:"Maintenance Report", image:"assets/img/customer-list.png"},
   { path:"/help", text:"Help", image:"assets/img/mobile-phone.png"},
