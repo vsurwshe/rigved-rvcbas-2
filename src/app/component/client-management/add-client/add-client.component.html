@@ -6,7 +6,7 @@
 <form [formGroup]="clientManagementForm" (ngSubmit)="saveClientDetails()">
   <div class="col-sm-12 header-board">
     <div class="col-md-12  col-sm-12 mb-2" style="text-align: right">
-      <a href="/manageClient">
+      <a routerLink="/manageClient">
         <button type="button" class="button-small" style="cursor: pointer" ng-show="!upcomingList"><span
             class="myfont">Manage Client</span></button>
       </a>

@@ -6,7 +6,7 @@
 <div id="map" style="width: 100%; height: 100vh; display: none"></div>
 <div class="col-sm-12 header-board">
     <div class="col-md-12  col-sm-12 mb-2" style="text-align: right">
-    <a href="/managetrip"> <button type="button" class="button-small" style="cursor: pointer"
+    <a routerLink="/managetrip"> <button type="button" class="button-small" style="cursor: pointer"
         ng-show="!upcomingList"><span class="myfont">Manage Trip</span></button> </a>
     </div>
     <form [formGroup]="tirpForm" (ngSubmit)="tripBooking()">

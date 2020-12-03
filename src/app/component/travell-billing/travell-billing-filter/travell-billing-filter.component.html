@@ -43,7 +43,7 @@
         <main class="col">
             <form [formGroup]="filterForm" (ngSubmit)="filtersApply()">
                 <div>
-                    <a href="/travelBilling"><button class="button-small" style="float: right;">Clear</button></a>
+                    <a routerLink="/travelBilling"><button class="button-small" style="float: right;">Clear</button></a>
                     <button type="submit" class="button-small" style="float: right; margin-right: 10px;" (click)="filtersApply()">Apply Filters</button>
                 </div>
                 <div class="tabcontent" id="dateRange">

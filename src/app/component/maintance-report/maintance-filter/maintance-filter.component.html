@@ -25,7 +25,7 @@
         <main class="col">
             <form [formGroup]="filterForm" (ngSubmit)="maintanceFiltersApply()">
                 <div>
-                    <a href="/maintenanceReport"><button type="button" class="button-small" style="float: right;">Clear</button></a>
+                    <a routerLink="/maintenanceReport"><button type="button" class="button-small" style="float: right;">Clear</button></a>
                     <button type="submit" class="button-small" style="float: right; margin-right: 10px;">Apply Filters</button>
                 </div>
                 <div class="tabcontent" id="dateRange">
