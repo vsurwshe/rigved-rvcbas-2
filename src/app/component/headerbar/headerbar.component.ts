@@ -51,6 +51,9 @@ export class HeaderbarComponent implements OnInit {
             case "/approveMember":
               this.routeText="Approve Member"
               break;
+            case "/driverReg":
+              this.routeText="Register Driver"
+              break;
             case "/manageVendor":
               this.routeText="Manage Vendor"
               break;
