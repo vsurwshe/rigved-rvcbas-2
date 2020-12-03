@@ -27,7 +27,7 @@ export class HeaderbarComponent implements OnInit {
     this.router.events.subscribe(
       (event: any) => {
         if (event instanceof NavigationEnd) {
-          // console.log("PAth ", this.router.url)
+          console.log("PAth ", this.router.url)
           switch (this.router.url) {
             case "/profile":
               this.routeText="Manage Profile"
@@ -87,8 +87,11 @@ export class HeaderbarComponent implements OnInit {
               this.travelBilling=false;
               this.routeText="Maintenance Report Filter"
               break;
-            case "/maintenanceDetaills;":
-              
+            case "/maintenanceDetaills":
+              this.maintenanceReport=false;
+              this.travelBilling=false;
+              this.routeText="Maintenance Details by Driver";
+              break;
             case "/help":
               this.routeText="Help"
               break;
@@ -102,15 +105,7 @@ export class HeaderbarComponent implements OnInit {
               this.routeText="Privacy Policy"
               break;
             default:
-              let splitedRoute= this.router.url.split(';')
-              if(splitedRoute[0]=="/maintenanceDetaills"){
-                this.maintenanceReport=false;
-                this.travelBilling=false;
-                this.routeText="Maintenance Details by Driver"
-                break;
-              }else{
-                this.routeText=""
-              }
+              this.routeText=""
           }
         }
       }

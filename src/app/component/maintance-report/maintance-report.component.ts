@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { ExpenditureService } from 'src/app/service/expenditure.service';
-import { MasterDataService } from 'src/app/service/master-data.service';
 import * as moment from 'moment';
 import { DataTableService } from 'src/app/service/data-table.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-maintance-report',
@@ -18,6 +18,10 @@ export class MaintanceReportComponent implements OnInit {
   approvedBillList;
   pendingBillList;
 
+  // we used for the check passed data form other compoent
+  state$: Observable<object>;
+
+  // this array used approved bills tabel columns
   appovedBillListTableColumns=[
     {title:'',data:''},
     {title:'',data:'driverAccountId',visible:false},
@@ -31,6 +35,7 @@ export class MaintanceReportComponent implements OnInit {
     {title:'Action',data:'',orderable: false},
   ]
 
+  // this array used approved bills tabel columns definations
   appovedBillListTableColumnsDef=[
     {
       "targets":   0,
@@ -81,6 +86,7 @@ export class MaintanceReportComponent implements OnInit {
     }
   ]
 
+  // this array used pending bills tabel columns
   pendingBillListTableColumns=[
     {title:'',data:''},
     {title:'',data:'driverAccountId',visible:false},
@@ -96,6 +102,7 @@ export class MaintanceReportComponent implements OnInit {
     {title:'',data:'',orderable: false},
   ]
 
+  // this array used pending bills tabel columns definations
   pendingsBillListTableColumnsDef=[
     {
       "targets":   0,
@@ -148,16 +155,27 @@ export class MaintanceReportComponent implements OnInit {
 
   constructor( 
     private expenditureService:ExpenditureService, 
-    private masterData: MasterDataService,
     private dataTableServie:DataTableService,
-    private router: Router 
+    private router: Router,
+    private activatedRoute:ActivatedRoute 
   ) {this.loading=false;}
 
   ngOnInit(): void {
-    document.getElementById("defaultOpen").click();
-    let approvedBillsSerach= this.expenditureService.getExpenseListConsaliate(0,100,null,null);
-    let pendingBillsSerach= this.expenditureService.getExpenseList(0,100,"Pending");
     this.loading=true;
+    let approvedBillsSerach, pendingBillsSerach;
+    // we will initlizes the state variable to map the state variables
+    this.state$ = this.activatedRoute.paramMap.pipe(map(()=> window.history.state));
+    this.state$.subscribe((data:any)=>{
+      const { startDate, endDate }= data 
+      // this condtion checks if passed start and dates
+      if (startDate && endDate ) {
+        approvedBillsSerach=this.expenditureService.getExpenseListConsaliate(0,100,startDate,endDate);
+        pendingBillsSerach=this.expenditureService.getExpenseList(0,100,"Pending")
+      } else { 
+        approvedBillsSerach= this.expenditureService.getExpenseListConsaliate(0,100,null,null);
+        pendingBillsSerach= this.expenditureService.getExpenseList(0,100,"Pending");  }
+    })
+    // we execute the paralle query 
     forkJoin([
       approvedBillsSerach,
       pendingBillsSerach
@@ -166,12 +184,20 @@ export class MaintanceReportComponent implements OnInit {
         this.loading=false;
         this.approvedBillList=response[0];
         this.pendingBillList=response[1];
-        this.dataTableServie.dataTable("#approvedBillTabel",this.appovedBillListTableColumns,this.approvedBillList,  this.appovedBillListTableColumnsDef)
-        this.dataTableServie.dataTable("#pendingBillTabel",this.pendingBillListTableColumns,this.pendingBillList,  this.pendingsBillListTableColumnsDef)
+        this.showTabelData();
       },error=>{this.loading=false; console.error("Error ",error);}
     )
   }
 
+  // this method used to initlize the tabels
+  showTabelData(){
+    this.dataTableServie.dataTable("#approvedBillTabel",this.appovedBillListTableColumns,this.approvedBillList,  this.appovedBillListTableColumnsDef)
+    this.dataTableServie.dataTable("#pendingBillTabel",this.pendingBillListTableColumns,this.pendingBillList,  this.pendingsBillListTableColumnsDef)
+    let element:HTMLElement= document.getElementById("defaultOpen") as HTMLElement;
+    element.click();
+  }
+
+  // this method handel the tabs opening in component
   openTab(evt, cityName):void {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -186,20 +212,14 @@ export class MaintanceReportComponent implements OnInit {
     evt.currentTarget.className += " active";
   }
 
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    this.dataTableServie.dataTable("#approvedBillTabel",this.appovedBillListTableColumns,this.approvedBillList,  this.appovedBillListTableColumnsDef)
-    this.dataTableServie.dataTable("#pendingBillTabel",this.pendingBillListTableColumns,this.pendingBillList,  this.pendingsBillListTableColumnsDef)
-  }
-
+  // this will handel the approved bills table view button action
   showDirverByApprovedBill(data){
     const { endDate, startDate, driverAccountId }=data
     let newStartDate= startDate.split("IST");
     let newEndDate= endDate.split("IST");
     var modifyStartDate = moment(new Date(newStartDate[0]+newStartDate[1])).format("YYYY-MM-DD");
     var modifyEndDate = moment(new Date(newEndDate[0]+newEndDate[1])).format("YYYY-MM-DD");
-    this.router.navigate(['/maintenanceDetaills',{driverAccountId,modifyStartDate,modifyEndDate}])
+    this.router.navigateByUrl("/maintenanceDetaills",{state:{driverAccountId,modifyStartDate,modifyEndDate}})
   }
 
 }

@@ -5,7 +5,7 @@
 </div>
 <div class="col-md-12 table-responsive header-board">
     <div class="tab">
-        <button id="defaultOpen" class="tablinks" (click)="openTab($event, 'ApprovedBills')">Approved Bills</button>
+        <button id="defaultOpen" class="tablinks" (click)="openTab($event, 'ApprovedBills')" #defaulttab>Approved Bills</button>
         <button class="tablinks" (click)="openTab($event, 'PendingBills')">Pending Bills</button>
     </div>
     <div id="ApprovedBills" class="tabcontent">
