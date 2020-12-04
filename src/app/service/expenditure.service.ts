@@ -33,4 +33,8 @@ export class ExpenditureService {
   getExpenseList(firstIndex, lastIndex, status):Observable<any>{
     return this.authService.process("GET","expenditure/allExpList/"+firstIndex+"/"+lastIndex+"/"+status,{headers: this.setHeaders()})
   }
+
+  saveExpense(expenseBodyData):Observable<any>{
+    return this.authService.process("POST","expenditure/create/",{headers: this.setHeaders(), body:expenseBodyData})
+  }
 }

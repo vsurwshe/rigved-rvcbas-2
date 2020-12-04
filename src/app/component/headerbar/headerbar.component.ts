@@ -27,7 +27,7 @@ export class HeaderbarComponent implements OnInit {
     this.router.events.subscribe(
       (event: any) => {
         if (event instanceof NavigationEnd) {
-          console.log("PAth ", this.router.url)
+          // console.log("PAth ", this.router.url)
           switch (this.router.url) {
             case "/profile":
               this.routeText="Manage Profile"
@@ -91,6 +91,9 @@ export class HeaderbarComponent implements OnInit {
               this.maintenanceReport=false;
               this.travelBilling=false;
               this.routeText="Maintenance Details by Driver";
+              break;
+            case "/addMaintenanceBill":
+              this.routeText="Add Expense";
               break;
             case "/help":
               this.routeText="Help"

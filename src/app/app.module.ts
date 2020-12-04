@@ -46,6 +46,7 @@ import { AddVendorComponent } from './component/vendor-management/add-vendor/add
 import { AddClientComponent } from './component/client-management/add-client/add-client.component';
 import { MaintanceFilterComponent } from './component/maintance-report/maintance-filter/maintance-filter.component';
 import { MaintanceDetailsComponent } from './component/maintance-report/maintance-details/maintance-details.component';
+import { AddMaintanceBillComponent } from './component/maintance-report/add-maintance-bill/add-maintance-bill.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { MaintanceDetailsComponent } from './component/maintance-report/maintanc
     AddVendorComponent,
     AddClientComponent,
     MaintanceFilterComponent,
-    MaintanceDetailsComponent 
+    MaintanceDetailsComponent,
+    AddMaintanceBillComponent 
   ],
   imports: [
     CommonModule,

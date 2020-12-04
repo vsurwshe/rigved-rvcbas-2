@@ -86,4 +86,8 @@ export class MaintanceDetailsComponent implements OnInit {
     this.router.navigateByUrl("/maintenanceReport");
   }
 
+  goToAddBill(){
+    this.router.navigateByUrl("/addMaintenanceBill");
+  }
+
 }
