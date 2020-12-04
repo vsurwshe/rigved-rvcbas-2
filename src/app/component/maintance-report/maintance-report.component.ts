@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { ExpenditureService } from 'src/app/service/expenditure.service';
 import * as moment from 'moment';
 import { DataTableService } from 'src/app/service/data-table.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { FileService } from 'src/app/service/file.service';
+import { LoginService } from 'src/app/service/login.service';
 
 @Component({
   selector: 'app-maintance-report',
@@ -13,11 +15,15 @@ import { map } from 'rxjs/operators';
 })
 export class MaintanceReportComponent implements OnInit {
 
+  @ViewChild('approvedclose') approvedclose: ElementRef;
+
   // required variables
   loading;
   approvedBillList;
   pendingBillList;
-
+  imageData;
+  selectedModel;
+  selectedData;
   // we used for the check passed data form other compoent
   state$: Observable<object>;
 
@@ -131,25 +137,25 @@ export class MaintanceReportComponent implements OnInit {
       "targets": -3, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => { console.log("Data ",rowData) })
+          $(td).on('click',event=>{ this.showInvoiceImage(rowData); })
       },
-      "defaultContent": "<button class='btn ripple-infinite btn-round btn-secondary materialButtons'  data-toggle='modal' data-target='#invoiceImage'>Show</button>"
+      "defaultContent": "<button class='btn btn-round btn-primary'  data-toggle='modal' data-target='#invoiceImage'>Show</button>"
     },
     {
       "targets": -2, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => { console.log("Data ",rowData) })
+        $(td).on('click',event=>{ this.selectedData=rowData; this.selectedModel="approvedBill"; })
       },
-      "defaultContent": "<button class='btn btn-round btn-primary materialButtons'> Approved </button>"
+      "defaultContent": "<button class='btn btn-round btn-success' data-toggle='modal'  data-target='#approvedInvoice'> Approve </button>"
     },
     {
       "targets": -1, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => { console.log("Data ",rowData) })
+        $(td).on('click',event=>{ this.selectedData=rowData; this.selectedModel="pendingBill"; })
       },
-      "defaultContent": "<button class='btn ripple-infinite btn-round btn-secondary materialButtons'>Rejected</button>"
+      "defaultContent": "<button class='btn btn-round btn-danger' data-toggle='modal' data-target='#approvedInvoice'>Reject</button>"
     }
   ]
 
@@ -157,11 +163,17 @@ export class MaintanceReportComponent implements OnInit {
     private expenditureService:ExpenditureService, 
     private dataTableServie:DataTableService,
     private router: Router,
-    private activatedRoute:ActivatedRoute 
+    private activatedRoute:ActivatedRoute ,
+    private filesService: FileService,
+    private loginService:LoginService
   ) {this.loading=false;}
 
   ngOnInit(): void {
     this.loading=true;
+    this.getBillData();
+  }
+
+  getBillData(){
     let approvedBillsSerach, pendingBillsSerach;
     // we will initlizes the state variable to map the state variables
     this.state$ = this.activatedRoute.paramMap.pipe(map(()=> window.history.state));
@@ -220,6 +232,39 @@ export class MaintanceReportComponent implements OnInit {
     var modifyStartDate = moment(new Date(newStartDate[0]+newStartDate[1])).format("YYYY-MM-DD");
     var modifyEndDate = moment(new Date(newEndDate[0]+newEndDate[1])).format("YYYY-MM-DD");
     this.router.navigateByUrl("/maintenanceDetaills",{state:{driverAccountId,modifyStartDate,modifyEndDate}})
+  }
+
+  showInvoiceImage(data){
+    const { fileUrl }=data
+    console.log("Data ",data)
+    if(fileUrl != "" && fileUrl != null){
+      let newUrl= fileUrl.replace(' ', '');
+      newUrl= newUrl.replace(/\\/g, '/');
+      this.loading=true;
+      this.filesService.getfile(newUrl)
+      .subscribe(
+        response=>{
+         this.imageData=URL.createObjectURL(response);
+         this.loading=false;
+        },error=>{ this.loading=false; console.error("Error ",error);}
+      )
+    } 
+  }
+
+  udpateStatus(status){
+    console.log("Data ",this.selectedData,status)
+    this.loading= true;
+    this.expenditureService.updateBillStatus(this.selectedData.id,status)
+    .subscribe(
+      response=>{
+        this.loading=false;
+        this.loginService.successFullMessage("Youe bill status updated successfully");
+        this.approvedclose.nativeElement.click();
+        this.getBillData();
+      },error=>{
+        this.loading=false;
+        this.loginService.errorMessage("Something went worng...,Please try again....!");
+      })
   }
 
 }

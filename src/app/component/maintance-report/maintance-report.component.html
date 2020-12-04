@@ -19,3 +19,47 @@
         </div>
     </div>
 </div>
+<!-- Model Area -->
+<div class="modal" tabindex="-1" role="dialog" id="invoiceImage">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invoice Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+               <img [src]="imageData" style="width: 100%;" />
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="approvedInvoice">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{selectedModel == 'approvedBill' ? 'Approve': 'Reject'}} Invoice Bill</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                Are sure you want {{selectedModel == 'approvedBill' ? 'approve': 'reject'}} bill by driver <b>{{selectedData?.driverName}}</b> on date <b>{{selectedData?.entryDate}}</b>, with this amount <b>{{selectedData?.totalAmount}}</b> ?
+            </div> 
+            <div class="modal-footer">
+                <ng-container *ngIf="selectedModel == 'approvedBill'; else elseInvoiceTemplate">
+                    <button type="button" class="btn btn-success" (click)="udpateStatus('Approve')">Approve Bill</button>
+                </ng-container>
+                <ng-template #elseInvoiceTemplate>
+                    <button type="button" class="btn btn-danger" (click)="udpateStatus('Reject')">Reject Bill</button>
+                </ng-template>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" #approvedclose>Close</button>
+            </div>
+        </div>
+    </div>
+</div>
