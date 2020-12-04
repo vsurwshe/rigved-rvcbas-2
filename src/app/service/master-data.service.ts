@@ -75,4 +75,12 @@ export class MasterDataService {
     return this.authService.process("GET","masterdata/costomerSearch/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
   }
 
+  getPatnerList(serachTerm):Observable<any>{
+    return this.authService.process("GET","masterdata/partnerSearch/"+this.firstIndex+"/"+this.lastIndex+"/"+serachTerm,{headers: this.setHeaders()})
+  }
+
+  savePatner(customerBodyData):Observable<any>{
+    return this.authService.process("POST","masterdata/addCustomer/",{headers: this.setHeaders(),body:customerBodyData})
+  }
+
 }

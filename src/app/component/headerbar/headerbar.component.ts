@@ -63,6 +63,9 @@ export class HeaderbarComponent implements OnInit {
             case "/manageClient":
               this.routeText="Manage Client"
               break;
+            case "/addClient":
+              this.routeText="Add Client"
+              break;
             case "/travelBilling":
               this.travelBilling=true;
               this.travelBillingFilter=false;
