@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
 import { forkJoin, Observable } from 'rxjs';
 import { ExpenditureService } from 'src/app/service/expenditure.service';
 import * as moment from 'moment';
@@ -165,7 +166,8 @@ export class MaintanceReportComponent implements OnInit {
     private router: Router,
     private activatedRoute:ActivatedRoute ,
     private filesService: FileService,
-    private loginService:LoginService
+    private loginService:LoginService,
+    public _DomSanitizationService: DomSanitizer
   ) {this.loading=false;}
 
   ngOnInit(): void {
@@ -236,7 +238,6 @@ export class MaintanceReportComponent implements OnInit {
 
   showInvoiceImage(data){
     const { fileUrl }=data
-    console.log("Data ",data)
     if(fileUrl != "" && fileUrl != null){
       let newUrl= fileUrl.replace(' ', '');
       newUrl= newUrl.replace(/\\/g, '/');
@@ -252,7 +253,6 @@ export class MaintanceReportComponent implements OnInit {
   }
 
   udpateStatus(status){
-    console.log("Data ",this.selectedData,status)
     this.loading= true;
     this.expenditureService.updateBillStatus(this.selectedData.id,status)
     .subscribe(

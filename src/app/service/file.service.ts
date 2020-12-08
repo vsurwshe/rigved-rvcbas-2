@@ -23,7 +23,7 @@ export class FileService {
   }
 
   getfile(fileUrl):Observable<any>{
-    return this.authService.process("GET","file/getFile/path/"+fileUrl,{headers: this.setHeaders()})
+    return this.authService.process("GET","file/getFile?path="+fileUrl,{headers: this.setHeaders(),responseType: 'blob'})
   }
 
 }
