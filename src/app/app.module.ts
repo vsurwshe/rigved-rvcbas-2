@@ -21,11 +21,11 @@ import { HelpComponent } from './component/help/help.component';
 import { SupportComponent } from './component/support/support.component';
 import { TermsAndConditionsComponent } from './component/terms-and-conditions/terms-and-conditions.component';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
-import { LoginService } from './service/login.service'
+import { LoginService } from './service/login.service';
 import { AuthService } from './service/auth.service';
 import { LoginComponent } from './component/login/login.component';
-import { LoginNavbarComponent } from './component/login-navbar/login-navbar.component';
-import { LoginFooterComponent } from './component/login-footer/login-footer.component'
+import { LoginNavbarComponent } from './component/login/login-navbar/login-navbar.component';
+import { LoginFooterComponent } from './component/login/login-footer/login-footer.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ManageTripService } from './service/manage-trip.service';
 import { MasterDataService } from './service/master-data.service';
@@ -47,6 +47,7 @@ import { AddClientComponent } from './component/client-management/add-client/add
 import { MaintanceFilterComponent } from './component/maintance-report/maintance-filter/maintance-filter.component';
 import { MaintanceDetailsComponent } from './component/maintance-report/maintance-details/maintance-details.component';
 import { AddMaintanceBillComponent } from './component/maintance-report/add-maintance-bill/add-maintance-bill.component';
+import { ForgotPasswordComponent } from './component/login/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AddMaintanceBillComponent } from './component/maintance-report/add-main
     AddClientComponent,
     MaintanceFilterComponent,
     MaintanceDetailsComponent,
-    AddMaintanceBillComponent 
+    AddMaintanceBillComponent,
+    ForgotPasswordComponent 
   ],
   imports: [
     CommonModule,

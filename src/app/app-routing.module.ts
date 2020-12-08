@@ -22,6 +22,7 @@ import { TravellBillingFilterComponent } from './component/travell-billing/trave
 import { TravellBillingComponent } from './component/travell-billing/travell-billing.component';
 import { AddVendorComponent } from './component/vendor-management/add-vendor/add-vendor.component';
 import { VendorManagementComponent } from './component/vendor-management/vendor-management.component';
+import { ForgotPasswordComponent } from './component/login/forgot-password/forgot-password.component'
 
 export const appRoutes: Routes = [
   { path:"profile", component: ProfileComponent},
@@ -46,6 +47,7 @@ export const appRoutes: Routes = [
   { path:"support", component: SupportComponent},
   { path:"terms", component: TermsAndConditionsComponent},
   { path:"privacy", component: PrivacyPolicyComponent},
+  { path:"forgotPass", component: ForgotPasswordComponent},
 ];
 
 export const sideBarRoutes = [
