@@ -1,15 +1,20 @@
-.heading {
-  Font-size: 20px;
-  text-align: initial !important;
+.heading{
+  font-weight:bold;
+  font-size:20px;
+  text-align: initial!important;
 }
 
 ol {
   margin: 0;
   padding: 0;
+  text-align: justify;
+  margin-left: 4em;
   list-style-type: number;
 }
 
 .ol_number{
+  margin-left: 2em;
+  text-align: justify;
   list-style-type: decimal;
 }
 
@@ -21,14 +26,7 @@ ol {
 }
 
 .a {
-  list-style-type: lower-alpha !important;
-}
-
-.description-format {
-  padding: 20px 20px 15px 20px;
-  /*  position: absolute; */
-  top: 115px;
-  left: 0;
-  font-size: 14px;
+  margin-left: 1em;
   text-align: justify;
+  list-style-type: lower-alpha !important;
 }
