@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { LoginService } from 'src/app/service/login.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +18,9 @@ export class ProfileComponent implements OnInit {
   changePasswordForm: FormGroup;
 
   constructor(
-    private formBuilder:FormBuilder
+    private formBuilder:FormBuilder,
+    private loginService:LoginService,
+    private userService:UserService
   ) { this.loading=false; this.profileData={}}
 
   ngOnInit(): void {
@@ -28,8 +32,8 @@ export class ProfileComponent implements OnInit {
 
     this.changePasswordForm=this.formBuilder.group({
       'oldPassword': new FormControl(''),
-      'rePassword': new FormControl(''),
-      'reConformPassword': new FormControl('')
+      'newPassword': new FormControl(''),
+      'confirmPassword': new FormControl('')
     })
     let buttonHtml: HTMLElement= document.getElementById("defaultOpen") as HTMLElement;
     buttonHtml.click();
@@ -55,7 +59,30 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword(){
-    console.log("CHA ", this.changePasswordForm)    
+    if(this.changePasswordForm.status == "VALID"){
+      const { value }= this.changePasswordForm
+      let modifyData={
+        ...value,
+        'accountId': this.loginService.getUserAccountId()
+      }
+      console.log("Data ",modifyData)
+      this.loading=true;
+      this.userService.changePassword(modifyData)
+      .subscribe(
+        response=>{
+          this.loading=false;
+          this.loginService.successFullMessage("Your password changed successfully...!");
+          this.changePasswordForm.reset();
+        },
+        error=>{
+          this.loading=false;
+          if(error && error.status && error.status== 500){
+            this.loginService.errorMessage("You provided worng old password...!");
+          }else{
+            this.loginService.errorMessage("Something went worng...,Please try again...!");
+          }
+        })
+    }    
   }
 
 }

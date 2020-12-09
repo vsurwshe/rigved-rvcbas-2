@@ -78,12 +78,12 @@
                             </div>
                             <div class="form-group col-md-12  col-sm-12">
                                 <label>New Password</label>
-                                <input  #rePasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="rePassword" name="userPassword"   placeholder="Enter New Password" required="required" maxlength="20" />
+                                <input  #rePasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="newPassword" name="userPassword"   placeholder="Enter New Password" required="required" maxlength="20" />
                                 <div toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" (click)="rePasswordField.type=rePasswordField.type=='password'?'text':'password'" style="position: relative;right:3px;bottom: 38px;"></div>
                              </div>
                              <div class="form-group col-md-12  col-sm-12">
                                 <label>Confirm Password</label>
-                                <input  #reConformPasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="reConformPassword" name="reConformPassword"   placeholder="Re Enter New Password" required="required" maxlength="20" />
+                                <input  #reConformPasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="confirmPassword" name="reConformPassword"   placeholder="Re Enter New Password" required="required" maxlength="20" />
                                 <div toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" (click)="reConformPasswordField.type=reConformPasswordField.type=='password'?'text':'password'" style="position: relative;right:3px;bottom: 38px;"></div>
                              </div>
                             <button type="submit" class="btn btn-success ml-3">Change Password <i class="fas fa-pencil-alt"></i></button>
