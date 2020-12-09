@@ -1,0 +1,30 @@
+<div id="page-loading" [hidden]="!loading">
+    <div class="loader">
+        <img src="assets/img/giphy.gif" width="100" height="100" style="padding: 0">
+    </div>
+</div>
+<div class="col-md-12 table-responsive header-board">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="col-md-3">
+                <img class="img" src="assets/img/dummy.png" alt="img">
+            </div>
+            <div class="col-md-10 element2">
+                <h4>Driver Details</h4>
+                <label><h6>Driver Name :</h6></label> 
+                <label>&nbsp;{{driverDetails?.firstName}}</label><br>
+                <label><h6> Driver Mobile Number :</h6></label>
+                <label>&nbsp;{{driverDetails?.mobileNumber}}</label><br>
+                <label><h6>Brand/modal :</h6></label>
+                <label>&nbsp;{{driverDetails?.carDetailDto?.type?.name}}</label><br>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-10  col-sm-12 mb-2" style="text-align: right">
+                <button type="button" (click)="goToAddBill()" class="button-small" style="cursor: pointer;margin-right: 10px;"><span class="myfont">Add Bill</span></button>
+                <button type="button" (click)="backToNavigate()" class="button-small" style="cursor: pointer"><span class="myfont">Manage Maintance Report</span></button>         
+            </div>
+         </div>
+    </div>
+    <table id="driverDetailsTabel" class="display" style="width: 100%;"></table>
+</div>

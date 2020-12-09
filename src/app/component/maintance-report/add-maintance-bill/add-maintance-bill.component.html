@@ -1,0 +1,106 @@
+<div id="page-loading" [hidden]="!loading">
+    <div class="loader">
+        <img src="assets/img/giphy.gif" width="100" height="100" style="padding: 0">
+    </div>
+</div>
+<div class="col-sm-12 header-board" style="height: 500px">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <form [formGroup]="expenseForm"  (ngSubmit)="saveExpense()" class="css-form">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 style="color: black;"> Fill Expense Details</h5>
+                    </div>
+                    <div class="card-body row" >
+                        <div class="from-group  col-sm-4">
+                            <label for="">Expense Date&nbsp;<span class="mendatory">*</span></label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="fromDate" formControlName="entryDate" ngbDatepicker #expnsedate="ngbDatepicker">
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary calendar" (click)="expnsedate.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="from-group  col-sm-4" id="remote">
+                            <label for="">OdoMeter Reading&nbsp;<span class="mendatory">*</span></label>
+                            <input class="form-control txt-field" formControlName="odoMeterReading" type="text" placeholder="Enter ODO Meter Reading" required>
+                        </div>
+                        <div class="from-group  col-sm-4" id="remote">
+                            <label for="">Vahical Number&nbsp;<span class="mendatory">*</span></label>
+                            <input class="form-control txt-field" formControlName="vehicleNumber" type="text" placeholder="Ex. KA01H0001" required>
+                        </div>
+                        <div class="form-group col-sm-4">
+                            <label for="exampleFormControlSelect1">Select Driver</label>
+                            <input id="driverName" type="text"  class="form-control" 
+                            formControlName="driverAccountId" placeholder="Select Car Name"
+                            [ngbTypeahead]="driverNameSearch"
+                            [resultFormatter]="formatMatchesByDriverName"
+                            [inputFormatter]="formatMatchesByDriverName" 
+                            (focus)="drivernamefocus$.next($any($event).target.value)"
+                            (click)="drivernameclick$.next($any($event).target.value)" 
+                            #drivernameinstance="ngbTypeahead" />
+                        </div>
+                        <div class="from-group  col-sm-4">
+                            <label for="exampleFormControlSelect1">Expense<span class="mendatory">*</span></label>
+                            <select class="form-control txt-field" id="exampleFormControlSelect1" formControlName="expenceType">
+                                <option value="">Select type</option>
+                                <option value="Fuel">Fuel</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                        <div *ngIf="getExpenseType == 'Fuel'" class="col-md-12 col-sm-12 row" style="margin-bottom: 20px;" formGroupName="fule">
+                            <div class="from-group  col-sm-3">
+                                <label for="">Price / L.&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="perLtRate" type="number" placeholder="Enter price per liter">
+                            </div>
+                            <div class="from-group  col-sm-3">
+                                <label for="">Fuel Quantity(L.)&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="totalLt" type="number" placeholder="Enter fuel quantity(Liters)">
+                            </div>
+                            <div class="from-group  col-sm-3">
+                                <label for="">Total Amount&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="totalAmount" type="number" placeholder="Enter total amounts">
+                            </div>
+                            <div class="from-group  col-sm-3">
+                                <label for="">Location&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="location" type="text" placeholder="Enter location">
+                            </div>
+                        </div>
+                        <div *ngIf="getExpenseType == 'Others'" class="col-md-12 col-sm-12 row" style="margin-bottom: 20px;" formGroupName="others">
+                            <div class="from-group  col-sm-4">
+                                <label for="">Description&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="description" type="text" placeholder="Enter description">
+                            </div>
+                            <div class="from-group  col-sm-4">
+                                <label for="">Total Amount&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="totalAmount" type="number" placeholder="Enter total amounts">
+                            </div>
+                            <div class="from-group  col-sm-4">
+                                <label for="">Service Location&nbsp;<span class="mendatory">*</span></label>
+                                <input class="form-control txt-field" formControlName="location" type="text" placeholder="Enter service location">
+                            </div>
+                        </div>
+                        <div class="from-group  col-sm-12" >
+                            <label>Invoice Image</label><br/>
+                            <ng-container *ngIf="getFileUrl == ''; else elseTemplate">
+                                <span  class="upload-file"><label class="upload-file-label" for="invioceIamge"> <i class="fas fa-upload"></i>Upload File</label></span> 
+                                <input id="invioceIamge" type="file" [ngModelOptions]="{standalone: true}" ngModel="" base-sixty-four-input multiple accept=".xlsx, .txt, .xls, .png, .jpg, .doc, .docx, .pdf, .gif, .bmp, .jpeg, .rtf" maxsize="5000000" (change)="Uploading($event,'ExpensePic','fileUrl')" hidden>
+                            </ng-container>
+                            <ng-template #elseTemplate>
+                                <label class="file-path">{{getFileUrl}}</label>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 row" style="margin-bottom: 20px;">
+                    <div class="col-sm-6" style="margin-top: 10px;">
+                        <button type="submit" class="button btn-block">Save Bill</button>
+                    </div>
+                    <div class="col-sm-6" style="margin-top: 10px;">
+                        <button type="button" class="button btn-block" (click)="maintenanceReport()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

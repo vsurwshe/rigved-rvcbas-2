@@ -11,7 +11,7 @@
         <p class="text-white font-weight-bold" style="margin-top: 20px;">Call: +91 88808 55551</p>
         <span *ngFor="let item of routesArray" >
             <li> 
-                <a href="{{item.path}}" style="text-decoration: none;">
+                <a routerLink="{{item.path}}" style="text-decoration: none;">
                     <img class="imgIco" src="{{item.image}}" /> {{item.text}}
                 </a>
             </li>

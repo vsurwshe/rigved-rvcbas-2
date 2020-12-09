@@ -43,7 +43,7 @@
         <main class="col">
             <form [formGroup]="filterForm" (ngSubmit)="filtersApply()">
                 <div>
-                    <a href="/travelBilling"><button class="button-small" style="float: right;">Clear</button></a>
+                    <a routerLink="/travelBilling"><button class="button-small" style="float: right;">Clear</button></a>
                     <button type="submit" class="button-small" style="float: right; margin-right: 10px;" (click)="filtersApply()">Apply Filters</button>
                 </div>
                 <div class="tabcontent" id="dateRange">
@@ -115,7 +115,6 @@
                     <h4 class="mt-2">Vehicle Segment</h4><hr>
                     <div class="from-group  col-sm-9">
                         <label for="">Vehicle Segment</label>
-                        <!-- <typeahead ng-model="selectedsSeg" items="categery" displaytag="name" displayitem="name"></typeahead> -->
                         <input id="vahicalSegment" type="text" class="form-control" formControlName="vahicalSegment" placeholder="Select Vahical Model" [ngbTypeahead]="vahicalSegmentSearch" (focus)="vahicalsegmentfocus$.next($any($event).target.value)" (click)="vahicalsegmentclick$.next($any($event).target.value)" #vahicalsegmentinstance="ngbTypeahead" />
                     </div>
                 </div>
@@ -123,7 +122,6 @@
                     <h4 class="mt-2">Vehicle Model</h4><hr>
                     <div class="from-group  col-sm-9">
                         <label for="">Vehicle Model</label>
-                        <!-- <typeahead ng-model="selectedsModel" items="carModals" displaytag="name" displayitem="name"></typeahead> -->
                         <input id="vahicalModel" type="text" class="form-control" formControlName="vahicalModel" placeholder="Select Vahical Model" [ngbTypeahead]="vahicalModelSearch" (focus)="vahicalmodelfocus$.next($any($event).target.value)" (click)="vahicalmodelclick$.next($any($event).target.value)" #vahicalmodelinstance="ngbTypeahead" />
                     </div>
                 </div>

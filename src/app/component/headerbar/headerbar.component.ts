@@ -82,6 +82,19 @@ export class HeaderbarComponent implements OnInit {
               this.travelBilling=false;
               this.routeText="Maintenance Report"
               break;
+            case "/maintenanceReportFilter":
+              this.maintenanceReport=false;
+              this.travelBilling=false;
+              this.routeText="Maintenance Report Filter"
+              break;
+            case "/maintenanceDetaills":
+              this.maintenanceReport=false;
+              this.travelBilling=false;
+              this.routeText="Maintenance Details by Driver";
+              break;
+            case "/addMaintenanceBill":
+              this.routeText="Add Expense";
+              break;
             case "/help":
               this.routeText="Help"
               break;

@@ -36,6 +36,7 @@ import { BillService } from './service/bill.service'
 import { DataTablesModule } from 'angular-datatables';
 import { FileService } from './service/file.service'
 import { DriverService } from './service/driver.service'
+import { ExpenditureService} from './service/expenditure.service'
 import { AddTripComponent } from './component/manage-trip/add-trip/add-trip.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddCustomerComponent } from './component/customer-list/add-customer/add-customer.component';
@@ -43,6 +44,9 @@ import { TravellBillingFilterComponent } from './component/travell-billing/trave
 import { AddDriverComponent } from './component/driver-management/add-driver/add-driver.component';
 import { AddVendorComponent } from './component/vendor-management/add-vendor/add-vendor.component';
 import { AddClientComponent } from './component/client-management/add-client/add-client.component';
+import { MaintanceFilterComponent } from './component/maintance-report/maintance-filter/maintance-filter.component';
+import { MaintanceDetailsComponent } from './component/maintance-report/maintance-details/maintance-details.component';
+import { AddMaintanceBillComponent } from './component/maintance-report/add-maintance-bill/add-maintance-bill.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +75,10 @@ import { AddClientComponent } from './component/client-management/add-client/add
     TravellBillingFilterComponent,
     AddDriverComponent,
     AddVendorComponent,
-    AddClientComponent 
+    AddClientComponent,
+    MaintanceFilterComponent,
+    MaintanceDetailsComponent,
+    AddMaintanceBillComponent 
   ],
   imports: [
     CommonModule,
@@ -94,7 +101,8 @@ import { AddClientComponent } from './component/client-management/add-client/add
     CustomerService,
     BillService,
     FileService,
-    DriverService
+    DriverService,
+    ExpenditureService
   ],
   bootstrap: [AppComponent]
 })

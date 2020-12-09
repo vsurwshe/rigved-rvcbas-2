@@ -1,0 +1,89 @@
+<div id="page-loading" [hidden]="!loading">
+    <div class="loader">
+        <img src="assets/img/giphy.gif" width="100" height="100" style="padding: 0">
+    </div>
+</div>
+<div class="container-fluid h-100 bg-white p-3" [hidden]="profileData?.masterId == '1'">
+    <div class="row h-100">
+        <aside class="col-12 col-md-2 ml-2 mt-4 p-0 mr-2">
+            <nav class="navbar navbar-light navbar-expand flex-md-column flex-row align-items-start w-75" style="background-color:skyblue; color: red;">
+                <div class="collapse navbar-collapse">
+                    <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-start">
+                        <li class="nav-item"> 
+                            <a class="nav-link tablinks" id="defaultOpen" (click)="openProfile($event, 'dateRange')" > <i class="fa fa-user"></i> Date Range </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'driverName')"> <i class="fa fa-car"></i> Driver Name</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openProfile($event, 'vehicleNumber')"> <i class="fa fa-key"></i> Vehicle Number</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="col">
+            <form [formGroup]="filterForm" (ngSubmit)="maintanceFiltersApply()">
+                <div>
+                    <a routerLink="/maintenanceReport"><button type="button" class="button-small" style="float: right;">Clear</button></a>
+                    <button type="submit" class="button-small" style="float: right; margin-right: 10px;">Apply Filters</button>
+                </div>
+                <div class="tabcontent" id="dateRange">
+                    <h4 class="mt-2">Filter By Date Range</h4><hr>
+                    <div class="row">
+                        <div class="from-group  col-sm-5">
+                            <label for="">Select Start From Date</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" formControlName="startDate" ngbDatepicker #mainstartdate="ngbDatepicker">
+                                <div class="input-group-append">
+                                  <button type="button" class="btn btn-outline-secondary calendar" (click)="mainstartdate.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="from-group  col-sm-5">
+                            <label for="">Select End To Date</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" formControlName="endDate" ngbDatepicker #mainenddate="ngbDatepicker">
+                                <div class="input-group-append">
+                                  <button ty type="button" class="btn btn-outline-secondary calendar" (click)="mainenddate.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabcontent" id="vehicleNumber">
+                    <h4 class="mt-2">Filter By Vehical Number</h4><hr>
+                    <div class="row">
+                        <div class="from-group  col-sm-5">
+                            <label for="">Select Vehical Number</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="toDate" formControlName="startDate" ngbDatepicker #mainstartdate="ngbDatepicker">
+                                <div class="input-group-append">
+                                  <button type="button" class="btn btn-outline-secondary calendar" (click)="mainstartdate.toggle()" type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabcontent" id="driverName">
+                    <h4 class="mt-2">Filter By Driver Name</h4><hr>
+                    <div class="row">
+                        <div class="from-group  col-sm-5">
+                            <label for="">Select Driver Name</label>
+                            <div class="input-group">
+                                <input id="driverName" type="text" 
+                                class="form-control" formControlName="driverName" placeholder="Select Driver Name"
+                                [ngbTypeahead]="driverNameSearch" 
+                                [resultFormatter]="formatMatchesByDriverName"
+                                [inputFormatter]="formatMatchesByDriverName" 
+                                (focus)="drivernamefocus$.next($any($event).target.value)"
+                                (click)="drivernameclick$.next($any($event).target.value)" 
+                                #drivernameinstance="ngbTypeahead" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
