@@ -13,7 +13,7 @@
                             <a class="nav-link tablinks" id="defaultOpen" (click)="openTab($event, 'update')" > <i class="fa fa-user"></i> Update Profile </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tablinks" (click)="openTab($event, 'driverName')"> <i class="fa fa-car"></i> Change Password</a>
+                            <a class="nav-link tablinks" (click)="openTab($event, 'chngPwd')"> <i class="fa fa-car"></i> Change Password</a>
                         </li>
                     </ul>
                 </div>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-xs-12 ml-12">
-                                <button type="submit" class="btn btn-success text-uppercase " style="font-size:14px;">Update <i class="fa fa-arrow-up"></i></button>
+                                <button type="submit" class="btn btn-success text-uppercase " style="font-size:14px;">Update Profile<i class="fa fa-arrow-up"></i></button>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12">
@@ -64,6 +64,30 @@
                                </div>
                             </div> 
                        </div>
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+                <div class="tabcontent" id="chngPwd">
+                    <h4 class="mt-2">Create Your New Password</h4><hr>
+                    <div class="row mt-3" style="padding: 0 25px;">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group col-md-12  col-sm-12">
+                                <label>Old Password</label>
+                                <input type="password" class="form-control txt-field" formControlName="oldPassword" placeholder="Enter old password"> 
+                            </div>
+                            <div class="form-group col-md-12  col-sm-12">
+                                <label>New Password</label>
+                                <input  #rePasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="rePassword" name="userPassword"   placeholder="Enter New Password" required="required" maxlength="20" />
+                                <div toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" (click)="rePasswordField.type=rePasswordField.type=='password'?'text':'password'" style="position: relative;right:3px;bottom: 38px;"></div>
+                             </div>
+                             <div class="form-group col-md-12  col-sm-12">
+                                <label>Confirm Password</label>
+                                <input  #reConformPasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="reConformPassword" name="reConformPassword"   placeholder="Re Enter New Password" required="required" maxlength="20" />
+                                <div toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" (click)="reConformPasswordField.type=reConformPasswordField.type=='password'?'text':'password'" style="position: relative;right:3px;bottom: 38px;"></div>
+                             </div>
+                            <button type="submit" class="btn btn-success ml-3">Change Password <i class="fas fa-pencil-alt"></i></button>
+                        </div>
                     </div>
                 </div>
             </form>

@@ -13,20 +13,26 @@ export class ProfileComponent implements OnInit {
   profileData;
 
   updateProfileForm:FormGroup;
+  changePasswordForm: FormGroup;
 
   constructor(
     private formBuilder:FormBuilder
   ) { this.loading=false; this.profileData={}}
 
   ngOnInit(): void {
-    let buttonHtml: HTMLElement= document.getElementById("defaultOpen") as HTMLElement;
-    buttonHtml.click();
-
     this.updateProfileForm= this.formBuilder.group({
       'firstName': new FormControl(''),
       'lastName': new FormControl(''),
       'emailId': new FormControl('')
     })  
+
+    this.changePasswordForm=this.formBuilder.group({
+      'oldPassword': new FormControl(''),
+      'rePassword': new FormControl(''),
+      'reConformPassword': new FormControl('')
+    })
+    let buttonHtml: HTMLElement= document.getElementById("defaultOpen") as HTMLElement;
+    buttonHtml.click();
   }
 
   // this method will used for the handel tab action
@@ -46,6 +52,10 @@ export class ProfileComponent implements OnInit {
 
   saveUpdateProfile(){
     console.log("Data ", this.updateProfileForm)
+  }
+
+  changePassword(){
+    console.log("CHA ", this.changePasswordForm)    
   }
 
 }
