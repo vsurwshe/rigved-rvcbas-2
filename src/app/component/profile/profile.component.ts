@@ -54,10 +54,12 @@ export class ProfileComponent implements OnInit {
     evt.currentTarget.className += " active";
   }
 
+  // this method will used for call update user profile api
   saveUpdateProfile(){
     console.log("Data ", this.updateProfileForm)
   }
 
+  // this method will used for call change password api
   changePassword(){
     if(this.changePasswordForm.status == "VALID"){
       const { value }= this.changePasswordForm
@@ -65,7 +67,6 @@ export class ProfileComponent implements OnInit {
         ...value,
         'accountId': this.loginService.getUserAccountId()
       }
-      console.log("Data ",modifyData)
       this.loading=true;
       this.userService.changePassword(modifyData)
       .subscribe(
