@@ -103,7 +103,7 @@ export class ManageTripComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    document.getElementById("defaultOpen").click();
+    // document.getElementById("defaultOpen").click();
     this.getManageTrip();
     this.getFinishedTrips();
   }
@@ -143,6 +143,8 @@ export class ManageTripComponent implements OnInit {
         this.upcomeingRidesList=tempData;
         this.loading=false;
         this.dataTabelService.dataTable("#upComeingDataTable", this.upComeingTabelColumns, this.upcomeingRidesList, this.upComeingTabelColumnsDef);
+        let buttonHtml: HTMLElement= document.getElementById("defaultOpen") as HTMLElement;
+        buttonHtml.click();
       },
       error=>{ this.loading=false; console.log("error ",error)}
     )

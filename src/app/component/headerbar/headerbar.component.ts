@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
-import { TravellBillingFilterComponent } from '../travell-billing/travell-billing-filter/travell-billing-filter.component';
 declare var $: any;
 @Component({
   selector: 'app-headerbar',
@@ -20,13 +18,19 @@ export class HeaderbarComponent implements OnInit {
   routesArray;
   constructor(private router:Router) {
     this.travelBilling=false;
+    this.maintenanceReport=false;
     this.travelBillingFilter=false;
+    this.maintanceReportFilter=false;
   }
 
   ngOnInit(): void {
     this.router.events.subscribe(
       (event: any) => {
         if (event instanceof NavigationEnd) {
+          this.travelBilling=false;
+          this.maintenanceReport=false;
+          this.travelBillingFilter=false;
+          this.maintanceReportFilter=false;
           // console.log("PAth ", this.router.url)
           switch (this.router.url) {
             case "/profile":
@@ -122,9 +126,5 @@ export class HeaderbarComponent implements OnInit {
       });
     });
    
-  }
-
-  filtersApply(){
-    // new TravellBillingFilterComponent().filtersApply();
   }
 }

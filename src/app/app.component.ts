@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import '@fortawesome/fontawesome-free/js/all.js';
 import { LoginService } from './service/login.service';
 
@@ -16,6 +15,18 @@ export class AppComponent {
 
   public ngOnInit(): void {
     this.token= (this.loginService.getToken() !== null && this.loginService.getToken() !=="") ? true: false;
+  }
+
+  get checkPrivateRoute(){
+    if( location.pathname == "/forgotPass" || 
+        location.pathname == "/privacy" || 
+        location.pathname == "/help" ||
+        location.pathname == "/terms" 
+    ){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }

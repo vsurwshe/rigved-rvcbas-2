@@ -1,1 +1,143 @@
-<p>profile works!</p>
+<div id="page-loading" [hidden]="!loading">
+    <div class="loader">
+        <img src="assets/img/giphy.gif" width="100" height="100" style="padding: 0">
+    </div>
+</div>
+<div class="container-fluid h-100 bg-white p-3" [hidden]="profileData?.masterId == '1'">
+    <div class="row h-100">
+        <aside class="col-12 col-md-2 ml-2 mt-4 p-0 mr-2">
+            <nav class="navbar navbar-light navbar-expand flex-md-column flex-row align-items-start w-75" style="background-color:skyblue; color: red;">
+                <div class="collapse navbar-collapse">
+                    <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-start">
+                        <li class="nav-item"> 
+                            <a class="nav-link tablinks" id="defaultOpen" (click)="openTab($event, 'update')" > <i class="fa fa-user"></i> Update Profile </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link tablinks" (click)="openTab($event, 'chngPwd')"> <i class="fa fa-car"></i> Change Password</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+        <main class="col">
+            <form [formGroup]="updateProfileForm" (ngSubmit)="saveUpdateProfile()">
+                <div class="tabcontent" id="update">
+                    <h4 class="mt-2">Update Your Profile</h4><hr>
+                    <div class="row mt-3" style="padding: 0 25px;">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="mb-2">First Name</label>
+                                    <input  type="text" class="form-control  txt-field" formControlName="firstName" placeholder="Enter your first name">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="mb-2">Last Name</label>
+                                    <input type="text"  class="form-control  txt-field" formControlName="lastName" tabindex="22" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label class="mb-2">Email-Id</label>
+                                    <input type="text"  class="form-control  txt-field" formControlName="emailId" placeholder="Enter your email id" >
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 ml-12">
+                                <button type="submit" class="btn btn-success text-uppercase " style="font-size:14px;">Update Profile<i class="fa fa-arrow-up"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-12 nopadding">
+                                <div class=" user-profile-card" style="background-color: transparent!important;"> 
+                                   <div class="middle-div">
+                                       <div class="inner-middle-div">
+                                           <div class="card-body">
+                                               <div class="user-info">
+                                                   <div class="user-pic" style="background-image: url({{profileData?.profileUrl || 'assets/img/user-demo.png'}})">
+                                                       <span class="edit" data-toggle="modal" data-target="#ProfilePicture" ng-click="toggleButton()"><i class="fas fa-camera"></i></span>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                            </div> 
+                       </div>
+                    </div>
+                </div>
+            </form>
+            <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+                <div class="tabcontent" id="chngPwd">
+                    <h4 class="mt-2">Create Your New Password</h4><hr>
+                    <div class="row mt-3" style="padding: 0 25px;">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group col-md-12  col-sm-12">
+                                <label>Old Password</label>
+                                <input type="password" class="form-control txt-field" formControlName="oldPassword" placeholder="Enter old password"> 
+                            </div>
+                            <div class="form-group col-md-12  col-sm-12">
+                                <label>New Password</label>
+                                <input  #rePasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="newPassword" name="userPassword"   placeholder="Enter New Password" required="required" maxlength="20" />
+                                <div toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" (click)="rePasswordField.type=rePasswordField.type=='password'?'text':'password'" style="position: relative;right:3px;bottom: 38px;"></div>
+                             </div>
+                             <div class="form-group col-md-12  col-sm-12">
+                                <label>Confirm Password</label>
+                                <input  #reConformPasswordField id="rePasswordField" type="password" class="form-control txt-field " formControlName="confirmPassword" name="reConformPassword"   placeholder="Re Enter New Password" required="required" maxlength="20" />
+                                <div toggle="#login-password" class="fa fa-fw fa-eye field-icon toggle-password pull-right" (click)="reConformPasswordField.type=reConformPasswordField.type=='password'?'text':'password'" style="position: relative;right:3px;bottom: 38px;"></div>
+                             </div>
+                            <button type="submit" class="btn btn-success ml-3">Change Password <i class="fas fa-pencil-alt"></i></button>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/img/opt_password.png" class="img-circle" alt="Cinque Terre"> 
+                                    </div>
+                                    <div class="col-sm-8"> 
+                                        <p style="color:black;">Change your password periodically.Use a secure alphanumeric password that cannot be easily guessed.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/img/opt_otp.png" class="img-circle" alt="Cinque Terre"> 
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <p style="color:black;">For security reason,do not use your first name or last name in your password.</p>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <img src="assets/img/opt_share.png" class="img-circle" alt="Cinque Terre"> 
+                                    </div>
+                                    <div class="col-sm-8"> 
+                                        <p style="color:black;">Please donot share your password with anyone.Your security is your own hand.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+<div id="ProfilePicture" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="display: block;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Select Profile Picture</h5>
+            </div>
+        </div>
+        <div class="modal-body" style="height:330px;">
+            <div class="center">
+                
+            </div>
+        </div>
+    </div>
+</div>

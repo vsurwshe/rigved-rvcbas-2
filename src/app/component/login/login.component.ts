@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -39,9 +38,10 @@ export class LoginComponent implements OnInit {
     this.loading=true;
     this.loginService.loginUser({...data, "deviceToken": ""}).subscribe(
       response=>{
-        const { token }=response.tokenDto
+        const { token, accountId }=response.tokenDto
         this.loading=false;
         this.loginService.saveToken(token);
+        this.loginService.saveUserAccountId(accountId);
         this.loginService.successFullMessage("Successfully Login....!");
         setTimeout(()=>{
           this.router.navigateByUrl("/managetrip");

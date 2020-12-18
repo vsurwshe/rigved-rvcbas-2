@@ -8,7 +8,7 @@
         </button>
     </div>
     <ul class="list-unstyled components" >
-        <p class="text-white font-weight-bold" style="margin-top: 20px;">Call: +91 88808 55551</p>
+        <p class="text-white font-weight-bold">Call: +91 88808 55551</p>
         <span *ngFor="let item of routesArray" >
             <li> 
                 <a routerLink="{{item.path}}" style="text-decoration: none;">
@@ -17,17 +17,36 @@
             </li>
         </span>
         <li class="logout" style="cursor: pointer" >
-            <a (click)="userLogout()"><img class="imgIco" src="assets/img/logout.png" /> Logout</a>
+            <a (click)="setLogout()" data-toggle='modal' data-target='#logOut'><img class="imgIco" src="assets/img/logout.png" /> Logout</a>
         </li>
-        <li>
+        <li class="center">
             <a href="https://www.apple.com/in/iphone/" target="_blank" class="article">
-                <img src="assets/img/appstore.png" width="100%" height="50%">
+                <img src="assets/img/appstore.png" width="70%" height="40%">
             </a>
         </li>
-        <li>
+        <li class="center">
             <a href="https://play.google.com/store/apps?hl=en" target="_blank" class="article" >
-                <img src="assets/img/googleplay.png" width="100%" height="50%">
+                <img src="assets/img/googleplay.png" width="70%" height="40%">
             </a>
         </li>
     </ul>
 </nav>
+<div class="modal" tabindex="-1" role="dialog" [hidden]="!logout" id="logOut">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Logout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+               Are sure want to logout form this application ?
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="callLogout()">Logout</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" #logoutclose>Close</button>
+            </div>
+        </div>
+    </div>
+</div>

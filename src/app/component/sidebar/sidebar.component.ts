@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { appRoutes, sideBarRoutes } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { LoginService } from 'src/app/service/login.service';
@@ -10,18 +10,25 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class SidebarComponent implements OnInit {
 
+  @ViewChild('logoutclose') logoutclose: ElementRef;
+  
+  // required variables
   routesArray;
+  logout;
   
   constructor(private loginService:LoginService, private appComponent:AppComponent) {
     this.routesArray = sideBarRoutes;
+    this.logout=false;
   }
 
   ngOnInit(): void {
   }
 
-  userLogout(){
-    console.log("Calling User Logout")
+  setLogout(){ this.logout=true;}
+
+  callLogout(){
     this.loginService.clearStorage();
+    this.logoutclose.nativeElement.click();
     this.appComponent.ngOnInit();
   }
 
