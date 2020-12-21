@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DataTableService } from 'src/app/service/data-table.service';
+import { LoginService } from 'src/app/service/login.service';
 import { MasterDataService } from 'src/app/service/master-data.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-driver-management',
@@ -8,9 +11,13 @@ import { MasterDataService } from 'src/app/service/master-data.service';
   styleUrls: ['./driver-management.component.scss']
 })
 export class DriverManagementComponent implements OnInit {
+
+  @ViewChild('approvedclose') approvedclose: ElementRef;
+  
   // required variables
   loading
   driverList
+  updateDriverDetailsForm: FormGroup
 
   driverListTableColumns=[
     {title:'Name',data:'firstName'},
@@ -25,9 +32,18 @@ export class DriverManagementComponent implements OnInit {
       "targets": -1, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
-          $(td).click(e => { console.log("Data ",rowData) })
+        $(td).on('click',event=>{ 
+          const {firstName,accountId, emailId}=rowData 
+          let filterName= firstName && firstName.split(' ')
+          this.updateDriverDetailsForm.patchValue({
+            'accountId': accountId, 
+            'firstName':filterName.length >0 && filterName[0], 
+            'lastName': filterName.length >0 && filterName[1], 
+            'emailId': emailId
+          })
+        })
       },
-      "defaultContent": "<button type='button' class='button-small'  uib-tooltip='appears with delay'><i class='fa fa-search-minus' aria-hidden='true'></i></button>"
+      "defaultContent": "<button type='button' class='button-small' data-toggle='modal' data-target='#modifyDriverDetails'><i class='fa fa-search-minus' aria-hidden='true'></i></button>"
     },
     {
       "targets": -2, // specifies the position of button(last but one) in the row
@@ -42,8 +58,11 @@ export class DriverManagementComponent implements OnInit {
    ]
 
   constructor(
+    private formBulider:FormBuilder,
     private masterData: MasterDataService,
-    private dataTableService: DataTableService
+    private dataTableService: DataTableService,
+    private userService:UserService,
+    private loginService:LoginService
   ) { this.loading=false;}
 
   ngOnInit(): void {
@@ -54,8 +73,32 @@ export class DriverManagementComponent implements OnInit {
         this.driverList=response;
         this.loading=false;
         this.dataTableService.dataTable("#driverManagmentList", this.driverListTableColumns, this.driverList, this.driverListTabelColumnsDef)
-      },error=>{ this.loading=false; console.error("Error: ",error)}
-    )
+      },error=>{ this.loading=false; console.error("Error: ",error)})
+
+      // this is update form initlizations
+      this.updateDriverDetailsForm= this.formBulider.group({
+        'accountId': new FormControl(''), 
+        'firstName': new FormControl(''), 
+        'lastName': new FormControl(''), 
+        'emailId': new FormControl('')
+      })
+  }
+
+  // this method will used for the update the driver details
+  updateDriverDetails(){
+    if(this.updateDriverDetailsForm.status == "VALID"){
+      const { value}=this.updateDriverDetailsForm
+      this.loading=true;
+      this.userService.updateProfile(value)
+      .subscribe(
+        response=>{
+          this.loading=false;
+          this.loginService.successFullMessage("Successfully updated driver details...!");
+          this.approvedclose.nativeElement.click();
+          this.ngOnInit();
+        },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng...Please try again...!"), console.error("Error ",error);}
+      )
+    }
   }
 
 }
