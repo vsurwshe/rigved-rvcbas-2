@@ -11,3 +11,36 @@
     </div>
     <table id="driverManagmentList" class="display" style="width: 100%;"></table>
 </div>
+<!-- Model Section -->
+<div class="modal" tabindex="-1" role="dialog" id="modifyDriverDetails">
+    <form [formGroup]="updateDriverDetailsForm" (ngSubmit)="updateDriverDetails()">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Modify the driver details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" >
+                    <div class="from-group  col-sm-12">
+                        <label for="">First Name&nbsp;<span class="mendatory">*</span></label>
+                        <input class="form-control txt-field" formControlName="firstName" type="text" placeholder="Enter First Name">
+                    </div>
+                    <div class="from-group  col-sm-12">
+                        <label for="">Last Name</label>
+                        <input class="form-control txt-field" formControlName="lastName" type="text" placeholder="Enter Last Name">
+                    </div>
+                    <div class="from-group  col-sm-12">
+                        <label for="">Email Id&nbsp;<span class="mendatory">*</span></label>
+                        <input class="form-control txt-field" formControlName="emailId" type="email" placeholder="Enter Email Id">
+                    </div>
+                </div> 
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" >Update Driver Details</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" #approvedclose>Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

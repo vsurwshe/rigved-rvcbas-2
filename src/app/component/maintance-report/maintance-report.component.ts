@@ -236,6 +236,7 @@ export class MaintanceReportComponent implements OnInit {
     this.router.navigateByUrl("/maintenanceDetaills",{state:{driverAccountId,modifyStartDate,modifyEndDate}})
   }
 
+  // this method will used for the call api and show image in model
   showInvoiceImage(data){
     const { fileUrl }=data
     if(fileUrl != "" && fileUrl != null){
@@ -252,6 +253,7 @@ export class MaintanceReportComponent implements OnInit {
     } 
   }
 
+  // this method will used for call api according to status
   udpateStatus(status){
     this.loading= true;
     this.expenditureService.updateBillStatus(this.selectedData.id,status)
