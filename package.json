@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
+    "pm2run":"pm2 start 'ng serve --host 0.0.0.0' --name 'rvcabs2.0'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
