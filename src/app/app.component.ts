@@ -18,10 +18,11 @@ export class AppComponent {
   }
 
   get checkPrivateRoute(){
-    if( location.pathname == "/forgotPass" || 
-        location.pathname == "/privacy" || 
-        location.pathname == "/help" ||
-        location.pathname == "/terms" 
+    console.log("DA ",location.pathname)
+    if( location.pathname == "/rvcabsv2/forgotPass" || 
+        location.pathname == "/rvcabsv2/privacy" || 
+        location.pathname == "/rvcabsv2/help" ||
+        location.pathname == "/rvcabsv2/terms" 
     ){
       return true;
     }else{
