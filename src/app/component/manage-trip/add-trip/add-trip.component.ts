@@ -104,6 +104,7 @@ export class AddTripComponent implements OnInit {
       }
     )
     this.tirpForm= this.formBuilder.group({
+      'costCenter': new FormControl(),
       'carHire': new FormControl(),
       'carUse': new FormControl(),
       'driverAccountId': new FormControl(),
@@ -122,7 +123,6 @@ export class AddTripComponent implements OnInit {
       'companyDetailDto': this.formBuilder.group({
         'companyName': new FormControl(),
         'gstnumber': new FormControl(),
-        'costCenter': new FormControl(),
       }),
       'travelId': new FormControl(),
       "traveldeskEmailId":new FormControl(),
