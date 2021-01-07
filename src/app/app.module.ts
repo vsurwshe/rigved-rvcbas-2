@@ -49,6 +49,7 @@ import { MaintanceFilterComponent } from './component/maintance-report/maintance
 import { MaintanceDetailsComponent } from './component/maintance-report/maintance-details/maintance-details.component';
 import { AddMaintanceBillComponent } from './component/maintance-report/add-maintance-bill/add-maintance-bill.component';
 import { ForgotPasswordComponent } from './component/login/forgot-password/forgot-password.component';
+import { TripDetailsComponent } from './component/manage-trip/trip-details/trip-details.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { ForgotPasswordComponent } from './component/login/forgot-password/forgo
     MaintanceFilterComponent,
     MaintanceDetailsComponent,
     AddMaintanceBillComponent,
-    ForgotPasswordComponent 
+    ForgotPasswordComponent,
+    TripDetailsComponent 
   ],
   imports: [
     CommonModule,

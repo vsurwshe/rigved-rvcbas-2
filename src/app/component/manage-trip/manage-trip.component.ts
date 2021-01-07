@@ -23,6 +23,8 @@ export class ManageTripComponent implements OnInit {
   feedbackModel;
   feedbackMessage;
   starReatings: number;
+  tripData;
+  showRideDetails;
 
   upComeingTabelColumns=[
     {title:'Traveller Name',data:'travellerName'},
@@ -100,6 +102,8 @@ export class ManageTripComponent implements OnInit {
     this.accept=false;
     this.online=false;
     this.feedbackModel=false;
+    this.tripData=null;
+    this.showRideDetails=false;
   }
 
   ngOnInit(): void {
@@ -286,7 +290,19 @@ export class ManageTripComponent implements OnInit {
   }
 
   viewTripDetails(rideData){
-    console.log("Ride ",rideData)
+    const { tripId } = rideData
+    if(tripId){
+      this.loading=true;
+      this.mangeTripService.getTripDetails(tripId)
+      .subscribe(
+        response=>{
+          this.tripData=response;
+          this.loading=false;
+          this.ridesDetails=true;
+        },
+        error=>{this.loading=false; console.error("Error: ",error);}
+      )
+    }
   }
 
   viewFeedback(rideData){

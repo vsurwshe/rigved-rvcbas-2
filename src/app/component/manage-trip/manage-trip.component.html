@@ -43,11 +43,11 @@
                     </div>
                     <div class="col-md-2">
                         <label> <h6 class="text">Date:</h6></label>
-                        <label class="subtext">&nbsp;{{ridesDetails?.bookingDate}}</label>
+                        <label class="subtext">&nbsp;{{ridesDetails?.pickUpDate}}</label>
                     </div>
                     <div class="col-md-2">
                         <label><h6 class="text">Time:</h6></label>
-                        <label class="subtext">&nbsp;{{ridesDetails?.bookingTime}}</label>
+                        <label class="subtext">&nbsp;{{ridesDetails?.pickUpTime}}</label>
                     </div>
                 </div>
                 <hr>
@@ -107,6 +107,11 @@
                 <hr>
                 <div class="text-center" [hidden]="!view">
                     <label>Current Ride Status</label><br>
+                    <div *ngIf="ridesDetails?.totalDistance">
+                        <label>Total Distance: {{ridesDetails?.totalDistance}}</label>&nbsp;&nbsp;
+                        <label>Total Time: {{ridesDetails?.totalTime}}</label>&nbsp;&nbsp;
+                    </div>
+                    
                     <button class="btn btn-defualt">
                         <h2>{{ridesDetails?.changedStatus}}</h2>
                     </button>
@@ -253,7 +258,7 @@
 </div>
 
  <!-- This model showing trip details -->
- <div class="modal" tabindex="-1" role="dialog" id="tripDetailsModel">
+ <div class="modal" [hidden]="showRideDetails" tabindex="-1" role="dialog" id="tripDetailsModel">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -263,7 +268,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Trip Details</p>
+                <ng-container *ngIf="tripData != null; else elseTemplate">
+                    <app-trip-details [tripData]="tripData"></app-trip-details>
+                </ng-container>
+                <ng-template #elseTemplate>
+                    <label>There is no trip details for this ride.</label>
+                </ng-template>
             </div> 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

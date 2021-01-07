@@ -34,4 +34,8 @@ export class ManageTripService {
     return this.authService.process("POST","booking/bookTrip/",{headers: this.setHeaders(), body:tripData})
   }
 
+  getTripDetails(tripId):Observable<any>{
+    return this.authService.process("GET","trip/getTripCoordinates/"+tripId,{headers: this.setHeaders()})
+  }
+
 }

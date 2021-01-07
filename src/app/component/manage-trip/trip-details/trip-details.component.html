@@ -1,0 +1,19 @@
+<div class="box">
+  <ul id="first-list" *ngFor="let item of tripData?.tripList">
+    <div class="card" style="margin-bottom: 10px;">
+        <li >
+            <span></span>
+            <div class="info" style="margin-top: -30px; margin-bottom: 20px;">{{item?.srcName}}</div>
+            <div class="info">{{item?.dstName}}</div>
+            <div class="time">
+                <span>{{item?.distance}} KM <br/>{{item?.timeDifference}}</span>
+            </div>
+        </li>
+    </div> 
+        
+  </ul>
+  <div class="center">
+    <label class="lable-class">Total Duration: {{tripData?.totalTime}}</label> &nbsp;&nbsp;&nbsp;
+    <label class="lable-class">Total Distance: {{tripData?.totalDistance}}</label>
+  </div>
+</div>
