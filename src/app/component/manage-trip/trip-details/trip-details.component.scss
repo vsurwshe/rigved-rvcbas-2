@@ -36,7 +36,7 @@
 }
 
 .box ul li{
-    margin: 20px 60px 60px;
+    margin: 20px 60px 30px;
     position: relative;
     padding: 10px 20px;
     background:rgba(255, 255, 255, 0.3);
@@ -47,7 +47,6 @@
 }
 
 .box ul li > span{
-    // content: "";
     display: block;
     width: 0;
     height: 100%;
@@ -59,27 +58,25 @@
 }
 
 .box ul li > span:before{
+    content: "\f042";
+    font-family: "Font Awesome 5 Free";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    color: green;
+    position: absolute;
+    left:-7.5px;
+    font-weight:900;
+}
+.box ul li > span:after{
     content: "\f041";
     font-family: "Font Awesome 5 Free";
     display: block;
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background:#ff6d6d;
-    // border:2px solid #ff6d6d;
-    position: absolute;
-    left:-7.5px;
-    font-weight:900;
-}
-.box ul li > span:after{
-    content: "\f10c";
-    font-family: "Font Awesome 5 Brands";
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background:#ff6d6d;
-    // border:2px solid #ff6d6d;
+    color: #FC9213;
     position: absolute;
     left:-7.5px;
     font-weight:900;

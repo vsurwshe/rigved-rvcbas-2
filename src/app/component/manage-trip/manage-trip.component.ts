@@ -24,7 +24,6 @@ export class ManageTripComponent implements OnInit {
   feedbackMessage;
   starReatings: number;
   tripData;
-  showRideDetails;
 
   upComeingTabelColumns=[
     {title:'Traveller Name',data:'travellerName'},
@@ -103,7 +102,6 @@ export class ManageTripComponent implements OnInit {
     this.online=false;
     this.feedbackModel=false;
     this.tripData=null;
-    this.showRideDetails=false;
   }
 
   ngOnInit(): void {
@@ -298,7 +296,7 @@ export class ManageTripComponent implements OnInit {
         response=>{
           this.tripData=response;
           this.loading=false;
-          this.ridesDetails=true;
+          console.log("RD ",this.ridesDetails)
         },
         error=>{this.loading=false; console.error("Error: ",error);}
       )
