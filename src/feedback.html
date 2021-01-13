@@ -1,0 +1,100 @@
+<html ng-app="feedbackFrom">
+<head>
+    <meta name="author" content="rvCabs, rvCabs">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./feedback/css/feedback.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="./assets/js/angular.js"></script>
+    <script src="./assets/js/angular-animate.js"></script>
+    <script src="./assets/js/ui-bootstrap-tpls-1.3.2.js"></script>
+</head>
+<script>
+ (function(){
+        var moduleName="feedbackFrom",
+            required=[
+            'ngAnimate', 
+            'ui.bootstrap'
+            ],
+            myModule=null;
+        myModule = angular.module(moduleName,required)
+        // This is creating syntax for creating controller in angular js
+        myModule.controller("AppCtrl",function($scope){
+            // This is syntax for write the business logic inside the controller 
+            $scope.rate = 0;
+            $scope.max = 5;
+            $scope.isReadonly = false;       
+            $scope.hoveringOver = function(value) {
+              $scope.overStar = value;
+              $scope.percent = 100 * (value / $scope.max);
+            };
+            $scope.ratingStates = [
+              {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+              {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+              {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+              {stateOn: 'glyphicon-heart'},
+              {stateOff: 'glyphicon-off'}
+            ];
+            $scope.checkbox1="";
+            $scope.checkbox2="";
+            $scope.checkbox3="";
+            $scope.checkbox4="";
+            $scope.checkbox5="";
+            $scope.feedback="";
+            $scope.submitFeedback= function(){
+                let bodyData={
+                   rate: $scope.rate,
+                   chekbox1: $scope.checkbox1,
+                   checkbox2:$scope.checkbox2,
+                   checkbox3:$scope.checkbox3,
+                   checkbox4:$scope.checkbox4,
+                   checkbox5:$scope.checkbox5,
+                   feedback:$scope.feedback
+                }
+                console.log("Data ", bodyData);
+            }
+        })
+}())
+</script>
+<body ng-controller="AppCtrl as app">
+    <div class="d-flex justify-content-center ">
+        <div class="card bg-light" style="width: 90%;height: auto;margin-top: 6%;">
+            <div class="card-header"> <h3>Customer Feedback</h3> </div>
+            <div class="card-body" style="font-size: 14px;">
+                <form >
+                    <div>
+                        <uib-rating ng-model="rate" style="font-size: xx-large;" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
+                        <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox1" id="blankCheckbox" value="option1" aria-label="inlineCheckbox1">
+                        <label class="form-check-label" for="inlineCheckbox1">Checkbox 1</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox2" id="blankCheckbox" value="option1" aria-label="inlineCheckbox2">
+                        <label class="form-check-label" for="inlineCheckbox2">Checkbox 2</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox3" id="blankCheckbox" value="option1" aria-label="inlineCheckbox3">
+                        <label class="form-check-label" for="inlineCheckbox3">Checkbox 3</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox4" id="blankCheckbox" value="option1" aria-label="inlineCheckbox4">
+                        <label class="form-check-label" for="inlineCheckbox4">Checkbox 4</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox5" id="blankCheckbox" value="option1" aria-label="inlineCheckbox5">
+                        <label class="form-check-label" for="inlineCheckbox5">Checkbox 5</label>
+                    </div>
+                    <div>
+                        <textarea id="subject" ng-model="feedback" name="subject" placeholder="Enter your feedback..."  style="height:200px"></textarea>
+                    </div>
+                    <div style="margin-top: 15;">
+                        <button type="submit" style="font-size: 14px;" ng-click="submitFeedback()" class="btn btn-success">Submit your feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

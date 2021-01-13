@@ -25,7 +25,10 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/feedback/css",
+              "src/feedback/js/angular.js",
+              "src/feedback.html"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
