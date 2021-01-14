@@ -35,20 +35,18 @@
               {stateOn: 'glyphicon-heart'},
               {stateOff: 'glyphicon-off'}
             ];
-            $scope.checkbox1="";
-            $scope.checkbox2="";
-            $scope.checkbox3="";
-            $scope.checkbox4="";
-            $scope.checkbox5="";
+            $scope.arrayCheckbox=[
+                "The driver was very polite",
+                "The car Ambience was nice",
+                "Car conditions are good",
+                "The driving skills are very professional"
+            ]
             $scope.feedback="";
+            $scope.array=[];
             $scope.submitFeedback= function(){
                 let bodyData={
                    rate: $scope.rate,
-                   chekbox1: $scope.checkbox1,
-                   checkbox2:$scope.checkbox2,
-                   checkbox3:$scope.checkbox3,
-                   checkbox4:$scope.checkbox4,
-                   checkbox5:$scope.checkbox5,
+                   checkbox:$scope.array,
                    feedback:$scope.feedback
                 }
                 console.log("Data ", bodyData);
@@ -66,26 +64,12 @@
                         <uib-rating ng-model="rate" style="font-size: xx-large;" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
                         <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox1" id="blankCheckbox" value="option1" aria-label="inlineCheckbox1">
-                        <label class="form-check-label" for="inlineCheckbox1">Checkbox 1</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox2" id="blankCheckbox" value="option1" aria-label="inlineCheckbox2">
-                        <label class="form-check-label" for="inlineCheckbox2">Checkbox 2</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox3" id="blankCheckbox" value="option1" aria-label="inlineCheckbox3">
-                        <label class="form-check-label" for="inlineCheckbox3">Checkbox 3</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox4" id="blankCheckbox" value="option1" aria-label="inlineCheckbox4">
-                        <label class="form-check-label" for="inlineCheckbox4">Checkbox 4</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input position-static" type="checkbox" ng-model="checkbox5" id="blankCheckbox" value="option1" aria-label="inlineCheckbox5">
-                        <label class="form-check-label" for="inlineCheckbox5">Checkbox 5</label>
-                    </div>
+                    <span ng-repeat="item in arrayCheckbox">
+                        <div class="form-check">
+                            <input class="form-check-input position-static" type="checkbox" ng-model="array[item]" id="blankCheckbox" value="{{item}}">
+                            <label class="form-check-label">{{item}}.</label>
+                        </div>
+                    </span>
                     <div>
                         <textarea id="subject" ng-model="feedback" name="subject" placeholder="Enter your feedback..."  style="height:200px"></textarea>
                     </div>
