@@ -565,11 +565,15 @@ export class AddDriverComponent implements OnInit {
       this.driverService.postDriverDteails(postBodyData)
       .subscribe(
         response=>{
-          this.loginService.successFullMessage("Driver Registered Successfully ..!");
+          const { status, message}=response
           this.loading=false;
-          this.router.navigateByUrl("/approveMember");
-        },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng,....Please try again...!"); console.error("Error ",error);
-        }
+          if (status && status === "409 CONFLICT") {
+            this.loginService.errorMessage(message);
+          } else {
+            this.loginService.successFullMessage("Driver Registered Successfully ..!");
+            this.router.navigateByUrl("/approveMember");
+          }
+        },error=>{  this.loading=false;  console.error("Error ",error); this.loginService.errorMessage("Something went worng,....Please try again...!");  }
       )
     }
   }
