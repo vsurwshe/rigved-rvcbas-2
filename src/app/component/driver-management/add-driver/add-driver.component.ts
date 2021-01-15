@@ -561,17 +561,16 @@ export class AddDriverComponent implements OnInit {
         "documentDetailDtos": this.DocumentData,
         "state": "Bangalore"
       }
-      console.log("Body Data ",postBodyData)
-      // this.loading=true;
-      // this.driverService.postDriverDteails(postBodyData)
-      // .subscribe(
-      //   response=>{
-      //     this.loginService.successFullMessage("Driver Registered Successfully ..!");
-      //     this.loading=false;
-      //     this.router.navigateByUrl("/approveMember");
-      //   },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng,....Please try again...!"); console.error("Error ",error);
-      //   }
-      // )
+      this.loading=true;
+      this.driverService.postDriverDteails(postBodyData)
+      .subscribe(
+        response=>{
+          this.loginService.successFullMessage("Driver Registered Successfully ..!");
+          this.loading=false;
+          this.router.navigateByUrl("/approveMember");
+        },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng,....Please try again...!"); console.error("Error ",error);
+        }
+      )
     }
   }
   
