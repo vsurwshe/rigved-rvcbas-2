@@ -84,7 +84,7 @@
                                 <div class="form-group col-sm-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Segment/Type</label>
                                     <input id="carCategory" type="text" 
-                                    class="form-control" formControlName="subType" placeholder="Select Car Type"
+                                    class="form-control" formControlName="carCategory" placeholder="Select Car Type"
                                     [ngbTypeahead]="carCategorySearchMethod" 
                                     [resultFormatter]="formatMatchesByName"
                                     [inputFormatter]="formatMatchesByName" 
@@ -95,7 +95,7 @@
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Brand</label>
                                     <input id="carBrand" type="text"  class="form-control" 
-                                    formControlName="carCategory" placeholder="Select Car Name"
+                                    formControlName="type" placeholder="Select Car Name"
                                     [ngbTypeahead]="carBrandSearchMethod"
                                     [resultFormatter]="formatMatchesByName"
                                     [inputFormatter]="formatMatchesByName" 
@@ -106,7 +106,7 @@
                                 <div class="form-group col-md-6" formGroupName="carDetailDto">
                                     <label for="exampleFormControlSelect1">Vehicle Model</label>
                                     <input id="carModel" type="text" class="form-control" 
-                                    formControlName="type" placeholder="Select Car Model"
+                                    formControlName="subType" placeholder="Select Car Model"
                                     [ngbTypeahead]="carModelSearchMethod" 
                                     [resultFormatter]="formatMatchesByName"
                                     [inputFormatter]="formatMatchesByName"

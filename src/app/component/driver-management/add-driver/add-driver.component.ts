@@ -99,8 +99,8 @@ export class AddDriverComponent implements OnInit {
       'emailId': new FormControl(),
       'carDetailDto': this.formBuilder.group({
         'carCategory': new FormControl(),
-        'type': new FormControl({value: '', disabled: true}),
-        'subType': new FormControl(),
+        'type': new FormControl(),
+        'subType': new FormControl({value: '', disabled: true}),
         'carColor': new FormControl(),
         'carInterrior': new FormControl(),
         'company': new FormControl()
@@ -200,14 +200,14 @@ export class AddDriverComponent implements OnInit {
         'Front Image': new FormControl()
       })
     })
-    this.driverManagementForm.get("carDetailDto.carCategory").valueChanges.subscribe(data=>{
+    this.driverManagementForm.get("carDetailDto.type").valueChanges.subscribe(data=>{
       if(data.id){
         this.loading=true;
         this.masterData.getCarSubTypeBrandSerach(data.id)
         .subscribe(
           response=>{
             this.carModelList=response;
-            this.driverManagementForm.get("carDetailDto.type").enable();
+            this.driverManagementForm.get("carDetailDto.subType").enable();
             this.loading=false;
           },error=>{ this.loading=false; console.error("Error ",error);
           }
@@ -561,16 +561,17 @@ export class AddDriverComponent implements OnInit {
         "documentDetailDtos": this.DocumentData,
         "state": "Bangalore"
       }
-      this.loading=true;
-      this.driverService.postDriverDteails(postBodyData)
-      .subscribe(
-        response=>{
-          this.loginService.successFullMessage("Driver Registered Successfully ..!");
-          this.loading=false;
-          this.router.navigateByUrl("/approveMember");
-        },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng,....Please try again...!"); console.error("Error ",error);
-        }
-      )
+      console.log("Body Data ",postBodyData)
+      // this.loading=true;
+      // this.driverService.postDriverDteails(postBodyData)
+      // .subscribe(
+      //   response=>{
+      //     this.loginService.successFullMessage("Driver Registered Successfully ..!");
+      //     this.loading=false;
+      //     this.router.navigateByUrl("/approveMember");
+      //   },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng,....Please try again...!"); console.error("Error ",error);
+      //   }
+      // )
     }
   }
   
