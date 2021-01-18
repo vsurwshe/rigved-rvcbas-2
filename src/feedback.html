@@ -8,6 +8,7 @@
     <script src="./assets/js/angular.js"></script>
     <script src="./assets/js/angular-animate.js"></script>
     <script src="./assets/js/ui-bootstrap-tpls-1.3.2.js"></script>
+    <base href="/feedback.html">
 </head>
 <script>
  (function(){
@@ -16,13 +17,19 @@
             'ngAnimate', 
             'ui.bootstrap'
             ],
-            myModule=null;
+        myModule=null;
         myModule = angular.module(moduleName,required)
+        // this config for url 
+        myModule.config(function($locationProvider){
+            $locationProvider.html5Mode(true);
+        })
         // This is creating syntax for creating controller in angular js
-        myModule.controller("AppCtrl",function($scope){
+        myModule.controller("AppCtrl",['$scope', '$location','$http',
+        function($scope,$location,$http){
             // This is syntax for write the business logic inside the controller 
             $scope.rate = 0;
             $scope.max = 5;
+            $scope.loading=false;
             $scope.isReadonly = false;       
             $scope.hoveringOver = function(value) {
               $scope.overStar = value;
@@ -44,14 +51,36 @@
             $scope.feedback="";
             $scope.array=[];
             $scope.submitFeedback= function(){
-                let bodyData={
-                   rate: $scope.rate,
-                   checkbox:$scope.array,
-                   feedback:$scope.feedback
+                const { tripId }=$location.search(); 
+                if(tripId){
+                    let feedbackMessage="";
+                    $scope.array.map((key,item)=>{ feedbackMessage=feedbackMessage+","+$scope.arrayCheckbox[item]; });
+                    feedbackMessage=feedbackMessage+","+$scope.feedback;
+                    let bodyData={
+                        "tripId":tripId,
+                        "rating": $scope.rate,
+                        "feedBack":feedbackMessage,
+                    }
+                    postFeedback(bodyData);
                 }
-                console.log("Data ", bodyData);
             }
-        })
+            // this will submit your feedback data
+            postFeedback=(bodyData)=>{
+                $scope.loading=true;
+                $http.post("http://103.224.240.187:9001/public/feedback", bodyData)
+                .then(
+                    (response)=>{
+                        $scope.loading=false;
+                        alert("Your feedback submited successfully......!");
+                    },
+                    (error)=>{
+                        $scope.loading=false;
+                        console.error("Error : ",error);
+                        alert("Something went worng...!");
+                    }
+                );
+            }
+        }])
 }())
 </script>
 <body ng-controller="AppCtrl as app">
@@ -64,16 +93,19 @@
                         <uib-rating ng-model="rate" style="font-size: xx-large;" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" titles="['one','two','three']" aria-labelledby="default-rating"></uib-rating>
                         <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
                     </div>
-                    <span ng-repeat="item in arrayCheckbox">
+                    <span ng-repeat="(index,item) in arrayCheckbox">
                         <div class="form-check">
-                            <input class="form-check-input position-static" type="checkbox" ng-model="array[item]" id="blankCheckbox" value="{{item}}">
+                            <input class="form-check-input position-static" type="checkbox" ng-model="array[index]" id="blankCheckbox" value="{{item}}">
                             <label class="form-check-label">{{item}}.</label>
                         </div>
                     </span>
                     <div>
                         <textarea id="subject" ng-model="feedback" name="subject" placeholder="Enter your feedback..."  style="height:200px"></textarea>
                     </div>
-                    <div style="margin-top: 15;">
+                    <div ng-if="loading">
+                        <div style="margin-top: 15;" class="loader"></div>
+                    </div>
+                    <div style="margin-top: 15;" ng-else ng-show="!loading">
                         <button type="submit" style="font-size: 14px;" ng-click="submitFeedback()" class="btn btn-success">Submit your feedback</button>
                     </div>
                 </form>
