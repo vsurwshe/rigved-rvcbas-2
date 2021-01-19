@@ -33,13 +33,14 @@ export class DriverManagementComponent implements OnInit {
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
         $(td).on('click',event=>{ 
-          const {firstName,accountId, emailId}=rowData 
+          const {firstName,accountId, emailId, mobileNumber}=rowData 
           let filterName= firstName && firstName.split(' ')
           this.updateDriverDetailsForm.patchValue({
             'accountId': accountId, 
             'firstName':filterName.length >0 && filterName[0], 
             'lastName': filterName.length >0 && filterName[1], 
-            'emailId': emailId
+            'emailId': emailId,
+            mobileNumber
           })
         })
       },
@@ -80,25 +81,44 @@ export class DriverManagementComponent implements OnInit {
         'accountId': new FormControl(''), 
         'firstName': new FormControl(''), 
         'lastName': new FormControl(''), 
-        'emailId': new FormControl('')
+        'emailId': new FormControl(''),
+        'mobileNumber': new FormControl('')
       })
   }
 
   // this method will used for the update the driver details
   updateDriverDetails(){
     if(this.updateDriverDetailsForm.status == "VALID"){
-      const { value}=this.updateDriverDetailsForm
+      const { value }=this.updateDriverDetailsForm
       this.loading=true;
-      this.userService.updateProfile(value)
+      var url =value.accountId+"/"+value.firstName+"/"+value.lastName+"/"+value.emailId+"/";
+      this.updateDriverDetailsForm.get('mobileNumber').dirty ?  url=url.concat(this.updateDriverDetailsForm.get('mobileNumber').value+"/") : url=url.concat("null/")
+      url=url+true;
+      this.updateUrlCall(url);
+    }
+  }
+
+  // this method used for deteling driver
+  deleteDriver(){
+    const { value }=this.updateDriverDetailsForm
+    this.loading=true;
+    var url =value.accountId+"/"+value.firstName+"/"+value.lastName+"/"+value.emailId+"/"+value.mobileNumber+"/";
+    url=url+false;
+    this.updateUrlCall(url);
+  }
+
+  // this method will call api url
+  updateUrlCall(url){
+    this.userService.updateProfile(url)
       .subscribe(
         response=>{
+          const { message }=response
           this.loading=false;
-          this.loginService.successFullMessage("Successfully updated driver details...!");
+          this.loginService.successFullMessage(message);
           this.approvedclose.nativeElement.click();
           this.ngOnInit();
         },error=>{ this.loading=false; this.loginService.errorMessage("Something went worng...Please try again...!"), console.error("Error ",error);}
       )
-    }
   }
 
 }

@@ -34,9 +34,9 @@ export class UserService {
     return this.authService.process("POST","public/changePassword",{headers: this.setHeaders(false),body:passwordBody})
   }
 
-  updateProfile(bodyData):Observable<any>{
-    const {accountId, firstName, lastName, emailId }=bodyData
-    return this.authService.process("GET","private/updateProfile/"+accountId+"/"+firstName+"/"+lastName+"/"+emailId,{headers: this.setHeaders(true)})
+  updateProfile(urlData):Observable<any>{
+    // const {accountId, firstName, lastName, emailId }=bodyData
+    return this.authService.process("GET","private/updateProfile/"+urlData,{headers: this.setHeaders(true)})
   }
 
 }
