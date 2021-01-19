@@ -72,6 +72,9 @@
                     (response)=>{
                         $scope.loading=false;
                         alert("Your feedback submited successfully......!");
+                        $scope.array=[];
+                        $scope.rate=0;
+                        $scope.feedback="";
                     },
                     (error)=>{
                         $scope.loading=false;
