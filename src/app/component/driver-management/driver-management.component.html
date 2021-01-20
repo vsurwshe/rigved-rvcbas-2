@@ -39,9 +39,15 @@
                         <label for="">Mobile Number&nbsp;<span class="mendatory">*</span></label>
                         <input class="form-control txt-field" formControlName="mobileNumber" type="email" placeholder="Enter Email Id">
                     </div>
+                    <div class="from-group  col-sm-12 ">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" formControlName="disiableDriver" id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1">Disiable driver</label>
+                        </div>
+                    </div>
                 </div> 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" (click)="deleteDriver()">Delete Driver</button>
+                    <!-- <button type="button" class="btn btn-danger" (click)="deleteDriver()">Delete Driver</button> -->
                     <button type="submit" class="btn btn-success" >Update Driver Details</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" #approvedclose>Close</button>
                 </div>

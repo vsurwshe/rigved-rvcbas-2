@@ -82,7 +82,8 @@ export class DriverManagementComponent implements OnInit {
         'firstName': new FormControl(''), 
         'lastName': new FormControl(''), 
         'emailId': new FormControl(''),
-        'mobileNumber': new FormControl('')
+        'mobileNumber': new FormControl(''),
+        'disiableDriver': new FormControl(true)
       })
   }
 
@@ -93,7 +94,7 @@ export class DriverManagementComponent implements OnInit {
       this.loading=true;
       var url =value.accountId+"/"+value.firstName+"/"+value.lastName+"/"+value.emailId+"/";
       this.updateDriverDetailsForm.get('mobileNumber').dirty ?  url=url.concat(this.updateDriverDetailsForm.get('mobileNumber').value+"/") : url=url.concat("null/")
-      url=url+true;
+      url=url+value.disiableDriver;
       this.updateUrlCall(url);
     }
   }
