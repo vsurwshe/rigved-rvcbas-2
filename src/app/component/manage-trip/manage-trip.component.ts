@@ -1,8 +1,8 @@
-import { Location } from '@angular/common';
-import { Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingService } from 'src/app/service/booking.service';
 import { DataTableService } from 'src/app/service/data-table.service';
+import { LoginService } from 'src/app/service/login.service';
 import { ManageTripService } from 'src/app/service/manage-trip.service';
 declare var $;
 
@@ -12,6 +12,9 @@ declare var $;
   styleUrls: ['./manage-trip.component.scss']
 })
 export class ManageTripComponent implements OnInit {
+
+  @ViewChild('approvedclose') closeTripButton: ElementRef;
+
   loading;
   upcomeingRidesList;
   pastRides;
@@ -24,6 +27,7 @@ export class ManageTripComponent implements OnInit {
   feedbackMessage;
   starReatings: number;
   tripData;
+  closeTripData:any;
 
   upComeingTabelColumns=[
     {title:'Traveller Name',data:'travellerName'},
@@ -34,10 +38,25 @@ export class ManageTripComponent implements OnInit {
     {title:'',data:'',orderable: false},
     {title:'',data:'',orderable: false},
     {title:'',data:'changedStatus',orderable: false},
+    {title:'',data:'status',orderable: false},
   ]
   upComeingTabelColumnsDef= [
     {
       "targets": -1, // specifies the position of button(last but one) in the row
+      "data": null,
+      "render": function ( data, type, row ) {
+        if(row.status === 4) {
+          return "<button class='btn btn-danger btn-round' data-toggle='modal' data-target='#closeTripModel'>Close&nbsp;Trip</button>"
+        }else{
+          return "";
+        }
+      },
+      "createdCell": (td, cellData, rowData, row, col) => {
+        $(td).click(e => { this.closeTripData=rowData; })
+      }
+    },
+    {
+      "targets": -2, // specifies the position of button(last but one) in the row
       "data": null,
       "render": function ( data, type, row ) {
         if(row.status !== 0 && row.status !== 1 && row.status !== 3) {
@@ -51,7 +70,7 @@ export class ManageTripComponent implements OnInit {
       }
     },
     {
-      "targets": -2, // specifies the position of button(last but one) in the row
+      "targets": -3, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
           $(td).click(e => { this.getBookingDetailsById(rowData,2); })
@@ -59,7 +78,7 @@ export class ManageTripComponent implements OnInit {
       "defaultContent": "<button class='btn btn-success btn-round' data-toggle='modal' data-target='#exampleModal'>Accept</button>"
     },
     {
-      "targets": -3, // specifies the position of button(last but one) in the row
+      "targets": -4, // specifies the position of button(last but one) in the row
       "data": null,
       "createdCell": (td, cellData, rowData, row, col) => {
           $(td).click(e => { this.getBookingDetailsById(rowData,2); })
@@ -92,7 +111,8 @@ export class ManageTripComponent implements OnInit {
     private mangeTripService:ManageTripService,
     private router:Router,
     private bookingService:BookingService,
-    private dataTabelService: DataTableService
+    private dataTabelService: DataTableService,
+    private loginService:LoginService
   ) 
   { 
     this.loading=false;
@@ -334,4 +354,25 @@ export class ManageTripComponent implements OnInit {
     console.log("Data ",data);
   }
 
+  closeTrip(){
+    console.log("Close trip data ",this.closeTripData)
+    const { id }=this.closeTripData
+    if(id){
+      this.loading=true;
+      this.bookingService.closeBookingTripById(id)
+      .subscribe(
+        response=>{
+          const { status }=response
+          this.loading=false;
+          if(status){
+            this.loginService.successFullMessage("Successfully closed your trip..!");
+          }else{
+            this.loginService.successFullMessage("Successfully not closed your trip, something went wrong..!");
+          }
+          this.closeTripButton.nativeElement.click();
+          this.ngOnInit();
+        },error=>{ this.loading=false; console.error("Error ",error); this.loginService.errorMessage("Something went wrong, Please try again.....!") }
+      )
+    }
+  }
 }

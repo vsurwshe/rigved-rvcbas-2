@@ -21,4 +21,8 @@ export class BookingService {
   getBookingDetailsById(bookingId):Observable<any>{
     return this.authService.process("GET","booking/getBooking/"+bookingId,{headers: this.setHeaders()})
   }
+
+  closeBookingTripById(bookingId):Observable<any>{
+    return this.authService.process("GET","booking/closeTrip/"+bookingId,{headers: this.setHeaders()})
+  }
 }
