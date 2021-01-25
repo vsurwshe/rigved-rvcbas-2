@@ -355,7 +355,6 @@ export class ManageTripComponent implements OnInit {
   }
 
   closeTrip(){
-    console.log("Close trip data ",this.closeTripData)
     const { id }=this.closeTripData
     if(id){
       this.loading=true;
