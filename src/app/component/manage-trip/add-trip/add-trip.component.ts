@@ -103,6 +103,8 @@ export class AddTripComponent implements OnInit {
         this.loading=false;
       }
     )
+
+    // this method used for form buliding
     this.tirpForm= this.formBuilder.group({
       'costCenter': new FormControl(),
       'carHire': new FormControl(),
@@ -142,6 +144,7 @@ export class AddTripComponent implements OnInit {
     })
   }
 
+  // this method used for filtering for company component
   companySearch = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.companyclick$.pipe(filter(() => !this.companyinstance.isPopupOpen()));
@@ -152,6 +155,7 @@ export class AddTripComponent implements OnInit {
     );
   }
 
+  // this method used for filtering for car segment component
   carSegmentSearch = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance.isPopupOpen()));
@@ -162,6 +166,7 @@ export class AddTripComponent implements OnInit {
     );
   }
 
+  // this method used for filtering for car barnd component
   carBrandSearch = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.carnameclick$.pipe(filter(() => !this.carnameinstance.isPopupOpen()));
@@ -182,6 +187,7 @@ export class AddTripComponent implements OnInit {
     );
   }
 
+  // this method used for filtering for use component
   forUseSearch = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
     const clicksWithClosedPopup$ = this.foruseclick$.pipe(filter(() => !this.foruseinstance.isPopupOpen()));
@@ -192,6 +198,7 @@ export class AddTripComponent implements OnInit {
     );
   }
   
+  // this method will used for toggleing driver list
   toggle(){
     if(this.assignDriver){
       this.showDriverList=false;
@@ -199,6 +206,7 @@ export class AddTripComponent implements OnInit {
       this.showDriverList=true;
     }
   }
+
   // Trip Booking
   async tripBooking(){
     let tripPickUpDate=this.tirpForm.value.pickUpDate && this.tirpForm.value.pickUpDate.month+"/"+this.tirpForm.value.pickUpDate.day+"/"+this.tirpForm.value.pickUpDate.year;
@@ -230,7 +238,9 @@ export class AddTripComponent implements OnInit {
       response=>{ 
         this.loginService.successFullMessage("Trip Booked Successfully ..!");
         setTimeout(()=>{
-          this.router.navigateByUrl("/managetrip");
+          if(!this.checkCustomerRoute){
+            this.router.navigateByUrl("/managetrip");
+          }
           this.loading=false;
         },500)
       },
@@ -239,4 +249,15 @@ export class AddTripComponent implements OnInit {
         this.loading=false;
     });
   }
+
+  // this checking user type is customer or not
+  get checkCustomerRoute(){
+    if(this.loginService.getUserType() == "CUSTOMER"){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
+
+

@@ -9,7 +9,7 @@
     </div>
     <ul class="list-unstyled components" >
         <p class="text-white font-weight-bold">Call: +91 88808 55551</p>
-        <span *ngFor="let item of routesArray" >
+        <span *ngFor="let item of routesArray" [hidden]="checkCustomerRoute" >
             <li> 
                 <a routerLink="{{item.path}}" style="text-decoration: none;">
                     <img class="imgIco" src="{{item.image}}" /> {{item.text}}

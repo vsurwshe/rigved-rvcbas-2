@@ -37,6 +37,17 @@ export class LoginService {
     return JSON.parse(tokenData);
   }
 
+  // this will save account id
+  saveUserType(userType){
+    sessionStorage.setItem('USER_TYPE', JSON.stringify(userType));
+  }
+
+  // this will get account id
+  getUserType(){
+    const userType = sessionStorage.getItem('USER_TYPE');
+    return JSON.parse(userType);
+  }
+
   // this method will used for the clear the session storage
   clearStorage(){
     sessionStorage.removeItem('AUTH');

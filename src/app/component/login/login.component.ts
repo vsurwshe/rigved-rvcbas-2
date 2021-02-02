@@ -38,13 +38,18 @@ export class LoginComponent implements OnInit {
     this.loading=true;
     this.loginService.loginUser({...data, "deviceToken": ""}).subscribe(
       response=>{
-        const { token, accountId }=response.tokenDto
+        const { token, accountId, userType }=response.tokenDto
         this.loading=false;
         this.loginService.saveToken(token);
         this.loginService.saveUserAccountId(accountId);
+        this.loginService.saveUserType(userType);
         this.loginService.successFullMessage("Successfully Login....!");
         setTimeout(()=>{
-          this.router.navigateByUrl("/managetrip");
+          if(userType == "CUSTOMER"){
+            this.router.navigateByUrl("/addtrip");
+          }else{
+            this.router.navigateByUrl("/managetrip");
+          }
           this.appComponent.ngOnInit();  
         },500)
       },

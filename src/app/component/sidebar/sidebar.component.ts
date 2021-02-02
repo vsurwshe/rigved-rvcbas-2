@@ -24,6 +24,17 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  // this checking user type is customer or not
+  get checkCustomerRoute(){
+    if(this.loginService.getUserType() == "CUSTOMER"){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+
   setLogout(){ this.logout=true;}
 
   callLogout(){
