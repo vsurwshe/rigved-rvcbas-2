@@ -258,6 +258,10 @@ export class AddTripComponent implements OnInit {
       return false;
     }
   }
+
+  get buttonText(){
+   return this.checkCustomerRoute ? "Request Ride" :"Assign Ride"
+  }
 }
 
 
